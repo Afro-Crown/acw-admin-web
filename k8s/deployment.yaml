@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web-basic
-        image: afrocrownregistry.azurecr.io/web-basic
+        image: afrocrownregistry.azurecr.io/web-basic:v12
         ports:
         - containerPort: 3000
 ---
