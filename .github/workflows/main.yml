@@ -1,0 +1,29 @@
+name: CD-CD
+
+on:
+  push:
+    branches: ["main"]
+    
+jobs:
+  Build: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3.5.2
+      
+      - name: Autenticação no Azure Registry
+        uses: Azure/docker-login@v1
+        with:
+          username: ${{secrets.DOCKER_REGISTRY_USER}}
+          password: ${{secrets.DOCKER_REGISTRY_PASS}}
+          login-server: ${{secrets.DOCKER_REGISTRY_DOMAIN}}
+      
+      - name: Construção da imagem Docker
+        uses: docker/build-push-action@v4.0.0
+        with: 
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags:
+            afrocrownregistry/web-basic:v1
+            afrocrownregistry/web-basic:latest
