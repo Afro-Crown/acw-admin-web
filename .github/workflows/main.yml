@@ -25,5 +25,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            afrocrownregistry/web-basic:v1
-            afrocrownregistry/web-basic:latest
+            afrocrownregistry.azurecr.io/web-basic:v1
+            afrocrownregistry.azurecr.io/web-basic:latest
