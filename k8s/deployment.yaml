@@ -17,6 +17,8 @@ spec:
         image: afrocrownregistry.azurecr.io/web-basic
         ports:
         - containerPort: 3000
+      imagePullSecrets:
+        - name: k8ssecret
 ---
 apiVersion: v1
 kind: Service
