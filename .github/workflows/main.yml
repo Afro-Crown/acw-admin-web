@@ -25,5 +25,19 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            afrocrownregistry.azurecr.io/web-basic:v1
+            afrocrownregistry.azurecr.io/web-basic:v${{github.run_number}}
             afrocrownregistry.azurecr.io/web-basic:latest
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.2
+      
+      - name: Definindo o context
+        uses: Azure/k8s-set-context@v3.0
+        with: 
+          method: kubeconfig
+          kubeconfig: ${{secrets.k8s_CONFIG}}
+        
+      
+      
+      
