@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meudeployment
+  name: deployment-web
 spec:
   replicas: 5
   selector:
@@ -18,7 +18,7 @@ spec:
         ports:
         - containerPort: 3000
       imagePullSecrets:
-        - name: k8ssecret
+        - name: k8s-secret
 ---
 apiVersion: v1
 kind: Service

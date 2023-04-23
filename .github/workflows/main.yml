@@ -38,6 +38,13 @@ jobs:
         with: 
           method: kubeconfig
           kubeconfig: ${{secrets.K8S_CONFIG}}
+        
+      - uses: Azure/k8s-create-secret@v1.1
+           with:
+              container-registry-url: ${{secrets.DOCKER_REGISTRY_DOMAIN}}
+              container-registry-username: ${{secrets.DOCKER_REGISTRY_USER}}
+              container-registry-password: ${{secrets.DOCKER_REGISTRY_PASS}}
+              secret-name: k8s-secret
           
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v4.9
