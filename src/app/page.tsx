@@ -8,7 +8,7 @@ const julius = Julius_Sans_One({
 export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-center ${julius.className}`}>
-      <label className={`text-base`}>AFRO CROWN</label>
+      <label className={`text-base`}>AFRO CROWN v2</label>
     </main>
   )
 }
