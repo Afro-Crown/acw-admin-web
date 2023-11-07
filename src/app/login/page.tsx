@@ -1,34 +1,47 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import { FcGoogle } from 'react-icons/fc'
-import { BsFacebook } from 'react-icons/bs'
-import acLogo from '../../../public/logo-login.svg'
-import { Eye, EyeClosed } from "@phosphor-icons/react";
 
-const inter = Inter({ subsets: ['latin'] })
+import Image from 'next/image';
+import Link from 'next/link';
+import { FcGoogle } from 'react-icons/fc';
+import { BsFacebook } from 'react-icons/bs';
+import acLogo from '../../../public/logo-login.svg';
+import { Eye, EyeClosed } from "@phosphor-icons/react";
+import React from 'react';
+import { Trirong } from 'next/font/google';
+
+const trirong = Trirong({
+  subsets: ['latin'],
+  weight: '400',
+  style: 'italic'
+})
 
 export default function LoginScreen() {
 
   return (
     <main className="flex min-h-screen w-full items-center justify-center bg-[#FFEAD4]">
       <div className="flex flex-col h-[70%] w-[80%] md:w-2/4 lg:min-w-[25%] lg:w-1/4 bg-white items-center">
-        <div className="flex flex-col gap-2 p-8">
+        <div className="flex flex-col gap-2 p-8 text-black text-center text-2xl">
           <Image alt='AfroCrow logo' src={acLogo} />
-          <h4 className='text-center text-3xl font-TRIRONG text-slate-950'>Entrar</h4>
+          <h4 className={trirong.className}>Entrar</h4>
         </div>
         <div className='w-[80%]'>
-        <div className='py-8'>
-          <h4 className='text-black font-medium'>
-            E-mail
-          </h4>
-          <input type="email" className='w-full border-b-2 h-10' name="E-mail" id="" />
+        <div className='py-8 text-black'>
+          <input
+              type="email"
+              placeholder="E-mail"
+              className='w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent'
+            />
         </div>
-        <div className='py-8'>
-          <h4 className='text-black font-medium'>
-            Senha
-          </h4>
-          <input type="password" className='w-full border-b-2 h-10' name="Senha" id="" />
+        <div className='py-8 text-black'>
+          <input
+            type="password"
+            placeholder="Senha"
+            className='w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-gray-500 focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent'
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500"
+          >
+          </button>
         </div>
         <div className='flex flex-col items-center justify-center'>
           <button className='w-full p-4 bg-[#F67F57AA] font-semibold text-lg rounded-lg mb-8'>
@@ -51,4 +64,4 @@ export default function LoginScreen() {
       </div>
     </main>
   )
-}
+};
