@@ -7,6 +7,7 @@ import acLogo from '../../../public/logo-login.svg';
 import { Eye, EyeClosed } from "@phosphor-icons/react";
 import React from 'react';
 import { Trirong } from 'next/font/google';
+import HomeScreen from '../home/page';
 
 const trirong = Trirong({
   subsets: ['latin'],
@@ -39,14 +40,17 @@ export default function LoginScreen() {
           />
           <button
             type="button"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
           >
+
           </button>
         </div>
         <div className='flex flex-col items-center justify-center'>
-          <button className='w-full p-4 bg-[#F67F57AA] font-semibold text-lg rounded-lg mb-8'>
-            Enviar
-          </button>
+          <Link href="#" className='w-full'>
+            <button className='w-full  p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8'>
+              Enviar
+            </button>
+          </Link>
           <span className='text-black text-sm'>
             Ainda não tem uma conta? <Link href={'google.com'}><span className='text-orange-500 font-semibold'>Criar conta</span></Link>
           </span>
