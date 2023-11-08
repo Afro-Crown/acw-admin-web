@@ -26,7 +26,7 @@ const HomeScreen = () => {
               </div>
               <main>
                 <div className="w-full pb-8">
-                  <Image className="absolute left-[670px] top-[250px]" alt="imagem do perfil do salão" src={userImage} />
+                  <Image className="absolute left-[620px] top-[280px]" alt="imagem do perfil do salão" src={userImage} />
                   <Image alt="Imagem de fundo do perfil" src={profileBg} />
                 </div>
                 <div className="text-black w-full flex flex-col items-center">
