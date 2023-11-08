@@ -3,7 +3,6 @@ import Link from "next/link";
 import footerLogo from "../../../../public/footer-logo.svg";
 import linkedinLogo from "../../../../public/linkedin-logo.svg";
 import instagramLogo from "../../../../public/instagram-logo.svg";
-import footerDivider from "../../../../public/divider.svg";
 import downloadApp from "../../../../public/download-app-btn.svg";
 import googlePlay from "../../../../public/googleplay-btn.svg";
 import appleStore from "../../../../public/applestore.svg";
@@ -13,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="h-[287px] w-full bg-[#A21A1A] flex flex-col items-center gap-1">
       <nav className=" h-[80%] pt-8 w-[60%] flex flex-row justify-between">
-        <div className="flex flex-col justify-between gap-12 pt-8">
+        <div className="flex flex-col justify-between gap-12">
           <div className="">
             <Image alt="AfroCrown logo" src={footerLogo}/>
           </div>
