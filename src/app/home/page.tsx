@@ -34,6 +34,11 @@ const HomeScreen = () => {
                   <h4 className="flex flex-row text-md items-center gap-2"><MapPin size={16} color="#A21A1A" weight="fill" />Av. Ovídio Poletti, 210, Campinas/SP</h4>
                 </div>
               </main>
+              <div className="w-full">
+                <nav>
+                  
+                </nav>
+              </div>
             </div>
           </section>
         <Footer />
