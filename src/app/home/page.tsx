@@ -7,9 +7,14 @@ import profileBg from "../../../public/profile-bg.svg";
 import scheduleIcon from "../../../public/schedule-icon.svg";
 import userImage from "../../../public/user-profile.svg";
 import Image from "next/image";
+import NextList from "./components/NextList";
+import HistoryList from "./components/HistoryList";
+import CanceledList from "./components/CanceledList";
+import { useState } from "react";
 
 
 const HomeScreen = () => {
+  const [tab, setTab] = useState<'NEXT' | 'HISTORY' | 'CANCELED'>('NEXT')
   return ( 
       <main className="h-screen w-full bg-white">
         <Header />
@@ -36,18 +41,32 @@ const HomeScreen = () => {
                 </div>
               </main>
               <div className="w-full">
-                <nav className="text-black font-semibold flex justify-between mt-8">
-                  <div className="flex flex-row gap-2">
+                <nav className="text-black font-semibold flex justify-between mt-8 border border-red-500">
+                  <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
                     <Image alt="Schedule icon" src={scheduleIcon}/>
                     <span>Próximos</span>
                   </div>
-                  <div className="flex flex-row">
+                  <div onClick={() => setTab('HISTORY')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
                     <span>Histórico</span>
                   </div>
-                  <div className="flex flex-row">
+                  <div onClick={() => setTab('CANCELED')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
                     <span>Cancelados</span>
                   </div>
                 </nav>
+                <div className="border border-blue-500 p-10">
+                  {
+                    tab == 'NEXT' &&
+                    <NextList />
+                  }
+                  {
+                    tab == 'HISTORY' &&
+                    <HistoryList />
+                  }
+                  {
+                    tab == 'CANCELED' &&
+                    <CanceledList />
+                  }
+                </div>
               </div>
             </div>
           </section>
