@@ -2,9 +2,10 @@
 import { Dot, MapPin } from "@phosphor-icons/react";
 import Footer from "./components/footer";
 import Header from "./components/header";
-import analiseTag from "../../../public/cadastroemanalise-tag.svg"
-import profileBg from "../../../public/profile-bg.svg"
-import userImage from "../../../public/user-profile.svg"
+import analiseTag from "../../../public/cadastroemanalise-tag.svg";
+import profileBg from "../../../public/profile-bg.svg";
+import scheduleIcon from "../../../public/schedule-icon.svg";
+import userImage from "../../../public/user-profile.svg";
 import Image from "next/image";
 
 
@@ -35,8 +36,17 @@ const HomeScreen = () => {
                 </div>
               </main>
               <div className="w-full">
-                <nav>
-                  
+                <nav className="text-black font-semibold flex justify-between mt-8">
+                  <div className="flex flex-row gap-2">
+                    <Image alt="Schedule icon" src={scheduleIcon}/>
+                    <span>Próximos</span>
+                  </div>
+                  <div className="flex flex-row">
+                    <span>Histórico</span>
+                  </div>
+                  <div className="flex flex-row">
+                    <span>Cancelados</span>
+                  </div>
                 </nav>
               </div>
             </div>
