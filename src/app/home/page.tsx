@@ -28,6 +28,8 @@ const HomeScreen = () => {
                   <span>Agendamentos</span>
                   <Dot size={40} />
                   <Link href={'../services'}><span>Serviços</span></Link>
+                  <Dot size={40} />
+                  <Link href={'../reviews'}><span>Avaliações</span></Link>
                 </div>
                 <div className="h-full flex items-center">
                   <Image alt="Cadastro em análise" src={analiseTag} />
