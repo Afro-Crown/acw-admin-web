@@ -46,7 +46,7 @@ export default function LoginScreen() {
           </button>
         </div>
         <div className='flex flex-col items-center justify-center'>
-          <Link href="#" className='w-full'>
+          <Link href={"/home"} className='w-full'>
             <button className='w-full  p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8'>
               Enviar
             </button>
