@@ -36,8 +36,8 @@ const Footer = () => {
           
         </div>
         <div className="w-[50%] flex justify-end gap-4">
-          <span className="text-sm">Termos de uso</span>
-          <span className="text-sm">Políticas de privacidade e dados</span>
+          <Link href={'/use-terms'}><span className="text-sm">Termos de uso</span></Link>
+          <Link href={'/privacy-datas'}><span className="text-sm">Políticas de privacidade e dados</span></Link>
         </div>
       </footer>
     </footer>

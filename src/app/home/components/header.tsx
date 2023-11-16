@@ -4,6 +4,9 @@ import shoppingCart from '../../../../public/shopping-cart-icon.svg';
 import Image from 'next/image';
 import { Trirong } from 'next/font/google';
 import Link from 'next/link';
+import { useState } from 'react';
+import NavMenu from './nav-menu';
+import { EyeClosed } from '@phosphor-icons/react';
 
 
 const trirong = Trirong({
@@ -13,6 +16,11 @@ const trirong = Trirong({
 })
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleMenu = () => {
+    setOpen((prev) => !prev);
+  };
   return ( 
     <div className="h-[104px] w-full bg-[#FFEAD4] flex items-center justify-between ">
       <div className="flex w-1/4 items-center justify-center">
@@ -31,7 +39,10 @@ const Header = () => {
           <li className={trirong.className}>Contatos</li>
           <div className='h-[20%] w-0 border border-y-1 border-[#A21A1A]'></div>
         </ul>
-        <Image alt='User Icon' src={userIcon}/>
+        <button className='flex items-center cursor-pointer'  onClick={handleMenu}>
+          <Image alt='User Icon' src={userIcon}/>
+          {open == true ? <NavMenu /> : <EyeClosed className='hidden'/>}
+        </button>
       </nav>
     </div>
    );
