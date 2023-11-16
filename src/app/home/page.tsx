@@ -46,19 +46,19 @@ const HomeScreen = () => {
                 </div>
               </main>
               <div className="w-full">
-                <nav className="text-black font-semibold flex justify-between mt-8 border border-red-500">
-                  <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
+                <nav className="text-black font-semibold flex justify-between mt-8">
+                  <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 justify-center">
                     <Image alt="Schedule icon" src={scheduleIcon}/>
                     <span>Próximos</span>
                   </div>
-                  <div onClick={() => setTab('HISTORY')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
+                  <div onClick={() => setTab('HISTORY')} className="flex flex-1 flex-row gap-2 justify-center">
                     <span>Histórico</span>
                   </div>
-                  <div onClick={() => setTab('CANCELED')} className="flex flex-1 flex-row gap-2 border border-orange-400 justify-center">
+                  <div onClick={() => setTab('CANCELED')} className="flex flex-1 flex-row gap-2 justify-center">
                     <span>Cancelados</span>
                   </div>
                 </nav>
-                <div className="border border-blue-500 p-10">
+                <div className=" p-10">
                   {
                     tab == 'NEXT' &&
                     <NextList />
