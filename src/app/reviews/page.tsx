@@ -5,12 +5,8 @@ import Header from "@/app/home/components/header";
 import { CaretRight, Dot, Star } from "@phosphor-icons/react";
 import Link from "next/link";
 import userIcon from '../../../public/profile-img-review.svg';
-import profileBg from "../../../public/profile-bg.svg";
-import userImage from "../../../public/user-profile.svg";
-import changeUser from "../../../public/change-user.svg";
-import changeBgUser from "../../../public/change-bg-user.svg";
 import Image from "next/image";
-import { MapPin } from "@phosphor-icons/react";
+import ProfileReviewsCover from "./components/profile-cover";
 
 const ReviewsScreen = () => {
   return (
@@ -29,32 +25,8 @@ const ReviewsScreen = () => {
           </div>
         </div>
         <main className="flex flex-col items-center">
-          <div className="w-full pb-8">
-            <Image
-              className="absolute lg:left-[620px] lg:top-[235px]"
-              alt="imagem do perfil do salão"
-              src={userImage}
-            />
-            <Image
-              className="absolute lg:left-[720px] lg:top-[235px]"
-              alt="ícone mudar foto do usuário"
-              src={changeUser}
-            />
-            <Image alt="Imagem de fundo do perfil" src={profileBg} />
-            <Image
-              className="absolute lg:left-[1100px] lg:top-[310px]"
-              alt="ícone mudar fundo"
-              src={changeBgUser}
-            />
-          </div>
-          <div className="text-black w-full flex flex-col items-center">
-            <h2 className="text-2xl font-bold">
-              Dellas & Delles Cabeleireiros
-            </h2>
-            <h4 className="flex flex-row text-md items-center gap-2">
-              <MapPin size={16} color="#A21A1A" weight="fill" />
-              Av. Ovídio Poletti, 210, Campinas/SP
-            </h4>
+          <div>
+            <ProfileReviewsCover />
           </div>
           <nav className="mt-4 w-4/12">
             <div className="flex flex-row justify-between w-full px-2">
@@ -63,7 +35,7 @@ const ReviewsScreen = () => {
                 <span className="text-2xl text-black">3,3</span>
               </div>
               <div className="text-black font-semibold">
-                <nav>2 avaliações</nav>
+                <div>2 avaliações</div>
               </div>
             </div>
             <div className="h-0 border border-slate-300 mt-2"></div>

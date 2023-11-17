@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const NavMenu = () => {
   return (
-    <div className="rounded-md p-3 bg-white w-[279px] h-[344px] text-gray-600 absolute top-[100px] left-[1100px]">
+    <div className="rounded-md p-3 bg-white lg:w-[279px] lg:h-[344px] text-gray-600 absolute lg:top-[100px] lg:left-[1150px] md:left-[500px] md:top-[50px]">
       <h2 className="w-full flex items-start text-xl pl-2 py-4">Olá, Dellas &...</h2>
       <button className="flex items-center w-full p-4 justify-between hover:bg-gray-50">
         <div className="flex items-center gap-2">

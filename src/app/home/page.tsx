@@ -12,6 +12,7 @@ import HistoryList from "./components/HistoryList";
 import CanceledList from "./components/CanceledList";
 import { useState } from "react";
 import Link from "next/link";
+import ProfileCover from "./components/profile-cover";
 
 
 const HomeScreen = () => {
@@ -35,16 +36,9 @@ const HomeScreen = () => {
                   <Image alt="Cadastro em análise" src={analiseTag} />
                 </div>
               </div>
-              <main>
-                <div className="w-full pb-8">
-                  <Image className="absolute lg:left-[620px] lg:top-[280px]" alt="imagem do perfil do salão" src={userImage} />
-                  <Image alt="Imagem de fundo do perfil" src={profileBg} />
-                </div>
-                <div className="text-black w-full flex flex-col items-center">
-                  <h2 className="text-2xl font-bold">Dellas & Delles Cabeleireiros</h2>
-                  <h4 className="flex flex-row text-md items-center gap-2"><MapPin size={16} color="#A21A1A" weight="fill" />Av. Ovídio Poletti, 210, Campinas/SP</h4>
-                </div>
-              </main>
+              <div>
+                <ProfileCover />
+              </div>
               <div className="w-full">
                 <nav className="text-black font-semibold flex justify-between mt-8">
                   <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 justify-center">
