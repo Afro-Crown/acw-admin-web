@@ -1,6 +1,7 @@
+"use client"
+
 import acLogo from '../../../../public/logo-one.svg';
 import userIcon from '../../../../public/user-icon.svg';
-import shoppingCart from '../../../../public/shopping-cart-icon.svg';
 import Image from 'next/image';
 import { Trirong } from 'next/font/google';
 import Link from 'next/link';

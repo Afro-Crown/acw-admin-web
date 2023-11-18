@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ServiceCard = () => {
   return ( 
-    <section className="flex flex-row justify-between w-screen p-2 max-w-[984px]">
+    <section className="flex flex-row justify-between px-1 md:p-2 lg:p-2 w-screen md:w-[700px] lg:w-[984px]max-w-[984px]">
       <div className="flex flex-row h-[129px] gap-4">
         <div className="flex flex-col items-center justify-around w-10% shadow-md rounded px-4 py-2">
           <span className="text-3xl">19</span>
@@ -14,8 +14,8 @@ const ServiceCard = () => {
         </div>
         <div className="flex flex-col justify-center gap-2">
           <span className="text-xs text-gray-300">Serviço N° 82763</span>
-          <span className="font-semibold underline">Barber Republic</span>
-          <span className="flex flex-row items-center font-normal">Degradê simples <Dot/>2h45 min</span>
+          <span className="font-semibold underline text-sm md:text-base lg:text-base">Barber Republic</span>
+          <span className="flex flex-row items-center font-normal text-sm md:text-base lg:text-base">Degradê simples <Dot/>2h45 min</span>
           <span>R$ 125,00</span>
         </div>
       </div>
