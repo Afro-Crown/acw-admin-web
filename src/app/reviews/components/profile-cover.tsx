@@ -11,22 +11,22 @@ const ProfileReviewsCover = () => {
     <main>
       <div className="w-full pb-8">
         <Image
-          className="absolute left-[140px] top-[160px] md:top-[190px] md:left-[300px] lg:left-[620px] lg:top-[255px] w-28 md:w-40"
+          className="absolute left-[140px] top-[110px] md:top-[130px] md:left-[300px] lg:left-[620px] lg:top-[225px] w-28 md:w-40"
           alt="imagem do perfil do salão"
           src={userImage}
         />
         <button>
           <Image
-            className="absolute left-[210px] top-[150px] md:left-[400px] lg:left-[720px] lg:top-[235px] w-10 md:w-20 lg:w-20"
+            className="absolute left-[210px] top-[100px] md:left-[400px] md:top-[120px] lg:left-[720px] lg:top-[215px] w-10 md:w-14 lg:w-14"
             alt="ícone mudar foto do usuário"
             src={changeUser}
             
           />
         </button>
-        <Image alt="Imagem de fundo do perfil" src={profileBg} />
+        <Image alt="Imagem de fundo do perfil" src={profileBg} className="max-w-screen-sm" />
         <button>
           <Image
-            className="absolute left-[330px] top-[210px] md:left-[640px] md:top-[260px] lg:left-[1100px] lg:top-[335px] w-10 md:w-20 lg:w-20"
+            className="absolute left-[330px] top-[170px] md:left-[650px] md:top-[220px] lg:left-[1100px] lg:top-[305px] w-10 md:w-14 lg:w-14"
             alt="ícone mudar fundo"
             src={changeBgUser}
           />

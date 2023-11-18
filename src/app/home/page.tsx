@@ -24,16 +24,12 @@ const HomeScreen = () => {
           <section className="h-full w-full bg-slate-50 flex justify-center">
             <div className="w-[984px] h-full">
               <div className="h-[15%] flex flex-row justify-between md:px-16 md:text-xs ">
-                <div className="text-black text-xs md:text-base lg:text-base md:flex lg:flex hidden md:flex-row lg:flex-row items-center h-full lg:px-4">
-                  <span>Início</span>
+                <div className="text-black text-xs md:text-base lg:text-base flex pl-16 md:pl-2 lg:pl-2 flex-row items-center h-full lg:px-4">
+                  <Link href={'../home'}><span>Início</span></Link>
                   <Dot size={40} />
                   <span>Agendamentos</span>
-                  <Dot size={40} />
-                  <Link href={'../services'}><span>Serviços</span></Link>
-                  <Dot size={40} />
-                  <Link href={'../reviews'}><span>Avaliações</span></Link>
                 </div>
-                <div className="h-full flex items-center">
+                <div className="h-full flex items-center pr-10 md:pr-2 lg:pr-2">
                   <Image alt="Cadastro em análise" src={analiseTag} />
                 </div>
               </div>
