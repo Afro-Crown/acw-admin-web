@@ -23,8 +23,8 @@ const HomeScreen = () => {
         <Header />
           <section className="h-full w-full bg-slate-50 flex justify-center">
             <div className="w-[984px] h-full">
-              <div className="h-[15%] flex flex-row justify-between">
-                <div className="text-black flex flex-row items-center h-full pl-4">
+              <div className="h-[15%] flex flex-row justify-between md:px-16 md:text-xs ">
+                <div className="text-black flex flex-row items-center h-full lg:px-4">
                   <span>Início</span>
                   <Dot size={40} />
                   <span>Agendamentos</span>
