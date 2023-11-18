@@ -13,6 +13,7 @@ import CanceledList from "./components/CanceledList";
 import { useState } from "react";
 import Link from "next/link";
 import ProfileCover from "./components/profile-cover";
+import ServiceCard from "../home/components/service-card";
 
 
 const HomeScreen = () => {
@@ -52,10 +53,10 @@ const HomeScreen = () => {
                     <span>Cancelados</span>
                   </div>
                 </nav>
-                <div className=" p-10">
+                <div className=" p-10 text-black">
                   {
                     tab == 'NEXT' &&
-                    <NextList />
+                    <ServiceCard />
                   }
                   {
                     tab == 'HISTORY' &&
