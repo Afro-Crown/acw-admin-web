@@ -24,7 +24,7 @@ const HomeScreen = () => {
           <section className="h-full w-full bg-slate-50 flex justify-center">
             <div className="w-[984px] h-full">
               <div className="h-[15%] flex flex-row justify-between md:px-16 md:text-xs ">
-                <div className="text-black text-xs md:text-base lg:text-base flex flex-col md:flex-row lg:flex-row items-center h-full lg:px-4">
+                <div className="text-black text-xs md:text-base lg:text-base md:flex lg:flex hidden md:flex-row lg:flex-row items-center h-full lg:px-4">
                   <span>Início</span>
                   <Dot size={40} />
                   <span>Agendamentos</span>
