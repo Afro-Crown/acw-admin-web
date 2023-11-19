@@ -23,7 +23,9 @@ const ProfileReviewsCover = () => {
             
           />
         </button>
-        <Image alt="Imagem de fundo do perfil" src={profileBg} className="max-w-screen-sm" />
+        <div className="">
+          <Image alt="Imagem de fundo do perfil" src={profileBg} />
+        </div>
         <button>
           <Image
             className="absolute left-[330px] top-[170px] md:left-[650px] md:top-[220px] lg:left-[1100px] lg:top-[305px] w-10 md:w-14 lg:w-14"

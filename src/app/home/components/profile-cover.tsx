@@ -12,7 +12,9 @@ const ProfileCover = () => {
           alt="imagem do perfil do salão"
           src={userImage}
         />
-        <Image alt="Imagem de fundo do perfil" src={profileBg} />
+        <div className="">
+          <Image alt="Imagem de fundo do perfil" src={profileBg} />
+        </div>
       </div>
       <div className="text-black w-full flex flex-col items-center">
         <h2 className="text-2xl font-bold">Dellas & Delles Cabeleireiros</h2>
