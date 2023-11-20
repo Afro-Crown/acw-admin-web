@@ -12,6 +12,8 @@ import HistoryList from "./components/HistoryList";
 import CanceledList from "./components/CanceledList";
 import { useState } from "react";
 import Link from "next/link";
+import ProfileCover from "./components/profile-cover";
+import ServiceCard from "../home/components/service-card";
 
 
 const HomeScreen = () => {
@@ -21,32 +23,21 @@ const HomeScreen = () => {
         <Header />
           <section className="h-full w-full bg-slate-50 flex justify-center">
             <div className="w-[984px] h-full">
-              <div className="h-[15%] flex flex-row justify-between">
-                <div className="text-black flex flex-row items-center h-full pl-4">
-                  <span>Início</span>
+              <div className="h-[15%] flex flex-row justify-between md:px-16 md:text-xs ">
+                <div className="text-black text-xs md:text-base lg:text-base flex pl-16 md:pl-2 lg:pl-2 flex-row items-center h-full lg:px-4">
+                  <Link href={'../home'}><span>Início</span></Link>
                   <Dot size={40} />
                   <span>Agendamentos</span>
-                  <Dot size={40} />
-                  <Link href={'../services'}><span>Serviços</span></Link>
-                  <Dot size={40} />
-                  <Link href={'../reviews'}><span>Avaliações</span></Link>
                 </div>
-                <div className="h-full flex items-center">
+                <div className="h-full flex items-center pr-10 md:pr-2 lg:pr-2">
                   <Image alt="Cadastro em análise" src={analiseTag} />
                 </div>
               </div>
-              <main>
-                <div className="w-full pb-8">
-                  <Image className="absolute lg:left-[620px] lg:top-[280px]" alt="imagem do perfil do salão" src={userImage} />
-                  <Image alt="Imagem de fundo do perfil" src={profileBg} />
-                </div>
-                <div className="text-black w-full flex flex-col items-center">
-                  <h2 className="text-2xl font-bold">Dellas & Delles Cabeleireiros</h2>
-                  <h4 className="flex flex-row text-md items-center gap-2"><MapPin size={16} color="#A21A1A" weight="fill" />Av. Ovídio Poletti, 210, Campinas/SP</h4>
-                </div>
-              </main>
+              <div>
+                <ProfileCover />
+              </div>
               <div className="w-full">
-                <nav className="text-black font-semibold flex justify-between mt-8">
+                <nav className="text-black font-semibold flex justify-between mt-8 px-8 md:px-0 lg:px-0">
                   <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 justify-center">
                     <Image alt="Schedule icon" src={scheduleIcon}/>
                     <span>Próximos</span>
@@ -58,10 +49,10 @@ const HomeScreen = () => {
                     <span>Cancelados</span>
                   </div>
                 </nav>
-                <div className=" p-10">
+                <div className=" p-10 text-black">
                   {
                     tab == 'NEXT' &&
-                    <NextList />
+                    <ServiceCard />
                   }
                   {
                     tab == 'HISTORY' &&
