@@ -8,7 +8,7 @@ const ProfileCover = () => {
     <main>
       <div className="w-screen">
         <Image
-          className="absolute left-[190px] top-[240px] md:top-[280px] md:left-[390px] lg:left-[480px] lg:top-[325px] xl:left-[620px] xl:top-[330px] 2xl:left-[1060px] 2xl:top-[330px] w-28 md:w-40 lg:w-40 xl:w-40 2xl:w-40"
+          className="absolute left-[140px] top-[140px] md:top-[280px] md:left-[390px] lg:left-[480px] lg:top-[325px] xl:left-[620px] xl:top-[330px] 2xl:left-[1060px] 2xl:top-[330px] w-28 md:w-40 lg:w-40 xl:w-40 2xl:w-40"
           alt="imagem do perfil do salão"
           src={userImage}
         />
