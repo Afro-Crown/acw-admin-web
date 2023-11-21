@@ -7,6 +7,9 @@ import Link from "next/link";
 import userIcon from "../../../public/profile-img-review.svg";
 import Image from "next/image";
 import ProfileReviewsCover from "./components/profile-cover";
+import ReviewCard from "./components/review-card";
+import Divider from "./components/review-card-divider";
+import ReviewValue from "./components/review-value";
 
 const ReviewsScreen = () => {
   return (
@@ -26,76 +29,12 @@ const ReviewsScreen = () => {
           <div>
             <ProfileReviewsCover />
           </div>
-          <nav className="mt-4 p-2 w-full md:w-2/4 lg:w-4/12">
-            <div className="flex flex-row justify-between w-full px-2">
-              <div className="flex items-center gap-2">
-                <Star weight="fill" color="#F67F57" size={28} />
-                <span className="text-2xl text-black">3,3</span>
-              </div>
-              <div className="text-black font-semibold">
-                <div>2 avaliações</div>
-              </div>
-            </div>
-            <div className="h-0 border border-slate-300 mt-2"></div>
-            <div className="flex">
-              <div className="w-[80%] flex flex-col">
-                <div className="flex flex-row text-black text-sm items-center gap-4 pl-2 py-2">
-                  <Image src={userIcon} alt="Foto de usuário" />
-                  <span>Rayssa Paviotti</span>
-                </div>
-                <div className="h-8 flex gap-2 pl-1">
-                  <div className="rounded-md bg-[#FFC8AF] bg-opacity-20 text-[#FF6734] text-xs px-2 h-fit py-1 flex items-center w-fit">
-                    Produtos de qualidade
-                  </div>
-                  <div className="rounded-md bg-[#FFC8AF] bg-opacity-20 text-[#FF6734] text-xs px-2 h-fit py-1 flex items-center w-fit">
-                    Espaço agradável
-                  </div>
-                </div>
-              </div>
-              <div className="w-[20%] text-black text-[10px] flex flex-col justify-center items-end">
-                <span>07/11/2023</span>
-                <div className="flex w-full justify-between">
-                  <Star weight="fill" color="#F67F57" size={12} />
-                  <Star weight="fill" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                </div>
-              </div>
-            </div>
-            <div className="h-0 border border-slate-300 mt-2"></div>
-            <div className="flex">
-              <div className="w-[80%] flex flex-col">
-                <div className="flex flex-row text-black text-sm items-center gap-4 pl-2 py-2">
-                  <Image src={userIcon} alt="Foto de usuário" />
-                  <span>Ana Raboni</span>
-                </div>
-                <div className="text-black text-xs">
-                  <p className="p-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Alias illum, ipsum ut aliquid quidem nesciunt.
-                  </p>
-                </div>
-                <div className="h-8 flex gap-2 pl-1">
-                  <div className="rounded-md bg-[#FFC8AF] bg-opacity-20 text-[#FF6734] text-xs px-2 h-fit py-1 flex items-center w-fit">
-                    Bom atendimento
-                  </div>
-                  <div className="rounded-md bg-[#FFC8AF] bg-opacity-20 text-[#FF6734] text-xs px-2 h-fit py-1 flex items-center w-fit">
-                    Espaço agradável
-                  </div>
-                </div>
-              </div>
-              <div className="w-[20%] text-black text-[10px] flex flex-col justify-center items-end">
-                <span>02/11/2023</span>
-                <div className="flex w-full justify-between">
-                  <Star weight="fill" color="#F67F57" size={12} />
-                  <Star weight="fill" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                  <Star weight="regular" color="#F67F57" size={12} />
-                </div>
-              </div>
-            </div>
+          <nav className="mt-4 p-2 w-screen md:max-w-[984px] lg:max-w-[984px] xl:max-w-[984px] 2xl:max-w-[984px]">
+            <ReviewValue />
+            <Divider />
+            <ReviewCard />
+            <Divider />
+            <ReviewCard />
           </nav>
         </main>
       </section>
