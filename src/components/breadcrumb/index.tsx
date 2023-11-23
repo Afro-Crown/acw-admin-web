@@ -17,7 +17,7 @@ function BreadCrumb({route}: {route: Breadcrumb[]}) {
                 }
 
                 return (
-                    <span>{item.label}</span>
+                    <span key={index}>{item.label}</span>
                 )
             })
         }
