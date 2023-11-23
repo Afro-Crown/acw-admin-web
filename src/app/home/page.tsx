@@ -13,59 +13,35 @@ import CanceledList from "./components/CanceledList";
 import { useState } from "react";
 import Link from "next/link";
 import ProfileCover from "./components/profile-cover";
-import ServiceCard from "../home/components/service-card";
+import ServiceCard from "./components/Tabs/ListNext/service-card";
+import BreadCrumb from "@/components/breadcrumb";
+import Tabs from "./components/Tabs";
 
 
 const HomeScreen = () => {
-  const [tab, setTab] = useState<'NEXT' | 'HISTORY' | 'CANCELED'>('NEXT')
+  
   return ( 
-      <main className="h-screen w-full bg-white">
+      <main className="h-screen w-full bg-slate-50 flex flex-col items-center">
         <Header />
-          <section className="h-full w-full bg-slate-50 flex justify-center">
-            <div className="w-[984px] h-full">
-              <div className="h-[15%] flex flex-row justify-between md:px-16 md:text-xs ">
-                <div className="text-black text-xs md:text-base lg:text-base flex pl-16 md:pl-2 lg:pl-2 flex-row items-center h-full lg:px-4">
-                  <Link href={'../home'}><span>Início</span></Link>
-                  <Dot size={40} />
-                  <span>Agendamentos</span>
-                </div>
-                <div className="h-full flex items-center pr-10 md:pr-2 lg:pr-2">
-                  <Image alt="Cadastro em análise" src={analiseTag} />
-                </div>
-              </div>
-              <div>
-                <ProfileCover />
-              </div>
-              <div className="w-full">
-                <nav className="text-black font-semibold flex justify-between mt-8 px-8 md:px-0 lg:px-0">
-                  <div onClick={() => setTab('NEXT')} className="flex flex-1 flex-row gap-2 justify-center">
-                    <Image alt="Schedule icon" src={scheduleIcon}/>
-                    <span>Próximos</span>
-                  </div>
-                  <div onClick={() => setTab('HISTORY')} className="flex flex-1 flex-row gap-2 justify-center">
-                    <span>Histórico</span>
-                  </div>
-                  <div onClick={() => setTab('CANCELED')} className="flex flex-1 flex-row gap-2 justify-center">
-                    <span>Cancelados</span>
-                  </div>
-                </nav>
-                <div className=" p-10 text-black">
+        <div className="w-[90%] max-w-[984px] h-full flex flex-col items-center">
+            <div className="w-full flex justify-between items-center mb-6 px-3 flex-wrap mt-3 ">
+              <BreadCrumb 
+                route={[
                   {
-                    tab == 'NEXT' &&
-                    <ServiceCard />
-                  }
+                    label: 'Início',
+                    path: '../home'
+                  },
                   {
-                    tab == 'HISTORY' &&
-                    <HistoryList />
+                    label: 'Agendamentos',
                   }
-                  {
-                    tab == 'CANCELED' &&
-                    <CanceledList />
-                  }
-                </div>
-              </div>
+                ]}
+              />
+
+              <Image alt="Tag de cadastro e análise" src={analiseTag} />
             </div>
-          </section>
+            <ProfileCover />
+            <Tabs />
+          </div>
         <Footer />
       </main>
    );

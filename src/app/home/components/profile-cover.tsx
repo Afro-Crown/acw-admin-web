@@ -5,16 +5,14 @@ import { MapPin } from "@phosphor-icons/react";
 
 const ProfileCover = () => {
   return (
-    <main>
-      <div className="w-full pb-8">
+    <>
+      <div className="w-full flex items-end justify-center relative mb-14">
         <Image
-          className="absolute left-[140px] top-[170px] md:top-[210px] md:left-[300px] lg:left-[620px] lg:top-[275px] w-28 md:w-40 lg:40"
+          className="absolute h-9/10 -bottom-10 object-cover w-[120px] lg:w-auto"
           alt="imagem do perfil do salão"
           src={userImage}
         />
-        <div className="">
-          <Image alt="Imagem de fundo do perfil" src={profileBg} />
-        </div>
+        <Image alt="Imagem de fundo do perfil" src={profileBg} className="rounded-xl h-[100px] w-full object-cover md:h-[180px]" />
       </div>
       <div className="text-black w-full flex flex-col items-center">
         <h2 className="text-2xl font-bold">Dellas & Delles Cabeleireiros</h2>
@@ -23,7 +21,7 @@ const ProfileCover = () => {
           Av. Ovídio Poletti, 210, Campinas/SP
         </h4>
       </div>
-    </main>
+    </>
   );
 };
 
