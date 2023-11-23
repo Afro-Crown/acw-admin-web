@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const NavMenu = () => {
   return (
-    <div className="rounded-md p-3 bg-white lg:w-[279px] lg:h-[344px] top-[60px] left-[180px] text-gray-600 absolute lg:top-[100px] lg:left-[1150px] md:left-[500px] md:top-[50px]">
+    <div className="rounded-md p-3 bg-white lg:w-[279px] lg:h-[344px] top-[60px] left-[180px] text-gray-600 absolute lg:top-[100px] lg:left-[1150px] md:left-[500px] md:top-[50px] z-10">
       <h2 className="w-full flex items-start text-xl pl-2 py-4">Olá, Dellas &...</h2>
 
       <Link href={'/reviews'}>
