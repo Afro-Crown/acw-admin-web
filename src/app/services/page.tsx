@@ -4,9 +4,18 @@ import Footer from "@/app/home/components/footer";
 import Header from "@/app/home/components/header";
 import { CaretRight, Dot } from "@phosphor-icons/react";
 import Link from "next/link";
-import ServiceCard from "./components/ServiceCard";
+import RegistrationCard from "./components/registration-service-card";
+import { useState } from "react";
+
 
 const ServicesScreen = () => {
+
+  const [showModalRegister, setShowModalRegister] = useState<boolean>(false);
+
+  function handleRegister() {
+    setShowModalRegister(true)
+  };
+
   return ( 
     <main className="h-screen w-full">
       <Header />
@@ -26,11 +35,11 @@ const ServicesScreen = () => {
           <main className="w-[984px] h-full text-black">
             <div className="flex flex-col">
               <h2 className="font-semibold text-lg mt-8">Cortes</h2>
-              <ServiceCard />
+              <RegistrationCard />
             </div>
             <div className="flex flex-col mt-4">
               <h2 className="font-semibold text-lg mt-8">Tinturas</h2>
-              <ServiceCard />
+              <RegistrationCard />
             </div>
           </main>
         </section>

@@ -1,7 +1,15 @@
 import { ArrowArcRight, NotePencil, Trash } from "@phosphor-icons/react";
+import { useState } from "react";
+import DeleteServiceModal from "./delete-service-modal";
 
+const RegistrationCard = () => {
 
-const ServiceCard = () => {
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
+  const handleMenu = () => {
+    setShowModalDelete((prev) => !prev);
+  };
+ 
   return (
     <main>
       <div className="w-[480px] h-[152px] shadow-lg flex text-black">
@@ -21,14 +29,17 @@ const ServiceCard = () => {
           <NotePencil size={16} color="#616161" weight="light" />
           Editar
         </button>
-        <button className="bg-[#A21A1A] bg-opacity-10 py-2 p-4 rounded-xl text-[#A21A1A] flex justify-between items-center gap-2">
+        <button
+          
+          className="bg-[#A21A1A] bg-opacity-10 py-2 p-4 rounded-xl text-[#A21A1A] flex justify-between items-center gap-2"
+        >
           <Trash size={16} color="#A21A1A" weight="light" />
           Excluir
         </button>
       </div>
-
+      
     </main>
   );
 };
 
-export default ServiceCard;
+export default RegistrationCard;
