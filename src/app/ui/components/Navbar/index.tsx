@@ -2,8 +2,8 @@ import { List } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import acLogo from "../../../public/logo-one.svg";
-import userIcon from "../../../public/user-icon.svg";
+import acLogo from "../../../../../public/logo-one.svg";
+import userIcon from "../../../../../public/user-icon.svg";
 import { Separator } from "./components/Separator";
 import { Menu } from "./components/Menu";
 import { useState } from "react";
