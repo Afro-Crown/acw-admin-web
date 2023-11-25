@@ -1,8 +1,8 @@
-import { BackIcon } from "../../../assets/icons/navbar/BackIcon"
-import { CalendarIcon } from "../../../assets/icons/navbar/CalendarIcon"
-import { ConfigIcon } from "../../../assets/icons/navbar/ConfigIcon"
-import { HelpIcon } from "../../../assets/icons/navbar/HelpIcon"
-import { UserIcon } from "../../../assets/icons/navbar/UserIcon"
+import { BackIcon } from "../../../../../assets/icons/navbar/BackIcon"
+import { CalendarIcon } from "../../../../../assets/icons/navbar/CalendarIcon"
+import { ConfigIcon } from "../../../../../assets/icons/navbar/ConfigIcon"
+import { HelpIcon } from "../../../../../assets/icons/navbar/HelpIcon"
+import { UserIcon } from "../../../../../assets/icons/navbar/UserIcon"
 import Link from "next/link"
 
 export const Menu = () => {

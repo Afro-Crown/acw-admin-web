@@ -3,13 +3,11 @@ import Footer from "./components/footer";
 import analiseTag from "../../../public/cadastroemanalise-tag.svg";
 import Image from "next/image";
 import ProfileCover from "./components/profile-cover";
-import BreadCrumb from "../../components/Breadcrumb";
+import BreadCrumb from "../ui/components/Breadcrumb";
 import Tabs from "./components/Tabs";
-import Navbar from "../../components/Navbar";
-
+import Navbar from "../ui/components/Navbar";
 
 const HomeScreen = () => {
-  
   return ( 
       <main className="w-full bg-slate-50 flex flex-col items-center">
         <Navbar />
