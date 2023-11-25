@@ -1,4 +1,4 @@
-import { NextIcon } from "@/assets/icons/option-service/NextIcon";
+import { NextIcon } from "../../../assets/icons/option-service/NextIcon";
 
 const ButtonInsert = () => {
     return (

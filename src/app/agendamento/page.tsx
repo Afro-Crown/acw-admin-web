@@ -1,22 +1,11 @@
 "use client"
-import { Dot, MapPin } from "@phosphor-icons/react";
 import Footer from "./components/footer";
-import Header from "./components/header";
 import analiseTag from "../../../public/cadastroemanalise-tag.svg";
-import profileBg from "../../../public/profile-bg.svg";
-import scheduleIcon from "../../../public/schedule-icon.svg";
-import userImage from "../../../public/user-profile.svg";
 import Image from "next/image";
-import NextList from "./components/NextList";
-import HistoryList from "./components/HistoryList";
-import CanceledList from "./components/CanceledList";
-import { useState } from "react";
-import Link from "next/link";
 import ProfileCover from "./components/profile-cover";
-import ServiceCard from "./components/Tabs/ListNext/service-card";
-import BreadCrumb from "@/components/Breadcrumb";
+import BreadCrumb from "../../components/Breadcrumb";
 import Tabs from "./components/Tabs";
-import Navbar from "@/components/Navbar";
+import Navbar from "../../components/Navbar";
 
 
 const HomeScreen = () => {

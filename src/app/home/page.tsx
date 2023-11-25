@@ -3,8 +3,7 @@ import Footer from "./components/footer";
 import analiseTag from "../../../public/cadastroemanalise-tag.svg";
 import Image from "next/image";
 import ProfileCover from "./components/profile-cover";
-import BreadCrumb from "@/components/Breadcrumb";
-import Navbar from "@/components/Navbar";
+import Navbar from "../../components/Navbar";
 import ButtonInsert from "./components/ButtonInsert";
 import List from "./components/List";
 

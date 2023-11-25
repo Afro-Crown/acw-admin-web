@@ -1,7 +1,7 @@
 import Image from "next/image";
 import image from "../../../../../../public/service-default.jpeg";
-import { DeleteIcon } from "@/assets/icons/option-service/DeleteIcon";
-import { EditIcon } from "@/assets/icons/option-service/EditIcon";
+import { DeleteIcon } from "../../../../../assets/icons/option-service/DeleteIcon";
+import { EditIcon } from "../../../../../assets/icons/option-service/EditIcon";
 
 const Option = () => {
     return (

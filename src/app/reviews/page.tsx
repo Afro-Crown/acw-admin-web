@@ -1,7 +1,6 @@
 "use client";
-
-import Footer from "@/app/home/components/footer";
-import Header from "@/app/home/components/header";
+import Footer from "../../app/home/components/footer";
+import Header from "../../app/home/components/header";
 import { CaretLeft, CaretRight, Dot, Star } from "@phosphor-icons/react";
 import Link from "next/link";
 import userIcon from "../../../public/profile-img-review.svg";
