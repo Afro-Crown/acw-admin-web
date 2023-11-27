@@ -11,7 +11,7 @@ interface ModalAcceptProps {
 
 const EditServiceModal = ({ closeModal }: ModalAcceptProps) => {
   return (
-    <div className="fixed w-screen h-screen left-0 top-0 flex justify-center items-center bg-white bg-opacity-10">
+    <div className="fixed w-[90%] h-full left-0 top-0 flex justify-center items-center bg-white bg-opacity-10">
       <div className="w-full md:w-[70%] lg:w-[70%] p-4 rounded-md bg-white font-ASSISTANT shadow-md">
         <div className="flex justify-start mb-2">
           <X size={24} onClick={closeModal} className="cursor-pointer" />

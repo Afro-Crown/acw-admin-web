@@ -17,7 +17,7 @@ const RegistrationCard = () => {
   return (
     <>
       <main>
-        <div className="w-[480px] h-[152px] shadow-lg flex text-black">
+        <div className="w-[90%] md:w-[480px] lg:w-[480px] xl:w-[480px] h-[152px] shadow-lg flex text-black">
           <div className="flex flex-col p-4">
             <h2 className="text-lg font-semibold">Corte completo</h2>
             <span className="text-xs">1h55 min</span>
