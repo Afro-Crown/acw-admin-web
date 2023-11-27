@@ -1,3 +1,5 @@
+import WeekDayCards from "./week-days-cards";
+
 const ServiceInfos = () => {
   return ( 
     <div className="pb-20">

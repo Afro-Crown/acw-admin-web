@@ -6,6 +6,7 @@ import { CaretRight, Dot } from "@phosphor-icons/react";
 import Link from "next/link";
 import RegistrationCard from "./components/registration-service-card";
 import { useState } from "react";
+import RegisterServiceModal from "./components/register-service-modal";
 
 
 const ServicesScreen = () => {
@@ -29,7 +30,7 @@ const ServicesScreen = () => {
                 <Link href={'../services'}><span>Serviços</span></Link>
             </div>
             <div className="h-full flex items-center">
-              <button className="rounded-3xl bg-[#F67F57] text-sm font-semibold flex items-center justify-center gap-2 p-4">Adicionar serviço<CaretRight size={14} color="#FFFF" weight="bold" /></button> 
+              <button onClick={handleRegister} className="rounded-3xl bg-[#F67F57] text-sm font-semibold flex items-center justify-center gap-2 p-4">Adicionar serviço<CaretRight size={14} color="#FFFF" weight="bold" /></button> 
             </div>  
           </div>
           <main className="w-[984px] h-full text-black">
@@ -44,6 +45,9 @@ const ServicesScreen = () => {
           </main>
         </section>
       <Footer />
+      {showModalRegister && (
+          <RegisterServiceModal closeModal={() => setShowModalRegister(false)} />
+        )}
     </main>
    );
 }
