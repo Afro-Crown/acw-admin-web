@@ -1,10 +1,8 @@
-import { Dot, X } from "@phosphor-icons/react";
+import { Dot, Star, X } from "@phosphor-icons/react";
 import canceledIcon from "../../../../../../public/canceled-schedule-icon.svg"
 import confirmedIcon from "../../../../../../public/confirmed-schedule-icon.svg"
 import Image from "next/image";
 import { useState } from "react";
-import { ModalCancel } from "./component/modal-cancel";
-import { ModalAccept } from "./component/modal-accept";
 
 const ServiceCard = () => {
   const [showModalCanceled, setShowModalCanceled] = useState<boolean>(false);
@@ -29,29 +27,13 @@ const ServiceCard = () => {
           </div>
         </div>
         <div className="mt-2 flex justify-between gap-4 md:items-end">
-          <button className="py-2 px-3 bg-[#489868] bg-opacity-10 text-[#489868] rounded-md flex items-center gap-2" onClick={() => setShowModalAccept(true)}>
-            <Image alt="canceled schedule icon" src={confirmedIcon} />
-            Confirmar
-          </button>
-          <button className="py-2 px-3 bg-[#A21A1A] bg-opacity-10 text-[#A21A1A] rounded-md flex items-center gap-2" onClick={() => setShowModalCanceled(true)}>
-            <Image alt="canceled schedule icon" src={canceledIcon} />
-            Cancelar
+          <button className="py-2 px-3 bg-[#FF6734] bg-opacity-10 text-[#FF6734] rounded-md flex items-center gap-2" onClick={() => setShowModalAccept(true)}>
+            <Star size={18} weight="light" />
+            Avaliar
           </button>
         </div>
       </div>
     </div>
-    {
-      showModalCanceled &&
-      <ModalCancel 
-        closeModal={() => setShowModalCanceled(false)}
-      />
-    }
-    {
-      showModalAccept &&
-      <ModalAccept 
-        closeModal={() => setShowModalAccept(false)}
-      />
-    }
     
     </>
    );

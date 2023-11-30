@@ -7,7 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'ASSISTANT': 'assistant',
+      'Assistant': 'Assistant, sans-serif',
+      'Trirong': 'Trirong, serif',
     },
 
     extend: {
@@ -15,6 +16,7 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'service-default': "url('/public/service-default.jpeg')",
       },
     },
   },
