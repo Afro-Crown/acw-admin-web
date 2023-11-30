@@ -9,7 +9,7 @@ const HourCards = () => {
     setChangeColor(!changeColor)
   }
 
-  return ( 
+  return (
     <div className="flex-wrap p-2">
       <button onClick={handleClick} className={`m-[2px] rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-1 w-14 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>7:00</button>
       <button onClick={handleClick} className={`m-[2px] rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-1 w-14 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>8:00</button>
