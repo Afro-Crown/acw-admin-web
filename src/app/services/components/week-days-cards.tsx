@@ -1,22 +1,23 @@
-"use client"
 import { useState } from "react";
 
 const WeekDayCards = () => {
-  const [changeColor, setChangeColor] = useState(false);
+  const [changeColor, setChangeColor] = useState<string[]>([]);
+  const weekly = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
 
-  function handleClick () {
-    setChangeColor(!changeColor)
+  function handleClick (value:string) {
+   if(changeColor.includes(value)){
+   return setChangeColor((old) => old.filter((item) => item != value))
+   }
+   setChangeColor((old) => [...old, value])
   }
 
-  return ( 
+  return (
     <div className="flex gap-2">
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Seg</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Ter</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Qua</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Qui</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Sex</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Sab</button>
-      <button onClick={handleClick} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-20 text-center ${(changeColor === true) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>Dom</button>
+      {
+        weekly.map((item, index) => (
+          <button key={index} onClick={() => handleClick(item)} className={`rounded-lg bg-opacity-20 text-sm text-[#616161] py-1 px-2 w-14 font-semibold text-center ${(changeColor.includes(item)) ? 'bg-[#FFD6AD] text-[#FF6734]': 'bg-[#c7c7c7]' }`}>{item}</button>
+        ))
+      }
     </div>
    );
 }
