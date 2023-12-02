@@ -12,13 +12,15 @@ export const Menu = () => {
                 <li className="w-60 mb-4">
                     Olá, Dellas &...
                 </li>
-                <li className="w-60 mb-4 flex items-center justify-between cursor-pointer">
-                    <div className="flex gap-2">
-                        <UserIcon />
-                        Seu perfil
-                    </div>
-                    <BackIcon />
-                </li>
+                <Link href="/reviews" className="hover:scale-105">
+                    <li className="w-60 mb-4 flex items-center justify-between cursor-pointer">
+                        <div className="flex gap-2">
+                            <UserIcon />
+                            Seu perfil
+                        </div>
+                        <BackIcon />
+                    </li>
+                </Link>
                 <Link href="/agendamento" className="hover:scale-105">
                     <li className="w-60 mb-4 flex items-center justify-between cursor-pointer">
                         <div className="flex gap-2">

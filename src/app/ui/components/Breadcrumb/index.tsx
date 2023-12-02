@@ -3,7 +3,7 @@ import { Breadcrumb } from "./interface/breadcrumb.interface";
 
 function BreadCrumb({route}: {route: Breadcrumb[]}) {
   return (
-    <div className="text-[#2E2E2E] flex items-center text-sm font-Assistant font-normal ">
+    <div className="text-[#2E2E2E] flex items-center text-sm font-Assistant font-normal">
         {
             route.map((item, index) => {
                 if(index == 0) {
