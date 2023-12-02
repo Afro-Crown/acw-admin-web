@@ -4,11 +4,12 @@ import Footer from "../home/components/footer";
 import Header from "../home/components/header";
 
 import { CaretRight } from "@phosphor-icons/react";
+import Navbar from "../ui/components/Navbar";
 
 const UseTermsScreen = () => {
   return (
     <main className="bg-white flex flex-col items-center justify-center">
-      <Header />
+      <Navbar />
       <div className="bg-white min-h-screen w-[90%] max-w-[1000px] flex flex-col items-center py-6 md:py-24 mx-6">
         <h1 className="w-full text-black text-3xl font-semibold mb-4 md:mb-10">Termos de uso</h1>
         <div className="text-black flex flex-col md:flex-row items-start justify-between h-full gap-6 md:gap-28">

@@ -1,38 +1,25 @@
 import Image from "next/image";
-import { MapPin } from "@phosphor-icons/react";
-import Link from "next/link";
 import profileBg from "../../../../public/profile-bg.svg";
 import userImage from "../../../../public/user-profile.svg";
-import changeUser from "../../../../public/change-user.svg";
-import changeBgUser from "../../../../public/change-bg-user.svg";
+import { MapPin, Pen } from "@phosphor-icons/react";
+import { PencilIcon } from "@/assets/icons/pencil";
+import { Available } from "./available";
 
-const ProfileReviewsCover = () => {
+const ProfileCover = () => {
   return (
-    <main>
-      <div className="w-full pb-8">
-        <Image
-          className="absolute left-[140px] top-[110px] md:top-[130px] md:left-[300px] lg:left-[620px] lg:top-[225px] w-28 md:w-40"
-          alt="imagem do perfil do salão"
-          src={userImage}
-        />
-        <button>
+    <>
+      <div className="w-full flex items-end justify-center relative mb-14">
+        <div className="absolute -bottom-10">
           <Image
-            className="absolute left-[210px] top-[100px] md:left-[400px] md:top-[120px] lg:left-[720px] lg:top-[215px] w-10 md:w-14 lg:w-14"
-            alt="ícone mudar foto do usuário"
-            src={changeUser}
-            
+            className="h-9/10 object-cover w-[120px] lg:w-auto"
+            alt="imagem do perfil do salão"
+            src={userImage}
           />
-        </button>
-        <div className="">
-          <Image alt="Imagem de fundo do perfil" src={profileBg} />
+          <div className="bg-white absolute top-2 right-2 p-2 rounded-full cursor-pointer">
+            <PencilIcon />
+          </div>
         </div>
-        <button>
-          <Image
-            className="absolute left-[330px] top-[170px] md:left-[650px] md:top-[220px] lg:left-[1100px] lg:top-[305px] w-10 md:w-14 lg:w-14"
-            alt="ícone mudar fundo"
-            src={changeBgUser}
-          />
-        </button>
+        <Image alt="Imagem de fundo do perfil" src={profileBg} className="rounded-xl h-[100px] w-full object-cover md:h-[180px]" />
       </div>
       <div className="text-black w-full flex flex-col items-center">
         <h2 className="text-2xl font-bold">Dellas & Delles Cabeleireiros</h2>
@@ -41,8 +28,8 @@ const ProfileReviewsCover = () => {
           Av. Ovídio Poletti, 210, Campinas/SP
         </h4>
       </div>
-    </main>
+    </>
   );
 };
 
-export default ProfileReviewsCover;
+export default ProfileCover;
