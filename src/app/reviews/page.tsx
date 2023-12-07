@@ -10,6 +10,7 @@ import analiseTag from "../../../public/cadastroemanalise-tag.svg";
 import BreadCrumb from "../ui/components/Breadcrumb";
 import ProfileCover from "./components/profile-cover";
 import { Available } from "./components/available";
+import Image from "next/image";
 
 const ReviewsScreen = () => {
   return (
