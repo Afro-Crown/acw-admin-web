@@ -22,7 +22,7 @@ const Header = () => {
     setOpen((prev) => !prev);
   };
   return (
-    <div className="lg:h-[104px] w-screen bg-[#FFEAD4] flex items-center justify-between">
+    <div className="lg:h-[104px] w-full bg-[#FFEAD4] flex items-center justify-between">
       <div className="flex w-1/4 items-center justify-center pl-2">
         <Image src={acLogo} alt="Afro Crown Logo" />
       </div>

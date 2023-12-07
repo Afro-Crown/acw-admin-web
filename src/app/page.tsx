@@ -15,7 +15,7 @@ const trirong = Trirong({
 export default function Home() {
   return (
     <main
-      className={`flex bg-[#FFEAD4] min-h-screen flex-col items-center`}
+      className={`flex bg-[#FFEAD4] w-full min-h-screen flex-col items-center`}
     >
       <header className="h-[104px] w-full md:w-[70%] lg:w-[60%] bg-[#FFEAD4] flex items-center justify-between ">
         <div className="flex w-1/2 md:w-2/4 lg:w-1/4 items-center justify-center">

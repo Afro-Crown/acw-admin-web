@@ -3,8 +3,6 @@ import Footer from "../../app/home/components/footer";
 import Header from "../../app/home/components/header";
 import { CaretLeft, CaretRight, Dot, Star } from "@phosphor-icons/react";
 import Link from "next/link";
-import userIcon from "../../../public/profile-img-review.svg";
-import Image from "next/image";
 import ProfileReviewsCover from "./components/profile-cover";
 import Navbar from "../ui/components/Navbar";
 
