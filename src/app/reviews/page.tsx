@@ -15,7 +15,7 @@ import analiseTag from "../../../public/cadastroemanalise-tag.svg";
 import BreadCrumb from "../ui/components/Breadcrumb";
 import ProfileCover from "./components/profile-cover";
 import { Available } from "./components/available";
->>>>>>>>> Temporary merge branch 2
+import Image from "next/image";
 
 const ReviewsScreen = () => {
   return (
