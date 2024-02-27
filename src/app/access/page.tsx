@@ -1,0 +1,45 @@
+import { Trirong } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import acLogo from "../../../public/logo-login.svg";
+import progressBar1 from "../../../public/access-progress-bar-1.svg"
+import React from "react";
+
+const trirong = Trirong({
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+});
+
+const Access = () => {
+  return (
+    <main className="flex min-h-screen w-full items-center justify-center bg-[#FFEAD4]">
+      <div className="flex flex-col h-[70%] w-[80%] md:w-2/4 lg:min-w-[25%] lg:w-1/4 bg-white items-center">
+        <div className="flex flex-col gap-2 p-8 text-black text-center text-2xl">
+          <Image alt="AfroCrow logo" src={acLogo} />
+          <h4 className={trirong.className}>Criar conta</h4>
+          <Image alt="Progress bar" src={progressBar1} />
+        </div>
+        <div className="w-[80%]">
+          <div className="flex flex-col items-center justify-center">
+            <Link href={"/home"} className="w-full">
+              <button className="w-full  p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
+                Avançar
+              </button>
+            </Link>
+            <span className="text-black text-sm text-center">
+              Ao criar uma conta você concorda com nossos{" "}
+              <Link href={"google.com"}>
+                <span className="text-orange-500 font-semibold">
+                  Termos de serviço
+                </span>
+              </Link>
+            </span>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Access;
