@@ -4,6 +4,7 @@ import Link from "next/link";
 import acLogo from "../../../public/logo-login.svg";
 import progressBar1 from "../../../public/access-progress-bar-1.svg"
 import React from "react";
+import FirstInputs from "./components/first-inputs";
 
 const trirong = Trirong({
   subsets: ["latin"],
@@ -20,14 +21,17 @@ const Access = () => {
           <h4 className={trirong.className}>Criar conta</h4>
           <Image alt="Progress bar" src={progressBar1} />
         </div>
+        <div className="w-full flex justify-center">
+          <FirstInputs />
+        </div>
         <div className="w-[80%]">
           <div className="flex flex-col items-center justify-center">
             <Link href={"/home"} className="w-full">
               <button className="w-full  p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-                Avançar
+                Criar conta
               </button>
             </Link>
-            <span className="text-black text-sm text-center">
+            <span className="text-black text-sm text-center pb-8">
               Ao criar uma conta você concorda com nossos{" "}
               <Link href={"google.com"}>
                 <span className="text-orange-500 font-semibold">
