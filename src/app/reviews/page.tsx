@@ -4,13 +4,10 @@ import Header from "../../app/home/components/header";
 import { CaretLeft, CaretRight, Dot, Star } from "@phosphor-icons/react";
 import Link from "next/link";
 import ProfileReviewsCover from "./components/profile-cover";
-<<<<<<<<< Temporary merge branch 1
 import ReviewCard from "./components/review-card";
 import Divider from "./components/review-card-divider";
 import ReviewValue from "./components/review-value";
-=========
 import Navbar from "../ui/components/Navbar";
-
 import analiseTag from "../../../public/cadastroemanalise-tag.svg";
 import BreadCrumb from "../ui/components/Breadcrumb";
 import ProfileCover from "./components/profile-cover";
