@@ -1,10 +1,10 @@
 import Image from "next/image";
-import progressBar1 from "../../../../public/access-progress-bar-1.svg";
+import progressBar1 from "../../../../../public/access-progress-bar-1.svg"
 import Link from "next/link";
 
 const FirstInputs = () => {
   return (
-    <div className="w-[80%] flex items-center justify-center">
+    <div className="w-[100%] flex items-center justify-center">
       <div className="w-[80%]">
         <Image alt="Progress bar" src={progressBar1} />
         <div className="py-8 text-black">
@@ -31,11 +31,6 @@ const FirstInputs = () => {
             />
           </div>
         </div>
-        <Link href={"/home"} className="w-full">
-          <button className="w-full  p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-            Criar conta
-          </button>
-        </Link>
       </div>
     </div>
   );

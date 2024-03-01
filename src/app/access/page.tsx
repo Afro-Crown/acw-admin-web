@@ -1,9 +1,12 @@
+"use client"
+
 import { Trirong } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import acLogo from "../../../public/logo-login.svg";
 import React from "react";
-import FirstInputs from "./components/Stages/first-inputs";
+import MultistepForm from "./components/useMultistepForm";
+
 
 const trirong = Trirong({
   subsets: ["latin"],
@@ -20,11 +23,10 @@ const Access = () => {
           <h4 className={trirong.className}>Criar conta</h4>
         </div>
         <div className="w-full flex justify-center">
-          <FirstInputs />
+          <MultistepForm />
         </div>
         <div className="w-[80%]">
           <div className="flex flex-col items-center justify-center">
-        
             <span className="text-black text-sm text-center pb-8">
               Ao criar uma conta você concorda com nossos{" "}
               <Link href={"google.com"}>
