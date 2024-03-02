@@ -3,9 +3,10 @@ import { useState } from "react";
 import FirstInputs from "./Stages/first-inputs";
 import SecondInputs from "./Stages/second-inputs";
 import ThirdInputs from "./Stages/third-inputs";
+import FourthInputs from "./Stages/fourth-inputs";
 
 const MultistepForm = () => {
-  const [steps, setSteps] = useState<"FIRST" | "SECOND" | "THIRD">("FIRST");
+  const [steps, setSteps] = useState<"FIRST" | "SECOND" | "THIRD" | "FOURTH">("FIRST");
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -13,6 +14,7 @@ const MultistepForm = () => {
         {steps == "FIRST" && <FirstInputs />}
         {steps == "SECOND" && <SecondInputs />}
         {steps == "THIRD" && <ThirdInputs />}
+        {steps == "FOURTH" && <FourthInputs />}
       </div>
       <nav className="w-full font-semibold flex justify-center mt-8">
         <button  onClick={() => setSteps("SECOND")} className="w-2/3 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
@@ -20,6 +22,9 @@ const MultistepForm = () => {
         </button>
         <button  onClick={() => setSteps("THIRD")} className="w-2/3 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
           Avançar
+        </button>
+        <button  onClick={() => setSteps("FOURTH")} className="w-2/3 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
+          Enviar cadastro
         </button>
       </nav>
     </div>
