@@ -13,7 +13,7 @@ const trirong = Trirong({
 const AccessVerification = () => {
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-[#FFEAD4]">
-      <div className="flex flex-col h-[70%] w-[80%] md:w-2/4 lg:min-w-[25%] lg:w-1/4 bg-white items-center">
+      <div className="flex flex-col h-[80%] w-[80%] md:w-2/4 lg:min-w-[25%] lg:w-1/4 bg-white items-center">
         <div className="flex flex-col gap-2 p-8 text-black text-center text-2xl">
           <Image alt="AfroCrow logo" src={acLogo} />
           <h4 className={trirong.className}>Criar conta</h4>
