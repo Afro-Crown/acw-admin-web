@@ -1,12 +1,11 @@
 import Image from "next/image";
 import progressBar3 from "../../../../../public/access-progress-bar-3.svg";
-import { useState } from "react";
+import Link from "next/link";
 
 const FourthInputs = () => {
-  const [steps, setSteps] = useState<"FIRST" | "SECOND" | "THIRD">("FIRST");
-
+  
   return (
-    <div className="w-[100%] flex items-center justify-center">
+    <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
         <Image alt="Progress bar" src={progressBar3} />
         <div className="py-8 text-black">
@@ -99,6 +98,11 @@ const FourthInputs = () => {
           </span>
         </div>
       </div>
+      <Link href="../../access-verification">
+        <button className="w-1/2 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
+          Enviar cadastro
+        </button>
+      </Link>
     </div>
   );
 };
