@@ -12,7 +12,7 @@ const ThirdInputs = () => {
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
         <div className=" text-black">
-          {steps == "FOURTH" && <FourthInputs />}
+          {steps === "FOURTH" && <FourthInputs />}
         </div>
         <Image alt="Progress bar" src={progressBar3} />
         <div className="py-8 text-black">
