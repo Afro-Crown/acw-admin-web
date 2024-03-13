@@ -3,7 +3,6 @@ import progressBar3 from "../../../../../public/access-progress-bar-3.svg";
 import Link from "next/link";
 
 const FourthInputs = () => {
-  
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
@@ -61,19 +60,23 @@ const FourthInputs = () => {
               className="w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent"
             />
           </div>
-          <div className="flex">
-            <span className="text-xs">Número</span>
-            <input
-              type="text"
-              placeholder=""
-              className="w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent"
-            />
-            <span className="text-xs">Complemento</span>
-            <input
-              type="text"
-              placeholder="(Opcional)"
-              className="w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent"
-            />
+          <div className="flex gap-4">
+            <div className="flex flex-col">
+              <span className="text-xs">Número</span>
+              <input
+                type="text"
+                placeholder=""
+                className="w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs">Complemento</span>
+              <input
+                type="text"
+                placeholder="(Opcional)"
+                className="w-full appearance-none dark:focus:border-orange-500 focus:outline-none focus:ring-0 focus:text-black focus:border-orange-500 border-0 border-b-2 h-10 bg-transparent"
+              />
+            </div>
           </div>
           <span className="text-xs">E-mail comercial</span>
           <input
@@ -98,11 +101,13 @@ const FourthInputs = () => {
           </span>
         </div>
       </div>
-      <Link href="../../access-verification">
-        <button className="w-1/2 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-          Enviar cadastro
-        </button>
-      </Link>
+      <div className="w-2/3">
+        <Link className="w-full" href="../../access-verification">
+          <button className="w-full text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
+            Enviar cadastro
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -8,12 +8,16 @@ import FourthInputs from "./Stages/fourth-inputs";
 const MultistepForm = () => {
   const [steps, setSteps] = useState<"FIRST" | "SECOND" | "THIRD" | "FOURTH">("FIRST");
 
+  function RedirectPage(page: "FIRST" | "SECOND" | "THIRD" | "FOURTH"){
+    setSteps(page)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className=" text-black">
-        {steps === "FIRST" && <FirstInputs />}
-        {steps === "SECOND" && <SecondInputs />}
-        {steps === "THIRD" && <ThirdInputs />}
+      <div className=" text-black w-full">
+        {steps === "FIRST" && <FirstInputs RedirectPage={RedirectPage}/>}
+        {steps === "SECOND" && <SecondInputs RedirectPage={RedirectPage} />}
+        {steps === "THIRD" && <ThirdInputs RedirectPage={RedirectPage} />}
         {steps === "FOURTH" && <FourthInputs />}
       </div>
     </div>

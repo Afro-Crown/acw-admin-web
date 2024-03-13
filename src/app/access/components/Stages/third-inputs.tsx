@@ -1,19 +1,14 @@
 import Image from "next/image";
 import progressBar3 from "../../../../../public/access-progress-bar-3.svg";
-import Link from "next/link";
-import { useState } from "react";
-import FourthInputs from "./fourth-inputs";
 
-const ThirdInputs = () => {
-  const [steps, setSteps] = useState<"FIRST" | "SECOND" | "THIRD" | "FOURTH">(
-    "FIRST"
-  );
+interface props {
+  RedirectPage:(page: "FIRST" | "SECOND" | "THIRD" | "FOURTH")=> void 
+}
+const ThirdInputs = ({RedirectPage}:props) => {
+  
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <div className=" text-black">
-          {steps === "FOURTH" && <FourthInputs />}
-        </div>
         <Image alt="Progress bar" src={progressBar3} />
         <div className="py-8 text-black">
           <span className="text-xs">E-mail comercial</span>
@@ -39,9 +34,11 @@ const ThirdInputs = () => {
           </span>
         </div>
       </div>
-      <button  onClick={() => setSteps("FOURTH")} className="w-1/2 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-          Teste 3
-        </button>
+      <div className="w-2/3">
+        <button  onClick={() => RedirectPage("FOURTH")} className="w-full text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
+            Avançar
+          </button>
+      </div>
     </div>
   );
 };
