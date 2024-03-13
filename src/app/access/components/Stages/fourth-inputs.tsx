@@ -101,7 +101,7 @@ const FourthInputs = () => {
           </span>
         </div>
       </div>
-      <div className="w-2/3">
+      <div className="w-2/3 mt-32">
         <Link className="w-full" href="../../access-verification">
           <button className="w-full text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
             Enviar cadastro

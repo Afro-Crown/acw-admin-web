@@ -34,7 +34,7 @@ const ThirdInputs = ({RedirectPage}:props) => {
           </span>
         </div>
       </div>
-      <div className="w-2/3">
+      <div className="w-2/3 mt-40">
         <button  onClick={() => RedirectPage("FOURTH")} className="w-full text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
             Avançar
           </button>

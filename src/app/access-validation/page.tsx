@@ -18,7 +18,9 @@ const trirong = Trirong({
 const AccessValidation = () => {
   const [stage, setStage] = useState<"CODE" | "PASSWORD">("CODE");
 
-
+  function RedirectPage(page: "CODE" | "PASSWORD"){
+    setStage(page)
+  }
   return (
     <main className="flex min-h-screen w-full items-center justify-center bg-[#FFEAD4]">
       <div className="flex flex-col h-[70%] w-[80%] md:w-2/4 lg:min-w-[25%] lg:w-1/4 bg-white items-center">
@@ -29,19 +31,11 @@ const AccessValidation = () => {
         </div>
         <div className="w-full flex justify-center">
         <div className=" text-black">
-        {stage == "CODE" && <ValidationCode />}
-        {stage == "PASSWORD" && <PasswordCreation />}
+        {stage == "CODE" && <ValidationCode RedirectPage={RedirectPage} />}
+        {stage == "PASSWORD" && <PasswordCreation RedirectPage={RedirectPage} />}
       </div>
         </div>
         <div className="w-[80%]">
-          <div className="flex flex-col items-center justify-center">
-            <button onClick={() => setStage("PASSWORD")} className="w-2/3 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-              Validar código
-            </button>
-            <button className="w-2/3 text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8">
-              Criar conta
-            </button>
-          </div>
         </div>
       </div>
     </main>
