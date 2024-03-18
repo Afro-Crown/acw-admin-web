@@ -1,6 +1,7 @@
 import Image from "next/image";
-import analysis from "../../../public/analysis.svg"
+import analysis from "../../../public/registration-in-analysis.svg"
 import Link from "next/link";
+import RegistrationInAnalysis from "./components/registration-in-analysis";
 
 const AnalysisRegistration = () => {
   return ( 
@@ -10,7 +11,7 @@ const AnalysisRegistration = () => {
           <p className="text-[#FFD6AD] text-lg text-center w-1/2">
             O cadastro de <b className="font-bold">Dellas & Delles Cabeleireiros</b> está
           </p>
-          <Image alt="Registro em análise" src={analysis} />
+          <RegistrationInAnalysis />
         </div>
         <div className="w-full flex flex-col gap-2 justify-center items-center">
           <p className="text-[#FFD6AD] text-xs w-1/2 text-center">
