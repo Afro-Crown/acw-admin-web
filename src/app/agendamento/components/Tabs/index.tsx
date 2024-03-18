@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-
 import scheduleIcon from "../../../../../public/schedule-icon.svg";
 import ListNext from "./ListNext";
 import ListHistory from "./ListHistory";
