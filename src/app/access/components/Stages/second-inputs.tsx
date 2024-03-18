@@ -1,5 +1,4 @@
-import Image from "next/image";
-import progressBar2 from "../../../../../public/access-progress-bar-2.svg";
+import ProgressBar2 from "../progress-bar-2";
 
 interface props {
   RedirectPage: (page: "FIRST" | "SECOND" | "THIRD" | "FOURTH") => void;
@@ -8,7 +7,7 @@ const SecondInputs = ({ RedirectPage }: props) => {
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <Image alt="Progress bar" src={progressBar2} />
+        <ProgressBar2 />
         <div className="py-8 text-black">
           <div className="flex">
             <span className="text-xs">CEP</span>
@@ -60,7 +59,7 @@ const SecondInputs = ({ RedirectPage }: props) => {
           </div>
         </div>
       </div>
-      <div className="w-2/3 mt-40">
+      <div className="w-3/4 mt-40">
         <button
           onClick={() => RedirectPage("THIRD")}
           className="w-full text-white p-4 bg-[#F67F57AA] hover:bg-[#F67F57] font-semibold text-lg rounded-lg mb-8"

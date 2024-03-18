@@ -1,5 +1,4 @@
-import Image from "next/image";
-import progressBar1 from "../../../../../public/access-progress-bar-1.svg";
+import ProgressBar1 from "../progress-bar-1";
 
 interface props {
   RedirectPage:(page: "FIRST" | "SECOND" | "THIRD" | "FOURTH")=> void 
@@ -8,8 +7,8 @@ const FirstInputs = ({RedirectPage}:props) => {
 
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
-      <div className="w-[100%]">
-        <Image className="w-full" alt="Progress bar" src={progressBar1} />
+      <div className="w-[80%]">
+        <ProgressBar1 />
         <div className="py-8 text-black">
           <span className="text-xs">Nome do salão</span>
           <input

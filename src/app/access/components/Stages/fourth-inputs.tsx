@@ -1,12 +1,11 @@
-import Image from "next/image";
-import progressBar3 from "../../../../../public/access-progress-bar-3.svg";
 import Link from "next/link";
+import ProgressBar3 from "../progress-bar-3";
 
 const FourthInputs = () => {
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <Image alt="Progress bar" src={progressBar3} />
+        <ProgressBar3 />
         <div className="py-8 text-black">
           <span className="text-xs">Nome do salão</span>
           <input

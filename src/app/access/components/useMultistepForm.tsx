@@ -15,7 +15,7 @@ const MultistepForm = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className=" text-black w-full">
-        {steps === "FIRST" && <FirstInputs RedirectPage={RedirectPage}/>}
+        {steps === "FIRST" && <FirstInputs RedirectPage={RedirectPage}/> }
         {steps === "SECOND" && <SecondInputs RedirectPage={RedirectPage} />}
         {steps === "THIRD" && <ThirdInputs RedirectPage={RedirectPage} />}
         {steps === "FOURTH" && <FourthInputs />}
