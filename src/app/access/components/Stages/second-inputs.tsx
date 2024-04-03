@@ -1,13 +1,15 @@
 import ProgressBar2 from "../progress-bar-2";
+import { Steps } from "@/app/enums/multistep-form.enum";
+import ProgressBar from "../progressbar";
 
-interface props {
-  RedirectPage: (page: "FIRST" | "SECOND" | "THIRD" | "FOURTH") => void;
-}
-const SecondInputs = ({ RedirectPage }: props) => {
+type SecondInputsProps = {
+  RedirectPage: (page: Steps) => void;
+};
+const SecondInputs: React.FC<SecondInputsProps> = ({ RedirectPage }) => {
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <ProgressBar2 />
+      <ProgressBar />
         <div className="py-8 text-black">
           <div className="flex">
             <span className="text-xs">CEP</span>

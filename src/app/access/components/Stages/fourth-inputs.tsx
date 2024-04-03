@@ -5,7 +5,7 @@ const FourthInputs = () => {
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <ProgressBar3 />
+        
         <div className="py-8 text-black">
           <span className="text-xs">Nome do salão</span>
           <input

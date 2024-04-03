@@ -1,14 +1,17 @@
+import { useState } from "react";
 import ProgressBar1 from "../progress-bar-1";
+import { Steps } from "@/app/enums/multistep-form.enum";
+import ProgressBar from "../progressbar";
 
-interface props {
-  RedirectPage:(page: "FIRST" | "SECOND" | "THIRD" | "FOURTH")=> void 
-}
-const FirstInputs = ({RedirectPage}:props) => {
+type FirstInputsProps = {
+  RedirectPage: (page: Steps) => void;
+};
+const FirstInputs: React.FC<FirstInputsProps> = ({ RedirectPage }) => {
 
   return (
     <div className="w-[100%] flex flex-col items-center justify-center">
       <div className="w-[80%]">
-        <ProgressBar1 />
+        <ProgressBar />
         <div className="py-8 text-black">
           <span className="text-xs">Nome do salão</span>
           <input

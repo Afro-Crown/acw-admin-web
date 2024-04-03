@@ -1,9 +1,12 @@
 import Image from "next/image";
 import progressBar3 from "../../../../public/access-progress-bar-3.svg";
 
-const ProgressBar3 = () => {
+type ProgressBarProps = {
+  RedirectProgress: (prog: "30" | "70" | "100") => void;
+};
+const ProgressBar3: React.FC<ProgressBarProps> = ({ RedirectProgress }) => {
   return ( 
-    <div>
+    <div className="">
       <Image alt="" src={progressBar3}/>
     </div>
    );
