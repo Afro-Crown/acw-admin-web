@@ -9,7 +9,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -19,8 +19,21 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"],
+      "@common/*": ["src/common/*"],
+      "@atoms/*": ["src/components/atoms/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@organisms/*": ["src/components/organisms/*"],
+      "@templates/*": ["src/components/templates/*"],
+      "@containers/*": ["src/containers/*"],
+      "@store/*": ["src/store/*"],
+      "@providers/*": ["src/store/providers/*"],
+      "@services/*": ["src/store/services/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
