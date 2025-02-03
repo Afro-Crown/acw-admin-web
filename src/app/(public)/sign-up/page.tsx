@@ -4,11 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import InputField from "@/components/molecules/InputField/inputField";
 import SignUpFormSchema from "@/validations/signUp";
 import Button from "@atoms/Button/button";
 import useAuth from "@hooks/useAuth";
-
-import InputField from "@/components/molecules/InputField/inputField";
 
 type SignUpForm = z.infer<typeof SignUpFormSchema>;
 
