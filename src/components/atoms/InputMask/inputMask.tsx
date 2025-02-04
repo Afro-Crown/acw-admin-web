@@ -17,7 +17,7 @@ const InputMask = <T extends FieldValues>({
   return (
     <ReactInputMask
       className={cn(
-        "ring-offset-primary-50 focus-within:border-primary-300 focus-within:ring-primary-50 h-11 items-center gap-1 rounded-lg border border-gray-300 px-3 text-sm outline-none focus-within:ring-1 focus-within:ring-offset-2",
+        "h-8 items-center gap-1 border-gray-300 min-w-[20px] text-sm outline-none border-b-2",
         className
       )}
       {...props}

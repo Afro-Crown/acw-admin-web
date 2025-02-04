@@ -6,3 +6,4 @@ export default z
   .regex(/^[A-zÀ-ú-\s]+$/, "Não utilize caracteres especiais")
   .regex(/^(.*\s)+.+(\s)?$/, "Inclua também seu sobrenome")
   .transform((value) => value.replace(/\s+/g, " ").trim());
+ 

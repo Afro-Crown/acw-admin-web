@@ -14,14 +14,14 @@ export const buttonVariants = tv({
   variants: {
     size: {
       sm: "py-2 px-3.5 text-sm",
-      md: "h-11 px-4 text-sm",
+      md: "h-[50px] px-[120px] text-sm",
       lg: "py-2.5 px-[18px] text-base",
       xl: "py-3 px-5 text-base",
       xxl: "py-4 px-7 text-lg"
     },
     variant: {
       success:
-        "bg-primary-600 hover:bg-primary-700 disabled:bg-primary-50 disabled:border-primary-50 active:bg-primary-600 border-primary-600 hover:border-primary-700 text-base-white disabled:text-primary-400",
+        "bg-button hover:bg-primary-700 disabled:bg-primary-50 disabled:border-primary-50 active:bg-primary-600 border-primary-600 hover:border-primary-700 text-white disabled:text-primary-400",
       "secondary-gray":
         "border-gray-300 bg-base-white hover:bg-gray-50 disabled:bg-gray-50 disabled:border-gray-200 text-gray-700 disabled:text-gray-300",
       "secondary-color":
