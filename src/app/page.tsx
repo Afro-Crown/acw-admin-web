@@ -1,15 +1,19 @@
-import Link from "next/link";
+import MainImage from "../../public/main-img.svg";
+import Image from 'next/image';
+import Header from "@/components/molecules/header";
+import Footer from "@/components/molecules/footer";
 
 import PublicOnlyFeature from "@/components/templates/Public/public";
 
 export default function Home() {
   return (
     <PublicOnlyFeature>
-      <main className="flex h-screen w-full flex-col items-center justify-center gap-4">
-        <h1 className="text-3xl font-bold underline">LANDING PAGE</h1>
-        <Link href="/login">Login Page</Link>
-        <Link href="/sign-up">Signup Page</Link>
-        <Link href="/admin/users">Admin Page</Link>
+      <main className="bg-[#FFEAD4] overflow-hidden h-screen">
+        <div className="flex flex-col items-center justify-center gap-3 h-full">
+          <Header />
+          <Image src={MainImage} alt="MainImage" className="mb-56"/>
+          <Footer />
+        </div>
       </main>
     </PublicOnlyFeature>
   );
