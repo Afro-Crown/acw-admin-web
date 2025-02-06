@@ -54,7 +54,9 @@ module.exports = {
       },
       backgroundImage: {
         button:
-          "linear-gradient(0deg, rgba(255,103,52,1) 0%, rgba(246,127,87,1) 100%)"
+          "linear-gradient(0deg, rgba(255,103,52,1) 0%, rgba(246,127,87,1) 100%)",
+        input:
+          "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(230,230,230,1) 100%)"
       },
       borderRadius: {
         lg: "var(--radius)",

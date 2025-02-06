@@ -63,8 +63,8 @@ export default function LoginPage() {
           </div>
         </form>
         <div className="flex flex-col mt-40 gap-4">
-          <Button className="mt-4 font-normal" loading={loading.loginWithInternalService}>
-            ENTRAR
+          <Button className="mt-4 font-normal text-lg" loading={loading.loginWithInternalService}>
+            Entrar
           </Button>
           <div className="flex justify-center gap-1 text-sm">
             <p>Ainda não tem uma conta?</p>
