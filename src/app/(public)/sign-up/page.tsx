@@ -23,10 +23,10 @@ export default function SignUpPage() {
   };
 
   return (
-    <>
+    <main className="flex flex-col items-center justify-center gap-5 bg-[#FFF5EA]">
       {step === 1 && <SignUpForm onSuccess={handleSignUpSuccess} />}
       {step === 2 && <EmailConfirmation email={email} onSuccess={handleEmailConfirmationSuccess} />}
       {step === 3 && <CreatePasswordForm onSuccess={handleCreatePasswordSuccess} />}
-    </>
+    </main>
   );
 }

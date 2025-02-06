@@ -27,7 +27,6 @@ const handleSubmitForm = (data: any) => {
 };
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-[#FFF5EA]">
       <div className="flex h-screen w-1/4 flex-col bg-[#FFFFFF] justify-between shadow-2xl m-16 px-16 py-3">
         <div className="flex flex-col items-center gap-10 m-7">
           <Image src={IconAfroCrown} alt="Icone Afro Crown" />
@@ -62,6 +61,5 @@ const handleSubmitForm = (data: any) => {
             </Button>
           </div>
       </div>
-    </main>
   );
 }

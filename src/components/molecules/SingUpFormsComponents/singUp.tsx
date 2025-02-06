@@ -32,7 +32,6 @@ const handleSubmitForm = (data: SignUpForm) => {
 };
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5 bg-[#FFF5EA]">
       <div className="flex flex-col bg-[#FFFFFF] shadow-2xl m-16">
         <div className="flex flex-col items-center gap-2 m-7">
           <Image src={IconAfroCrown} alt="Icone Afro Crown" />
@@ -137,6 +136,5 @@ const handleSubmitForm = (data: SignUpForm) => {
           </div>
         </form>
       </div>
-    </main>
   );
 }
