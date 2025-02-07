@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import SignUpForm from "@/components/molecules/SingUpFormsComponents/singUp";
-import EmailConfirmation from "@/components/molecules/SingUpFormsComponents/emailConfirmation";
+
 import CreatePasswordForm from "@/components/molecules/SingUpFormsComponents/creatPassoword";
+import EmailConfirmation from "@/components/molecules/SingUpFormsComponents/emailConfirmation";
+import SignUpForm from "@/components/molecules/SingUpFormsComponents/singUp";
 
 export default function SignUpPage() {
   const [step, setStep] = useState(1);
@@ -23,10 +24,19 @@ export default function SignUpPage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5 bg-[#FFF5EA]">
+    <main
+      className={`flex flex-col ${step === 1 ? null : "h-screen"} items-center justify-center gap-5 bg-[#FFF5EA]`}
+    >
       {step === 1 && <SignUpForm onSuccess={handleSignUpSuccess} />}
-      {step === 2 && <EmailConfirmation email={email} onSuccess={handleEmailConfirmationSuccess} />}
-      {step === 3 && <CreatePasswordForm onSuccess={handleCreatePasswordSuccess} />}
+      {step === 2 && (
+        <EmailConfirmation
+          email={email}
+          onSuccess={handleEmailConfirmationSuccess}
+        />
+      )}
+      {step === 3 && (
+        <CreatePasswordForm onSuccess={handleCreatePasswordSuccess} />
+      )}
     </main>
   );
 }

@@ -13,7 +13,7 @@ const Input = <T extends FieldValues>({
   return (
     <input
       className={cn(
-        "h-8 items-center gap-1 border-gray-300 min-w-[20px] text-sm outline-none border-b-2",
+        "h-8 min-w-[20px] items-center gap-1 border-b-2 border-gray-300 text-sm outline-none",
         className
       )}
       {...props}

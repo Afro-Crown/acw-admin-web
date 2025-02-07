@@ -2,7 +2,7 @@ import { LabelProps } from "./types";
 
 const Label = ({ children, name }: LabelProps) => {
   return (
-    <label className="text-base font-bold text-gray-700 " htmlFor={name}>
+    <label className="text-[#2E2E2E] " htmlFor={name}>
       {children}
     </label>
   );
