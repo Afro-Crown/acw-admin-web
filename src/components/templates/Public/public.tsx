@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 import LoadingComponent from "@/components/atoms/Loading/loading";
 import useAuth from "@/hooks/useAuth";
@@ -14,13 +14,13 @@ interface Props {
 
 function PublicOnlyFeature({ children }: Props): JSX.Element {
   const { userUid } = useAuth();
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (userUid !== "") {
-      router.replace(`/home`);
-    }
-  }, [userUid, router]);
+  // useEffect(() => {
+  //   if (userUid !== "") {
+  //     router.replace(`/home`);
+  //   }
+  // }, [userUid, router]);
 
   if (userUid === "") {
     return children;
