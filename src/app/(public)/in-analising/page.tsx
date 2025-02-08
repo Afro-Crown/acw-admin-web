@@ -10,7 +10,7 @@ export default function AnalisingPage() {
       </p>
       <Image src={emAnalise} alt="Em análise" />
       <p className="mt-40 text-center font-[200] text-[19px] w-[258px] text-primary">Fique de olho em seu e-mail. Daremos um retorno em breve.</p>
-      <Button className="mt-10 w-[290px] h-11 text-primary border-primary">Continuar</Button>
+      <Button className="mt-10 w-[290px] h-11 text-primary border-primary bg-transparent">Continuar</Button>
     </main>
   );
 }

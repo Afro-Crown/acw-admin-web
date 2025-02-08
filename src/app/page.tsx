@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <PublicOnlyFeature>
       <main className="bg-[#FFEAD4] overflow-hidden h-screen">
-        <div className="flex flex-col items-center justify-center gap-3 h-full">
+        <div className="flex flex-col items-center justify-center gap-">
           <Header />
-          <Image src={MainImage} alt="MainImage" className="mb-56" />
+          <Image src={MainImage} alt="MainImage" className="" />
           <Footer />
         </div>
       </main>
