@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center items-center bg-secondary w-full h-64 fixed bottom-0">
+    <footer className="flex justify-center items-center bg-secondary w-full h-64 bottom-0">
       <div className="w-2/3 flex flex-col justify-between gap-2 mb-2">
         <div className="flex justify-between">
           <div>

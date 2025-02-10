@@ -4,7 +4,7 @@ import logo from '../../../../public/logo-one.svg';
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center bg-[#FFEAD4] w-full h-20 px-64 fixed top-0">
+    <header className="flex justify-between items-center bg-[#FFEAD4] w-full h-20 px-64 top-0">
       <Image src={logo} alt="Logo" />
       <span className="bg-secondary px-40 py-[1px] mx-3 rounded-sm"></span>
       <div className="flex items-center mr-4">
