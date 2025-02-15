@@ -19,7 +19,7 @@ const authMenuItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AuthenticatedOnlyFeature>
-      <main className="">
+      <main>
         <Header/>
         {children}
         <Footer/>
