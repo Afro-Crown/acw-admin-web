@@ -17,7 +17,8 @@ export const buttonVariants = tv({
       md: "h-[50px] px-[120px] text-sm",
       lg: "py-2.5 px-[18px] text-base",
       xl: "py-3 px-5 text-base",
-      xxl: "py-4 px-7 text-lg"
+      xxl: "py-4 px-7 text-lg",
+      custom: "w-[55px] h-[55px] text-4xl font-normal rounded-full shadow-lg"
     },
     variant: {
       success:

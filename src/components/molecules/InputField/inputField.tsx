@@ -1,16 +1,12 @@
 import { useState } from "react";
-
 import Image from "next/image";
 import { FieldValues } from "react-hook-form";
-
 import FormErrorLabel from "@/components/atoms/FormError/formError";
 import Input from "@/components/atoms/Input/input";
 import InputCurrency from "@/components/atoms/InputCurrency/InputCurrency";
 import InputMask from "@/components/atoms/InputMask/inputMask";
 import Label from "@/components/atoms/Label/label";
-
 import { InputFieldProps } from "./types";
-
 import EyeIcon from "../../../../public/mostrar-password.svg";
 import EyeOffIcon from "../../../../public/ocutar-password.svg";
 
@@ -24,6 +20,7 @@ const InputField = <T extends FieldValues>({
   currency = false,
   control,
   type = "text",
+  optionalText,
   ...props
 }: InputFieldProps<T>) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +33,7 @@ const InputField = <T extends FieldValues>({
   if (currency && control) {
     return (
       <div className="relative flex flex-col gap-1">
-        {label && <Label>{label}</Label>}
+        {label && <Label><span className="font-medium">{label}</span></Label>}
         <InputCurrency
           className={className}
           name={name}
@@ -46,6 +43,7 @@ const InputField = <T extends FieldValues>({
         <FormErrorLabel>
           {errorMessage && errorMessage.toString()}
         </FormErrorLabel>
+        {optionalText && <p className="text-sm text-gray-500 opacity-75">{optionalText}</p>}
       </div>
     );
   }
@@ -53,7 +51,7 @@ const InputField = <T extends FieldValues>({
   if (mask) {
     return (
       <div className="relative flex flex-col gap-1">
-        {label && <Label>{label}</Label>}
+        {label && <Label><span className="font-medium">{label}</span></Label>}
         <InputMask
           {...props}
           className={className}
@@ -64,13 +62,14 @@ const InputField = <T extends FieldValues>({
         <FormErrorLabel>
           {errorMessage && errorMessage.toString()}
         </FormErrorLabel>
+        {optionalText && <p className="text-sm text-gray-500 opacity-75">{optionalText}</p>}
       </div>
     );
   }
 
   return (
     <div className="relative flex flex-col gap-1">
-      {label && <Label>{label}</Label>}
+      {label && <Label><span className="font-medium">{label}</span></Label>}
       <Input
         {...props}
         className={`pr-10 ${className}`}
@@ -92,6 +91,7 @@ const InputField = <T extends FieldValues>({
         </div>
       )}
       <FormErrorLabel>{errorMessage && errorMessage.toString()}</FormErrorLabel>
+      {optionalText && <p className="text-sm text-gray-500 opacity-75">{optionalText}</p>}
     </div>
   );
 };

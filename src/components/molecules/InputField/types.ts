@@ -1,5 +1,4 @@
 import { ComponentProps } from "react";
-
 import {
   Control,
   FieldErrors,
@@ -17,4 +16,5 @@ export interface InputFieldProps<T extends FieldValues>
   currency?: boolean;
   control?: Control<T>;
   label?: string;
+  optionalText?: string;
 }
