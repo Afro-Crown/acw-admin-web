@@ -1,22 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../../atoms/Button/button";
+
 import { Plus } from "lucide-react";
 import Image from "next/image";
-import Professional from "../Professionals/professionals";
+
 import Divider from "../../../../public/divider.svg";
 import Link from "next/link";
 
 export default function ProfessionalList() {
-  const [professionals, setProfessionals] = useState<string[]>(["User 1", "User 2", "User 3"]);
+  const [professionals, setProfessionals] = useState<string[]>([
+    "User 1",
+    "User 2",
+    "User 3"
+  ]);
 
   const handleDelete = (indexToRemove: number) => {
-    setProfessionals(professionals.filter((_, index) => index !== indexToRemove));
+    setProfessionals(
+      professionals.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   return (
-    <div className="flex flex-col gap-4 ml-10 p-2">
+    <div className="flex flex-col gap-4 p-2">
       <div className="flex items-end gap-2">
         <h1 className="text-3xl">Cabeleleiras(os)</h1>
         <Link href="/staffRegister">
@@ -32,9 +38,13 @@ export default function ProfessionalList() {
       <div>
         <Image src={Divider} alt="Divider" className="bg-gray-300" />
       </div>
-      <div className="grid grid-cols-2 gap-5 mt-5">
+      <div className="mt-5 grid grid-cols-2 gap-5">
         {professionals.map((professional, index) => (
-          <Professional key={index} text={professional} onDelete={() => handleDelete(index)} />
+          <Professional
+            key={index}
+            text={professional}
+            onDelete={() => handleDelete(index)}
+          />
         ))}
       </div>
     </div>
