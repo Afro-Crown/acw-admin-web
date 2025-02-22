@@ -7,6 +7,8 @@ import Image from "next/image";
 
 import Divider from "../../../../public/divider.svg";
 import Link from "next/link";
+import Button from "@/components/atoms/Button/button";
+import Professional from "../Professionals/professionals";
 
 export default function ProfessionalList() {
   const [professionals, setProfessionals] = useState<string[]>([
@@ -25,7 +27,7 @@ export default function ProfessionalList() {
     <div className="flex flex-col gap-4 p-2">
       <div className="flex items-end gap-2">
         <h1 className="text-3xl">Cabeleleiras(os)</h1>
-        <Link href="/staffRegister">
+        <Link href="/staff-register">
           <Button
             size="md"
             variant="success"
