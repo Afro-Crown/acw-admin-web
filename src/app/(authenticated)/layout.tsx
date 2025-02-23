@@ -2,7 +2,6 @@
 
 import Header from "@/components/molecules/Header/header";
 import Footer from "@/components/molecules/Footer/footer";
-import Navbar from "@containers/Navbar/navbar";
 import AuthenticatedOnlyFeature from "@templates/Authenticated/authenticated";
 
 const authMenuItems = [
@@ -22,7 +21,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main>
         <Header/>
         {children}
-        <Footer/>
+        <div className="mt-10">
+          <Footer/>
+        </div>
       </main>
     </AuthenticatedOnlyFeature>
   );

@@ -7,6 +7,7 @@ import ProfileBG from "@molecules/ProfileBG/profileBG";
 import { Scissors } from "lucide-react";
 import AgendamentoForm from "@molecules/AgendamentoForm/agendamentoForm";
 import Button from "@atoms/Button/button";
+import Navigation from "@molecules/Navigation/navigation"
 
 interface Agendamento {
   id: number;
@@ -117,29 +118,29 @@ export default function Agendamento() {
 
   return (
     <main>
+      <div className="flex flex-start justify-self-center gap-2 font-light text-sm w-[61rem]">
+        <Navigation />
+      </div>
       <ProfileBG isEditable={false} />
       <div className="flex justify-center gap-80 text-2xl font-light mt-5">
         <div
-          className={`flex gap-2 cursor-pointer ${
-            activeSection === "proximos" ? "border-b-2 border-black" : ""
-          }`}
+          className={`flex gap-2 cursor-pointer ${activeSection === "proximos" ? "border-b-2 border-black" : ""
+            }`}
           onClick={() => setActiveSection("proximos")}
         >
           <Image src={Schedule} alt="agenda" width={24} height={24} className={`${activeSection === "historico" || activeSection === "cancelados" ? "filter grayscale opacity-30" : ""}`} />
           <p>Próximos</p>
         </div>
         <div
-          className={`flex cursor-pointer ${
-            activeSection === "historico" ? "border-b-2 border-black" : ""
-          }`}
+          className={`flex cursor-pointer ${activeSection === "historico" ? "border-b-2 border-black" : ""
+            }`}
           onClick={() => setActiveSection("historico")}
         >
           <p>Histórico</p>
         </div>
         <div
-          className={`cursor-pointer ${
-            activeSection === "cancelados" ? "border-b-2 border-black" : ""
-          }`}
+          className={`cursor-pointer ${activeSection === "cancelados" ? "border-b-2 border-black" : ""
+            }`}
           onClick={() => setActiveSection("cancelados")}
         >
           <p>Cancelados</p>

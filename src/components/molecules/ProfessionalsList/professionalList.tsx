@@ -4,7 +4,8 @@ import { useState } from "react";
 
 import { Plus } from "lucide-react";
 import Image from "next/image";
-
+import Button from "@atoms/Button/button"
+import Professional from "../Professionals/professionals";
 import Divider from "../../../../public/divider.svg";
 import Link from "next/link";
 import Button from "@/components/atoms/Button/button";
