@@ -1,11 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
 import logo from "../../../../public/logo-one.svg";
+import userImg from "../../../../public/user-icon.svg";
+import { ModalProfile } from "../ModalProfile/modalProfile"
+import { useState } from "react";
+
+
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false)
+  const user = {
+    name: "John Doe",
+    email: "teste@gmail.com",
+    image: userImg
+  };
   return (
-    <header className="flex h-20 w-full items-center justify-center bg-[#FFEAD4]">
+    <header className="relative flex h-20 w-full items-center justify-center bg-[#FFEAD4]">
       <div className="flex max-w-5xl items-center justify-between gap-5">
         <Image src={logo} alt="Logo" width={250} />
         <span className="mx-3 h-[1px] w-[200px] rounded-sm bg-secondary"></span>
@@ -22,11 +34,18 @@ export default function Header() {
             Contato
           </Link>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
-          <Link href="/login" className="text-secondary">
-            Entrar
-          </Link>
+          {user ? (
+            <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+              <Image src={user.image} alt="User" width={30} height={30} />
+            </div>
+          ) : (
+            <Link href="/login" className="text-secondary">
+              Entrar
+            </Link>
+          )}
         </div>
       </div>
+      <ModalProfile isOpen={isOpen} setIsOpen={setIsOpen} name={user.name} />
     </header>
   );
 }
