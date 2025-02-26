@@ -8,8 +8,8 @@ import Button from "@atoms/Button/button"
 import Professional from "../Professionals/professionals";
 import Divider from "../../../../public/divider.svg";
 import Link from "next/link";
-import Button from "@/components/atoms/Button/button";
-import Professional from "../Professionals/professionals";
+// import Button from "@/components/atoms/Button/button";
+// import Professional from "../Professionals/professionals";
 
 export default function ProfessionalList() {
   const [professionals, setProfessionals] = useState<string[]>([

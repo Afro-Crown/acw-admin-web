@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navigation from "@molecules/Navigation/navigation";
 import Servicos from "@molecules/Servicos/servicos";
 import Button from "@atoms/Button/button"
+import { ModalServices } from "@/components/molecules/ModalServices/modalServices";
 
 interface Servico {
   id: number;
@@ -70,12 +71,18 @@ export default function Service() {
         .filter((categoria) => categoria.servicos.length > 0 || categoria.title.trim() !== "")
     );
   };
+  
+  const [isOpen, setIsOpen] = useState(false)
+  const user = {
+    name: "John Doe",
+  };
 
+  
   return (
     <div>
       <div className="flex flex-start justify-self-center gap-2 font-light text-sm w-[61rem]">
         <Navigation />
-        <Button className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate">Adicionar serviço&gt;</Button>
+        <Button className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate" onClick={() => setIsOpen(true)}>Adicionar serviço&gt;</Button>
       </div>
       <div className="flex flex-col justify-self-center justify-start gap-5">
         {categorias.map((categoria) => (
@@ -88,6 +95,7 @@ export default function Service() {
           />
         ))}
       </div>
+      <ModalServices isOpen={isOpen} setIsOpen={setIsOpen} name={user.name} />
     </div>
   );
 }
