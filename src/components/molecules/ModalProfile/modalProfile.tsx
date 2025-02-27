@@ -1,3 +1,6 @@
+import { Calendar, CircleHelp, Settings, User } from "lucide-react";
+import Link from "next/link";
+
 import {
   Dialog,
   DialogContent,
@@ -6,12 +9,10 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+
 import { ModalProps } from "./types";
-import Link from "next/link";
-import { Calendar, CircleHelp, Settings, User } from "lucide-react";
 
-
-export function ModalProfile({ isOpen, setIsOpen }: ModalProps) {
+export function ModalProfile({ isOpen, setIsOpen, storeName }: ModalProps) {
   const tabs = [
     {
       icon: <User color="#616161" strokeWidth={1.25} />,
@@ -33,28 +34,32 @@ export function ModalProfile({ isOpen, setIsOpen }: ModalProps) {
       link: "/profile",
       name: "Configurações"
     }
-  ]
+  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="absolute top-[15rem] left-[80rem] w-[18rem]">
+      <DialogContent className="absolute left-[80rem] top-[15rem] w-[18rem]">
         <DialogHeader>
-          <DialogTitle className="font-normal">Olá, Dellas &...</DialogTitle>
+          <DialogTitle className="font-normal">Olá, {storeName}</DialogTitle>
           {/* <DialogDescription>Descrição</DialogDescription> */}
         </DialogHeader>
         <div className="grid gap-6 py-4">
-          {tabs.map((item) => (
-            <div className="flex gap-3">
+          {tabs.map((item, index) => (
+            <div className="flex gap-3" key={item.name + index}>
               {item.icon}
               <div className="flex w-[12rem] justify-between">
-                <Link href={item.link} className="font-light">{item.name}</Link>
+                <Link href={item.link} className="font-light">
+                  {item.name}
+                </Link>
                 <span className="font-light">{">"}</span>
               </div>
             </div>
           ))}
         </div>
         <DialogFooter>
-          <button className="w-[125px] h-[40px] text-sm bg-[#A21A1A] text-[white] rounded-sm"><Link href="/login">Sair da conta</Link></button>
+          <button className="h-[40px] w-[125px] rounded-sm bg-[#A21A1A] text-sm text-[white]">
+            <Link href="/login">Sair da conta</Link>
+          </button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
