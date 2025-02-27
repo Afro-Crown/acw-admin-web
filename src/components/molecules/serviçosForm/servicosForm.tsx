@@ -14,33 +14,39 @@ interface ServicoFormProps {
 
 export default function ServicoForm({ name, text, hora, preco, onDelete }: ServicoFormProps) {
   return (
-    <div className="px-10 gap-7 shadow-lg flex items-center w-[39rem] h-[13rem]">
-      <div className="flex-1">
-        <h2 className="font-semibold text-xl">{name}&gt;</h2>
-        <p className="text-gray-500 text-sm">{hora}</p>
-        <p className="text-gray-600 text-sm break-words">{text}</p>
-        <div className="flex justify-between items-end space-y-5">
-          <p className="text-black font-bold">{preco}</p>
-          <div className="flex gap-2 ">
+    <div className="xl:p-8 xl:gap-7 sm:p-4 sm:gap-3 shadow-lg flex max-w-[39rem] max-h-[13rem]">
+      <div className="flex-1 flex flex-col h-full">
+        <div>
+          <div className="flex xl:gap-2 sm:gap-1">
+            <h2 className="text-[#2E2E2E] font-semibold xl:text-xl sm:text-lg">{name} </h2>
+            <p className="xl:text-xl sm:text-lg font-light">&gt;</p>
+          </div>
+          <p className="xl:text-sm sm:text-xs">{hora}</p>
+          <p className="xl:text-sm sm:text-xs break-words">{text}</p>
+        </div>
+        <div className="grid grid-cols-2 items-end mt-auto">
+          <p className="items-center text-black font-bold xl:text-sm sm:text-xs">{preco}</p>
+          <div className="flex gap-2 justify-end">
             <Button
               size="sm"
               variant="success"
-              className="flex rounded-sm border-none bg-[#C7C7C7] bg-opacity-20 p-2 text-[#616161]"
+              className="flex rounded-sm border-none bg-[#C7C7C7] bg-opacity-20 p-2 text-[#616161] w-auto font-medium"
             >
-              <Pencil size={16} /> Editar
+              <Pencil size={16} className="sm:hidden xl:block" /> Editar
             </Button>
             <Button
               onClick={onDelete}
               size="sm"
               variant="success"
-              className="flex rounded-sm border-none bg-[#A21A1A1A] bg-opacity-10 p-2 text-[#A21A1A]"
+              className="flex rounded-sm border-none bg-[#A21A1A1A] bg-opacity-10 p-2 text-[#A21A1A] w-auto font-medium"
             >
-              <Trash2 size={16} /> Excluir
+              <Trash2 size={16} className="sm:hidden xl:block" /> Excluir
             </Button>
           </div>
         </div>
       </div>
-      <Image src={ProfileImg} alt="ProfileImg" className="w-44 h-36 object-cover object-center" />
+      <Image src={ProfileImg} alt="ProfileImg" className="xl:w-[11rem] sm:w-[8rem] xl:h-[9rem] sm:h-[8rem]  object-cover rounded-md" />
     </div>
+   
   );
 }
