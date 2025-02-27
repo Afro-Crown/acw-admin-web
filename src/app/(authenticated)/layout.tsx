@@ -1,28 +1,28 @@
 "use client";
 
-import Header from "@/components/molecules/Header/header";
 import Footer from "@/components/molecules/Footer/footer";
+import Header from "@/components/molecules/Header/header";
 import AuthenticatedOnlyFeature from "@templates/Authenticated/authenticated";
 
-const authMenuItems = [
-  {
-    label: "Home",
-    href: "/home"
-  },
-  {
-    label: "Profile",
-    href: "/profile"
-  }
-];
+// const authMenuItems = [
+//   {
+//     label: "Home",
+//     href: "/home"
+//   },
+//   {
+//     label: "Profile",
+//     href: "/profile"
+//   }
+// ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AuthenticatedOnlyFeature>
-      <main>
-        <Header/>
+      <main className="flex min-h-screen flex-col justify-between">
+        <Header />
         {children}
         <div className="mt-10">
-          <Footer/>
+          <Footer />
         </div>
       </main>
     </AuthenticatedOnlyFeature>

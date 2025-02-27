@@ -23,7 +23,7 @@ const InputMask = <T extends FieldValues>({
       {...props}
       {...(register && register(name))}
       mask={mask}
-      maskPlaceholder={null}
+      maskPlaceholder=""
     />
   );
 };

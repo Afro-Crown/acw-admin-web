@@ -13,7 +13,6 @@ import {
   Img,
   Button
 } from "@react-email/components";
-import "dotenv/config";
 
 interface Temp {
   width?: number;
