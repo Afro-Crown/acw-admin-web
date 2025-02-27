@@ -80,11 +80,11 @@ export default function Service() {
   
   return (
     <div>
-      <div className="flex flex-start justify-self-center gap-2 font-light text-sm w-[61rem]">
+      <div className="flex justify-self-center font-light text-sm w-[61rem]">
         <Navigation />
         <Button className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate" onClick={() => setIsOpen(true)}>Adicionar serviço&gt;</Button>
       </div>
-      <div className="flex flex-col justify-self-center justify-start gap-5">
+      <div className="flex flex-col justify-self-center justify-start gap-5 mx-20">
         {categorias.map((categoria) => (
           <Servicos
             key={categoria.id}
