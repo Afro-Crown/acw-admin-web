@@ -1,15 +1,16 @@
-import MainImage from "../../public/main-img.svg";
-import Image from 'next/image';
-import Header from "@/components/molecules/Header/header";
-import Footer from "@/components/molecules/Footer/footer";
+import Image from "next/image";
 
+import Footer from "@/components/molecules/Footer/footer";
+import Header from "@/components/molecules/Header/header";
 import PublicOnlyFeature from "@/components/templates/Public/public";
+
+import MainImage from "../../public/main-img.svg";
 
 export default function Home() {
   return (
     <PublicOnlyFeature>
-      <main className="bg-[#FFEAD4] overflow-hidden h-screen">
-        <div className="flex flex-col items-center justify-center gap-">
+      <main className="overflow-hidden bg-[#FFEAD4]">
+        <div className="flex min-h-screen flex-col items-center justify-between">
           <Header />
           <Image src={MainImage} alt="MainImage" className="" />
           <Footer />

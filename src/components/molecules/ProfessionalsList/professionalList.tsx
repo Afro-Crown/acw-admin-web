@@ -4,11 +4,11 @@ import { useState } from "react";
 
 import { Plus } from "lucide-react";
 import Image from "next/image";
-import Button from "@atoms/Button/button"
-import Professional from "../Professionals/professionals";
-import Divider from "../../../../public/divider.svg";
 import Link from "next/link";
+
 import Button from "@/components/atoms/Button/button";
+
+import Divider from "../../../../public/divider.svg";
 import Professional from "../Professionals/professionals";
 
 export default function ProfessionalList() {
@@ -32,7 +32,7 @@ export default function ProfessionalList() {
           <Button
             size="md"
             variant="success"
-            className="w-10 h-10 rounded-full p-0 flex items-center justify-center border-none"
+            className="flex h-10 w-10 items-center justify-center rounded-full border-none p-0"
           >
             <Plus />
           </Button>

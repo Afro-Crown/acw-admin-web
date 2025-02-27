@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import Schedule from "../../../../../public/schedule-icon.svg";
-import ProfileBG from "@molecules/ProfileBG/profileBG";
+
 import { Scissors } from "lucide-react";
-import AgendamentoForm from "@molecules/AgendamentoForm/agendamentoForm";
+import Image from "next/image";
+
 import Button from "@atoms/Button/button";
-import Navigation from "@molecules/Navigation/navigation"
+import AgendamentoForm from "@molecules/AgendamentoForm/agendamentoForm";
+import Navigation from "@molecules/Navigation/navigation";
+import ProfileBG from "@molecules/ProfileBG/profileBG";
+
+import Schedule from "../../../../../public/schedule-icon.svg";
 
 interface Agendamento {
   id: number;
@@ -36,7 +39,7 @@ export default function Agendamento() {
       tempoDoCorte: "3h",
       nome: "Barbearia",
       preco: "R$ 123,00",
-      status: "proximos",
+      status: "proximos"
     },
     {
       id: 2,
@@ -48,37 +51,47 @@ export default function Agendamento() {
       tempoDoCorte: "2h40 min",
       nome: "Barbearia",
       preco: "R$ 123,00",
-      status: "proximos",
-    },
+      status: "proximos"
+    }
   ]);
 
   const handleConfirm = (id: number) => {
     setAgendamentos((prev) => [
       ...prev.map((agendamento) =>
-        agendamento.id === id ? { ...agendamento, status: "confirmed" } : agendamento
+        agendamento.id === id
+          ? { ...agendamento, status: "confirmed" }
+          : agendamento
       ),
-      ...prev.filter((agendamento) => agendamento.id === id).map((agendamento) => ({
-        ...agendamento,
-        status: "historico",
-      })),
+      ...prev
+        .filter((agendamento) => agendamento.id === id)
+        .map((agendamento) => ({
+          ...agendamento,
+          status: "historico"
+        }))
     ]);
   };
 
   const handleCancel = (id: number) => {
     setAgendamentos((prev) => [
       ...prev.map((agendamento) =>
-        agendamento.id === id ? { ...agendamento, status: "cancelados" } : agendamento
+        agendamento.id === id
+          ? { ...agendamento, status: "cancelados" }
+          : agendamento
       ),
-      ...prev.filter((agendamento) => agendamento.id === id).map((agendamento) => ({
-        ...agendamento,
-        status: "historico",
-      })),
+      ...prev
+        .filter((agendamento) => agendamento.id === id)
+        .map((agendamento) => ({
+          ...agendamento,
+          status: "historico"
+        }))
     ]);
   };
 
   const renderContent = () => {
     const filteredAgendamentos = agendamentos.filter(
-      (agendamento) => agendamento.status === activeSection || (activeSection === "proximos" && agendamento.status === "confirmed")
+      (agendamento) =>
+        agendamento.status === activeSection ||
+        (activeSection === "proximos" && agendamento.status === "confirmed")
     );
 
     switch (activeSection) {
@@ -87,9 +100,9 @@ export default function Agendamento() {
       case "cancelados":
         if (filteredAgendamentos.length === 0) {
           return (
-            <div className="flex flex-col items-center mt-10 text-[#949494]">
+            <div className="mt-10 flex flex-col items-center text-[#949494]">
               <Scissors width={50} height={50} className="opacity-70" />
-              <p className="flex max-w-[18rem] justify-center text-2xl text-center font-light">
+              <p className="flex max-w-[18rem] justify-center text-center text-2xl font-light">
                 Você ainda não tem nenhum agendamento marcado
               </p>
             </div>
@@ -97,7 +110,7 @@ export default function Agendamento() {
         }
 
         return (
-          <div className="flex flex-col mt-2 w-[63rem] justify-self-center">
+          <div className="mt-2 flex w-[63rem] flex-col justify-self-center">
             {filteredAgendamentos.map((agendamento, index) => (
               <div key={agendamento.id}>
                 <AgendamentoForm
@@ -105,7 +118,9 @@ export default function Agendamento() {
                   onConfirm={() => handleConfirm(agendamento.id)}
                   onCancel={() => handleCancel(agendamento.id)}
                 />
-                {index < filteredAgendamentos.length - 1 && <hr className="my-4 border-gray-300" />}
+                {index < filteredAgendamentos.length - 1 && (
+                  <hr className="my-4 border-gray-300" />
+                )}
               </div>
             ))}
           </div>
@@ -118,36 +133,45 @@ export default function Agendamento() {
 
   return (
     <main>
-      <div className="flex flex-start justify-self-center gap-2 font-light text-sm w-[61rem]">
+      <div className="flex-start flex w-[61rem] gap-2 justify-self-center text-sm font-light">
         <Navigation />
       </div>
       <ProfileBG isEditable={false} />
-      <div className="flex justify-center gap-80 text-2xl font-light mt-5">
+      <div className="mt-5 flex justify-center gap-80 text-2xl font-light">
         <div
-          className={`flex gap-2 cursor-pointer ${activeSection === "proximos" ? "border-b-2 border-black" : ""
-            }`}
+          className={`flex cursor-pointer gap-2 ${
+            activeSection === "proximos" ? "border-b-2 border-black" : ""
+          }`}
           onClick={() => setActiveSection("proximos")}
         >
-          <Image src={Schedule} alt="agenda" width={24} height={24} className={`${activeSection === "historico" || activeSection === "cancelados" ? "filter grayscale opacity-30" : ""}`} />
+          <Image
+            src={Schedule}
+            alt="agenda"
+            width={24}
+            height={24}
+            className={`${activeSection === "historico" || activeSection === "cancelados" ? "opacity-30 grayscale filter" : ""}`}
+          />
           <p>Próximos</p>
         </div>
         <div
-          className={`flex cursor-pointer ${activeSection === "historico" ? "border-b-2 border-black" : ""
-            }`}
+          className={`flex cursor-pointer ${
+            activeSection === "historico" ? "border-b-2 border-black" : ""
+          }`}
           onClick={() => setActiveSection("historico")}
         >
           <p>Histórico</p>
         </div>
         <div
-          className={`cursor-pointer ${activeSection === "cancelados" ? "border-b-2 border-black" : ""
-            }`}
+          className={`cursor-pointer ${
+            activeSection === "cancelados" ? "border-b-2 border-black" : ""
+          }`}
           onClick={() => setActiveSection("cancelados")}
         >
           <p>Cancelados</p>
         </div>
       </div>
       {activeSection === "historico" && (
-        <div className="flex justify-center items-center gap-2 mt-2">
+        <div className="mt-2 flex items-center justify-center gap-2">
           <Button
             size="sm"
             className={`rounded-full border-[#2E2E2E] ${activeButton === "todos" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
