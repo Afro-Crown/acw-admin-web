@@ -14,7 +14,7 @@ const CheckboxField = <T extends FieldValues>({
   disabled = false,
   name,
   className,
-  formErrors
+  formErrors,
 }: CheckboxFieldProps<T>) => {
   const errorMessage = (formErrors && formErrors[name]?.message) ?? null;
 

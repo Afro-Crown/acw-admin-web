@@ -1,18 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import logo from "../../../../public/logo-one.svg";
-import userImg from "../../../../public/user-icon.svg";
-import { ModalProfile } from "../ModalProfile/modalProfile"
 import { useState } from "react";
 
+import Image from "next/image";
+import Link from "next/link";
 
+import logo from "../../../../public/logo-one.svg";
+import userImg from "../../../../public/user-icon.svg";
+import { ModalProfile } from "../ModalProfile/modalProfile";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const user = {
     name: "John Doe",
+    storeName: "Loja do João",
     email: "teste@gmail.com",
     image: userImg
   };
@@ -45,7 +46,11 @@ export default function Header() {
           )}
         </div>
       </div>
-      <ModalProfile isOpen={isOpen} setIsOpen={setIsOpen} name={user.name} />
+      <ModalProfile
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        storeName={user.storeName}
+      />
     </header>
   );
 }

@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     "Equipe Plataforma"
   ];
 
-  const html = render(
+  const html = await render(
     TemplateEmail({
       paragraphs,
       preview: "Convite",

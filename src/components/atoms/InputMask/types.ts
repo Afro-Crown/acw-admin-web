@@ -7,4 +7,5 @@ export interface InputMaskProps<T extends FieldValues>
   name: Path<T>;
   register: UseFormRegister<T>;
   mask: string;
+  children?: never;
 }
