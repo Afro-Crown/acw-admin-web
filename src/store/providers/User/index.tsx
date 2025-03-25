@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
+import { UserEntity } from "@/common/entities/users";
 import useProfile from "@/hooks/queries/useProfile";
 import { errorToast, successToast } from "@/hooks/useAppToast";
 import { getAllUsers, updateUserDoc } from "@/store/services/user";
-import { UserEntity } from "@common/entities/user";
 import useAuth from "@hooks/useAuth";
 
 import UserContext from "./context";

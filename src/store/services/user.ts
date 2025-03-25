@@ -13,9 +13,9 @@ import {
   updateDoc
 } from "firebase/firestore";
 
+import { UserEntity } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { userMapper } from "@/utils/userMapper";
-import { UserEntity } from "@common/entities/user";
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
