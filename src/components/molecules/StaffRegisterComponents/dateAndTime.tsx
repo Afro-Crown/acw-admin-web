@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import Button from "@/components/atoms/Button/button";
+import ButtonArray from "../ButtonArray/buttonArray";
 
 import ChangeUser from "../../../../public/change-user.svg";
 import UserIcon from "../../../../public/user-icon.svg";
@@ -120,31 +121,9 @@ export default function DateAndTime({
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <p>
-          Selecione os horários que <span className="font-bold">{name}</span>{" "}
-          atende no salão
-        </p>
-        <div className="flex flex-wrap space-x-2">
-          {timesOfDay.slice(0, 8).map((time, index) => (
-            <button
-              key={index}
-              onClick={() => handleTimeClick(index)}
-              className={`bg-inpu h-[2rem] w-[4rem] rounded-lg ${selectedTimes[index] ? "bg-[#FFD6AD] text-[#FF6734]" : "bg-input text-[#616161]"}`}
-            >
-              {time}
-            </button>
-          ))}
-        </div>
-        <div className="mt-2 flex flex-wrap space-x-2">
-          {timesOfDay.slice(8).map((time, index) => (
-            <button
-              key={index + 8}
-              onClick={() => handleTimeClick(index + 8)}
-              className={`bg-inpu h-[2rem] w-[4rem] rounded-lg ${selectedTimes[index + 8] ? "bg-[#FFD6AD] text-[#FF6734]" : "bg-input text-[#616161]"}`}
-            >
-              {time}
-            </button>
-          ))}
+        <p>Selecione os horários que <span className="font-bold">{name}</span> atende no salão</p>
+        <div className="w-[40rem]">
+          <ButtonArray name={timesOfDay} handleNameClick={handleTimeClick} selectedName={selectedTimes} cols={8} w={5} h={2} /> 
         </div>
       </div>
       <div className="mt-3 flex justify-between">
