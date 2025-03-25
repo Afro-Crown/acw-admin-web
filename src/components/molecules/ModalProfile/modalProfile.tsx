@@ -12,7 +12,12 @@ import {
 
 import { ModalProps } from "./types";
 
-export function ModalProfile({ isOpen, setIsOpen, storeName }: ModalProps) {
+export function ModalProfile({
+  isOpen,
+  setIsOpen,
+  storeName,
+  openHelpModal
+}: ModalProps & { openHelpModal: () => void }) {
   const tabs = [
     {
       icon: <User color="#616161" strokeWidth={1.25} />,
@@ -26,8 +31,12 @@ export function ModalProfile({ isOpen, setIsOpen, storeName }: ModalProps) {
     },
     {
       icon: <CircleHelp color="#616161" strokeWidth={1.25} />,
-      link: "/profile",
-      name: "Ajuda"
+      link: "#",
+      name: "Ajuda",
+      onClick: () => {
+        setIsOpen(false);
+        openHelpModal(); 
+      }
     },
     {
       icon: <Settings color="#616161" strokeWidth={1.25} />,
@@ -45,7 +54,11 @@ export function ModalProfile({ isOpen, setIsOpen, storeName }: ModalProps) {
         </DialogHeader>
         <div className="grid gap-6 py-4">
           {tabs.map((item, index) => (
-            <div className="flex gap-3" key={item.name + index}>
+            <div
+              className="flex gap-3"
+              key={item.name + index}
+              onClick={item.onClick}
+            >
               {item.icon}
               <div className="flex w-[12rem] justify-between">
                 <Link href={item.link} className="font-light">
