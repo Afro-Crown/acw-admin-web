@@ -1,4 +1,4 @@
-import { UserEntity } from "@/common/entities/user";
+import { UserEntity } from "@/common/entities/users";
 
 export interface UserContextType {
   updateUser: ({ uid, email, name, dob, phone }: Partial<UserEntity>) => void;

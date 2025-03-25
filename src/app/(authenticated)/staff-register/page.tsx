@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 
-import { ScheduleEntity } from "@/common/entities/schedule";
+import { ScheduleEntity } from "@/common/entities/schedules";
 import DateAndTime from "@/components/molecules/StaffRegisterComponents/dateAndTime";
 import NameAndEmail from "@/components/molecules/StaffRegisterComponents/nameAndEmail";
 

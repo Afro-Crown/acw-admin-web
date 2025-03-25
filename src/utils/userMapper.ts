@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-import { UserEntity } from "@common/entities/user";
+import { UserEntity } from "@/common/entities/users";
 
 export const userMapper = (apiData: any): UserEntity => {
   return {

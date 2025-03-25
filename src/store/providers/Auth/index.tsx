@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { UserEntity as UserDoc } from "@/common/entities/user";
+import { UserEntity as UserDoc } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { errorToast, successToast } from "@/hooks/useAppToast";
 import {
