@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { DocumentData } from "firebase/firestore";
 
-import type { UserEntity } from "@/common/entities/users";
+import type { UsersEntity } from "@/common/entities/users";
 import { getUserDoc } from "@/store/services/user";
 import {
   FORTY_FIVE_MINUTES_IN_MS,
@@ -16,7 +16,7 @@ export const getProfileQueryFn = (uid: string) => {
   return () => getUserDoc(uid);
 };
 
-const useProfile = <T = UserEntity>(
+const useProfile = <T = UsersEntity>(
   uid: string,
   select?: (data: DocumentData) => T
 ) => {

@@ -7,6 +7,6 @@ export interface ServicesEntity {
   description: string;
   image: string;
   staff: string;
-  created_at : Date;
-  updated_at : Date;
+  created_at: Date;
+  updated_at: Date;
 }

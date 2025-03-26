@@ -5,6 +5,6 @@ export interface StaffEntity {
   image: string;
   hours: string;
   days: string;
-  created_at : Date;
-  updated_at : Date;
+  created_at: Date;
+  updated_at: Date;
 }

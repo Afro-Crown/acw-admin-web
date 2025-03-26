@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { UserEntity } from "@/common/entities/users";
+import { UsersEntity } from "@/common/entities/users";
 import useProfile from "@/hooks/queries/useProfile";
 import { errorToast, successToast } from "@/hooks/useAppToast";
 import { getAllUsers, updateUserDoc } from "@/store/services/user";
@@ -22,18 +22,24 @@ const UserProvider = ({ children }: Props) => {
     getAllUsers: false
   };
   const [loading, setLoading] = useState(initialLoadingObject);
-  const [allUsers, setAllUsers] = useState<UserEntity[] | null>();
+  const [allUsers, setAllUsers] = useState<UsersEntity[] | null>();
 
   const updateUser = async ({
-    uid,
+    id,
     email,
     name,
-    dob,
-    phone
-  }: Partial<UserEntity>) => {
+    geo,
+    image
+  }: Partial<UsersEntity>) => {
     setLoading((prev) => ({ ...prev, updateUserDoc: true }));
-    const finalUid = uid ?? (user?.uid || "");
-    const { error } = await updateUserDoc(finalUid, email, name, dob, phone);
+    const finalUid = id ?? (user?.id || "");
+    const { error } = await updateUserDoc(
+      finalUid,
+      email,
+      name,
+      geo ? new Date(geo) : undefined,
+      image
+    );
     if (!error) {
       successToast("Profile updated");
     }

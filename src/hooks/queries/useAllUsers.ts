@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { DocumentData } from "firebase/firestore";
 
-import type { UserEntity } from "@/common/entities/users";
+import type { UsersEntity } from "@/common/entities/users";
 import { getAllUsers } from "@/store/services/user";
 import {
   FORTY_FIVE_MINUTES_IN_MS,
@@ -16,7 +16,7 @@ export const getAllUsersQueryFn = () => {
   return () => getAllUsers();
 };
 
-const useAllUsers = <T = UserEntity[]>(select?: (data: DocumentData) => T) => {
+const useAllUsers = <T = UsersEntity[]>(select?: (data: DocumentData) => T) => {
   return useQuery({
     queryKey: getAllUsersQueryKey(),
     queryFn: getAllUsersQueryFn(),

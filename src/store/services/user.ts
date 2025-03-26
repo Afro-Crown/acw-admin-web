@@ -13,7 +13,7 @@ import {
   updateDoc
 } from "firebase/firestore";
 
-import { UserEntity } from "@/common/entities/users";
+import { UsersEntity } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { userMapper } from "@/utils/userMapper";
 
@@ -22,18 +22,18 @@ const db = getFirestore(firebaseApp);
 const tableName = "users";
 
 export const createNewUserDoc = async ({
-  uid,
+  id,
   email,
   name,
-  dob,
-  phone
-}: UserEntity) => {
+  geo,
+  image
+}: UsersEntity) => {
   try {
-    await setDoc(doc(db, tableName, uid || ""), {
+    await setDoc(doc(db, tableName, id || ""), {
       name,
       email,
-      dob,
-      phone
+      geo,
+      image
     });
     return { error: null };
   } catch (error: any) {
@@ -41,10 +41,10 @@ export const createNewUserDoc = async ({
   }
 };
 
-export const getUserDoc = async (uid: string) => {
-  if (uid === "") return null;
+export const getUserDoc = async (id: string) => {
+  if (id === "") return null;
   return new Promise<DocumentData | null>((resolve, reject) => {
-    const docRef = doc(db, tableName, uid);
+    const docRef = doc(db, tableName, id);
 
     getDoc(docRef)
       .then((data) => {
@@ -59,7 +59,7 @@ export const getAllUsers = async () => {
   const usersRef = collection(db, tableName);
   const q = query(usersRef);
   const querySnapshot = await getDocs(q);
-  const users: UserEntity[] = [];
+  const users: UsersEntity[] = [];
   querySnapshot.forEach((doc) => {
     users.push(userMapper({ uid: doc.id, ...doc.data() }));
   });
