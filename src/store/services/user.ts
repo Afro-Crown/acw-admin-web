@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getAuth, User } from "firebase/auth";
 import {
@@ -43,16 +44,9 @@ export const createNewUserDoc = async ({
 
 export const getUserDoc = async (id: string) => {
   if (id === "") return null;
-  return new Promise<DocumentData | null>((resolve, reject) => {
-    const docRef = doc(db, tableName, id);
-
-    getDoc(docRef)
-      .then((data) => {
-        const userData = data.data();
-        resolve(userData || null);
-      })
-      .catch((error) => reject(error));
-  });
+  const docRef = doc(db, tableName, id);
+  const data = await getDoc(docRef);
+  return data.data() || null;
 };
 
 export const getAllUsers = async () => {
