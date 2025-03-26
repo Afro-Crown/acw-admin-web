@@ -1,4 +1,4 @@
-export interface staffEntity {
+export interface StaffEntity {
   id: string;
   name: string;
   email: string;

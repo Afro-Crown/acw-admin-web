@@ -1,4 +1,4 @@
-export interface servicesEntity {
+export interface ServicesEntity {
   id: string;
   type: string;
   price: string;
