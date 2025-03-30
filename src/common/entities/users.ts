@@ -1,10 +1,26 @@
 export interface UsersEntity {
   id: string;
-  name: string;
+  salonName: string;
   email: string;
-  geo: string;
-  image: string;
-  created_at?: Date;
-  updated_at?: Date;
-  deleted_at?: Date;
+  address: string;
+  neighboard: string;
+  complement: string;
+  number: string;
+  city: string;
+  zipCode: string;
+  state: string;
+  cnpj: string;
+  phone: string;
+  ownerName: string;
+  image?: string;
+  banner?: string;
+  isOpen?: boolean;
+  createdAt: Date;
+  updatedAt?: Date;
+  isActive?: boolean;
+  comments?: string[];
+  staff?: string[];
+  services?: string[];
+  inAnalising: boolean;
+  schedules?: string[];
 }

@@ -2,9 +2,9 @@
 
 import React, { useEffect } from "react";
 
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-// import useAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import FetchAuthState from "@templates/FetchAuth/fetchAuth";
 
 interface Props {
@@ -12,14 +12,14 @@ interface Props {
 }
 
 function AuthenticatedOnlyFeature({ children }: Props): JSX.Element {
-  // const { userUid } = useAuth();
-  // const router = useRouter();
+  const { userUid } = useAuth();
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (userUid === "") {
-  //     router.push(`/login`);
-  //   }
-  // }, [userUid, router]);
+  useEffect(() => {
+    if (userUid === "") {
+      router.push(`/login`);
+    }
+  }, [userUid, router]);
 
   return children;
 }

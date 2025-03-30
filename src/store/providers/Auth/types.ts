@@ -6,20 +6,16 @@ import { z } from "zod";
 
 import SignUpForm from "@/validations/signUp";
 
-type SignUpFormValidationData = z.infer<typeof SignUpForm>;
+export type SignUpFormData = z.infer<typeof SignUpForm>;
 
 export interface AuthContextType {
   loginWithGoogleUser: () => void;
   logoutUser: () => void;
   setUserUid: Dispatch<SetStateAction<string>>;
   userUid: string;
-  createUserWithInternalService: ({
-    email,
-    password,
-    name,
-    dob,
-    phone
-  }: Omit<SignUpFormValidationData, "confirmPassword">) => Promise<void>;
+  createUserWithInternalService: (
+    data: SignUpFormData & { password: string }
+  ) => Promise<void>;
   loading: Record<string, boolean>;
   loginWithInternalService: (email: string, password: string) => void;
   forgotPassword: (email: string) => void;

@@ -9,23 +9,23 @@ export default z.object({
     .string({ required_error: "Insira o nome do salão" })
     .min(1, "O nome do salão não pode estar vazio"),
   cnpj: z.string({ required_error: "Insira o CNPJ" }),
-  name: z
+  ownerName: z
     .string({ required_error: "Insira o nome do(a) proprietário(a)" })
     .min(1, "O nome do(a) proprietário(a) não pode estar vazio"),
-  cep: z.string({ required_error: "Insira o CEP" }),
-  cidade: z
+  zipCode: z.string({ required_error: "Insira o CEP" }),
+  city: z
     .string({ required_error: "Insira a cidade" })
     .min(1, "A cidade não pode estar vazia"),
-  rua: z
+  address: z
     .string({ required_error: "Insira a rua" })
     .min(1, "A rua não pode estar vazia"),
-  bairro: z
+  neighboard: z
     .string({ required_error: "Insira o bairro" })
     .min(1, "O bairro não pode estar vazio"),
-  numero: z
+  number: z
     .string({ required_error: "Insira o número" })
     .min(1, "O número não pode estar vazio"),
-  complemento: z.string({ required_error: "Insira o complemento" }).optional(),
+  complement: z.string({ required_error: "Insira o complemento" }).optional(),
   email: z
     .string({ required_error: "Insira o email" })
     .email("Insira um email válido"),

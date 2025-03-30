@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import useAuth from "@/hooks/useAuth";
 
 import { ModalProps } from "./types";
 
@@ -18,6 +19,7 @@ export function ModalProfile({
   storeName,
   openHelpModal
 }: ModalProps & { openHelpModal: () => void }) {
+  const { logoutUser } = useAuth();
   const tabs = [
     {
       icon: <User color="#616161" strokeWidth={1.25} />,
@@ -35,7 +37,7 @@ export function ModalProfile({
       name: "Ajuda",
       onClick: () => {
         setIsOpen(false);
-        openHelpModal(); 
+        openHelpModal();
       }
     },
     {
@@ -70,8 +72,11 @@ export function ModalProfile({
           ))}
         </div>
         <DialogFooter>
-          <button className="h-[40px] w-[125px] rounded-sm bg-[#A21A1A] text-sm text-[white]">
-            <Link href="/login">Sair da conta</Link>
+          <button
+            className="h-[40px] w-[125px] rounded-sm bg-[#A21A1A] text-sm text-[white]"
+            onClick={logoutUser}
+          >
+            Sair da conta
           </button>
         </DialogFooter>
       </DialogContent>

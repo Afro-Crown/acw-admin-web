@@ -5,10 +5,11 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { ModalHelp } from "@/components/molecules/Modalhelp/modalHelp";
+
 import logo from "../../../../public/logo-one.svg";
 import userImg from "../../../../public/user-icon.svg";
 import { ModalProfile } from "../ModalProfile/modalProfile";
-import { ModalHelp } from "@/components/molecules/Modalhelp/modalHelp";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function Header() {
   const openHelpModal = () => {
     setIsHelpOpen(true);
   };
-  
+
   return (
     <header className="relative flex h-20 w-full items-center justify-center bg-[#FFEAD4]">
       <div className="flex max-w-5xl items-center justify-between gap-5">

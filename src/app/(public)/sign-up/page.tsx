@@ -29,13 +29,13 @@ export default function SignUpPage() {
     >
       {step === 1 && <SignUpForm onSuccess={handleSignUpSuccess} />}
       {step === 2 && (
+        <CreatePasswordForm onSuccess={handleCreatePasswordSuccess} />
+      )}
+      {step === 3 && (
         <EmailConfirmation
           email={email}
           onSuccess={handleEmailConfirmationSuccess}
         />
-      )}
-      {step === 3 && (
-        <CreatePasswordForm onSuccess={handleCreatePasswordSuccess} />
       )}
     </main>
   );

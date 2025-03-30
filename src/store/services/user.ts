@@ -5,7 +5,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  DocumentData,
   getDoc,
   getDocs,
   getFirestore,
@@ -22,19 +21,32 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 const tableName = "users";
 
-export const createNewUserDoc = async ({
-  id,
-  email,
-  name,
-  geo,
-  image
-}: UsersEntity) => {
+export const createNewUserDoc = async (data: UsersEntity) => {
   try {
-    await setDoc(doc(db, tableName, id || ""), {
-      name,
-      email,
-      geo,
-      image
+    await setDoc(doc(db, tableName, data.id || ""), {
+      salonName: data.salonName,
+      email: data.email,
+      address: data.address,
+      neighboard: data.neighboard,
+      complement: data.complement,
+      number: data.number,
+      city: data.city,
+      cep: data.zipCode,
+      state: data.state,
+      cnpj: data.cnpj,
+      phone: data.phone,
+      ownerName: data.ownerName,
+      image: data.image ?? null,
+      banner: data.banner ?? null,
+      isOpen: data.isOpen,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt || null,
+      isActive: data.isActive || null,
+      comments: data.comments,
+      staff: data.staff,
+      services: data.services,
+      inAnalising: data.inAnalising,
+      schedules: data.schedules
     });
     return { error: null };
   } catch (error: any) {
@@ -43,8 +55,10 @@ export const createNewUserDoc = async ({
 };
 
 export const getUserDoc = async (id: string) => {
+  console.log("getUserDoc", id);
   if (id === "") return null;
   const docRef = doc(db, tableName, id);
+  console.log(docRef);
   const data = await getDoc(docRef);
   return data.data() || null;
 };
@@ -64,19 +78,33 @@ export const waitForUser = (callback: (user: User | null) => void) => {
   return auth.onAuthStateChanged(callback);
 };
 
-export const updateUserDoc = async (
-  uid: string,
-  email?: string,
-  name?: string,
-  dob?: Date,
-  phone?: string
-) => {
+export const updateUserDoc = async (data: Partial<UsersEntity>) => {
   try {
-    await updateDoc(doc(db, tableName, uid), {
-      email,
-      name,
-      dob,
-      phone
+    if (!data.id) {
+      throw new Error("ID do usuário não informado");
+    }
+    await updateDoc(doc(db, tableName, data.id), {
+      name: data.salonName,
+      email: data.email,
+      address: data.address,
+      neighboard: data.neighboard,
+      complement: data.complement,
+      number: data.number,
+      city: data.city,
+      cep: data.zipCode,
+      state: data.state,
+      cnpj: data.cnpj,
+      phone: data.phone,
+      ownerName: data.ownerName,
+      image: data.image,
+      banner: data.banner,
+      isOpen: data.isOpen,
+      comments: data.comments,
+      staff: data.staff,
+      services: data.services,
+      inAnalising: data.inAnalising,
+      schedules: data.schedules,
+      updatedAt: new Date()
     });
     return { error: null };
   } catch (error: any) {
