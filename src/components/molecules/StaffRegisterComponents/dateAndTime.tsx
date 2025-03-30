@@ -7,10 +7,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import Button from "@/components/atoms/Button/button";
-import ButtonArray from "../ButtonArray/buttonArray";
 
 import ChangeUser from "../../../../public/change-user.svg";
 import UserIcon from "../../../../public/user-icon.svg";
+import ButtonArray from "../ButtonArray/buttonArray";
 
 interface DateAndTimeProps {
   onSuccess: (selectedDays: string[], selectedTimes: string[]) => void;
@@ -20,7 +20,7 @@ interface DateAndTimeProps {
 }
 
 const daysOfWeek = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-const timesOfDay = [
+const hoursOfDay = [
   "7:00",
   "8:00",
   "9:00",
@@ -77,7 +77,7 @@ export default function DateAndTime({
 
     selectedTimes.forEach((isSelected, index) => {
       if (isSelected) {
-        selectedTimesArray.push(timesOfDay[index]);
+        selectedTimesArray.push(hoursOfDay[index]);
       }
     });
     console.log(selectedDaysArray, selectedTimesArray);
@@ -121,9 +121,19 @@ export default function DateAndTime({
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <p>Selecione os horários que <span className="font-bold">{name}</span> atende no salão</p>
+        <p>
+          Selecione os horários que <span className="font-bold">{name}</span>{" "}
+          atende no salão
+        </p>
         <div className="w-[40rem]">
-          <ButtonArray name={timesOfDay} handleNameClick={handleTimeClick} selectedName={selectedTimes} cols={8} w={5} h={2} /> 
+          <ButtonArray
+            name={hoursOfDay}
+            handleNameClick={handleTimeClick}
+            selectedName={selectedTimes}
+            cols={8}
+            w={5}
+            h={2}
+          />
         </div>
       </div>
       <div className="mt-3 flex justify-between">
