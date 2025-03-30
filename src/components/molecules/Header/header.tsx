@@ -10,15 +10,14 @@ import { ModalHelp } from "@/components/molecules/Modalhelp/modalHelp";
 import logo from "../../../../public/logo-one.svg";
 import userImg from "../../../../public/user-icon.svg";
 import { ModalProfile } from "../ModalProfile/modalProfile";
+import useProfile from "@/hooks/queries/useProfile";
+import useAuth from "@/hooks/useAuth";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const user = {
-    name: "John Doe",
-    storeName: "Loja do João",
-    email: "teste@gmail.com",
-    image: userImg
-  };
+  const { userUid } = useAuth();
+  const { data: user } = useProfile(userUid);
+  
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   const openHelpModal = () => {
@@ -45,7 +44,7 @@ export default function Header() {
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
           {user ? (
             <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
-              <Image src={user.image} alt="User" width={30} height={30} />
+              <Image src={userImg} alt="User" width={30} height={30} />
             </div>
           ) : (
             <Link href="/login" className="text-secondary">
@@ -57,7 +56,7 @@ export default function Header() {
       <ModalProfile
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        storeName={user.storeName}
+        ownerName={user?.ownerName || ""}
         openHelpModal={openHelpModal}
       />
       <ModalHelp isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} />

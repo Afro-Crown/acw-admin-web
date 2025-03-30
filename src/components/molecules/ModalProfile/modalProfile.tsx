@@ -12,14 +12,17 @@ import {
 import useAuth from "@/hooks/useAuth";
 
 import { ModalProps } from "./types";
+import useProfile from "@/hooks/queries/useProfile";
+
 
 export function ModalProfile({
   isOpen,
   setIsOpen,
-  storeName,
   openHelpModal
 }: ModalProps & { openHelpModal: () => void }) {
   const { logoutUser } = useAuth();
+  const { userUid } = useAuth();
+  const { data: user } = useProfile(userUid);
   const tabs = [
     {
       icon: <User color="#616161" strokeWidth={1.25} />,
@@ -51,7 +54,7 @@ export function ModalProfile({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="absolute left-[80rem] top-[15rem] w-[18rem]">
         <DialogHeader>
-          <DialogTitle className="font-normal">Olá, {storeName}</DialogTitle>
+          <DialogTitle className="font-normal">Olá, {user?.ownerName}</DialogTitle>
           {/* <DialogDescription>Descrição</DialogDescription> */}
         </DialogHeader>
         <div className="grid gap-6 py-4">
