@@ -3,11 +3,16 @@
 
 import { useState } from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { ScheduleEntity } from "@/common/entities/schedules";
 import DateAndTime from "@/components/molecules/StaffRegisterComponents/dateAndTime";
 import NameAndEmail from "@/components/molecules/StaffRegisterComponents/nameAndEmail";
+import useAuth from "@/hooks/useAuth";
+import { createMultipleStaffDocs } from "@/store/services/staff";
 
 export default function StaffRegisterPage() {
+  const { userUid } = useAuth();
   const [step, setStep] = useState(1);
   const [staffData, setStaffData] = useState([{ name: "", email: "" }]);
   const [scheduleData, setScheduleData] = useState<ScheduleEntity[]>([]);
@@ -16,13 +21,29 @@ export default function StaffRegisterPage() {
   const handleNameAndEmailSuccess = (
     data: { name: string; email: string }[]
   ) => {
+    const staffs = data.map((staff) => ({
+      id: "",
+      name: staff.name,
+      email: staff.email,
+      image: "",
+      hours: "",
+      days: "",
+      created_at: new Date(),
+      updated_at: new Date()
+    }));
     setStaffData(data);
     setScheduleData(
       data.map((staff) => ({
-        name: staff.name,
+        id: "",
+        staff_name: staff.name,
         email: staff.email,
+        date: new Date(),
+        service_name: "",
         days: [],
-        times: []
+        times: [],
+        price: "0",
+        duration: "",
+        isConfirmed: false
       }))
     );
     setStep(2);
@@ -40,8 +61,17 @@ export default function StaffRegisterPage() {
         days: selectedDays,
         times: selectedTimes
       };
+
       if (currentStaffIndex === staffData.length - 1) {
-        console.log("Dados consolidados:", newData);
+        const consolidatedData = staffData.map((staff, index) => ({
+          ...staff,
+          id: uuidv4(),
+          days: newData[index].days.join(", "),
+          hours: newData[index].times.join(", "),
+          created_at: new Date()
+        }));
+        console.log("Dados consolidados:", consolidatedData);
+        createMultipleStaffDocs(userUid, consolidatedData);
       }
       return newData;
     });

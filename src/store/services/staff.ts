@@ -1,79 +1,110 @@
+/* eslint-disable no-useless-catch */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    getDocs,
-    getFirestore,
-    query,
-    setDoc,
-    updateDoc
+  doc,
+  getDoc,
+  getFirestore,
+  updateDoc,
+  arrayUnion
 } from "firebase/firestore";
 
 import { StaffEntity } from "@/common/entities/staff";
 import firebaseApp from "@/config/firebase";
 
 const db = getFirestore(firebaseApp);
-const collectionName = "staff";
+const usersCollection = "users";
 
-export const  createNewStaffDoc = async (staff: StaffEntity) => {
-    try {
-        await setDoc(doc(db, collectionName, staff.id), {
-            ...staff
-        });
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message };
-    }
+export const createNewStaffDoc = async (userId: string, staff: StaffEntity) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    await updateDoc(userDocRef, {
+      staffs: arrayUnion(staff)
+    });
+    return { error: null };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };
 
-export const getStaffDoc = async (id: string) => {
-    if (!id) return null;
-    try {
-        const docRef = doc(db, collectionName, id);
-        const docSnap = await getDoc(docRef);
-        return docSnap.exists() ? docSnap.data() : null;
-    } catch (error: any) {
-        throw error;
-    }
+export const createMultipleStaffDocs = async (
+  userId: string,
+  staffs: StaffEntity[]
+) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    await updateDoc(userDocRef, {
+      staffs: arrayUnion(...staffs)
+    });
+    return { error: null };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };
 
-export const getAllStaff = async () => {
-    try {
-        const staffRef = collection(db, collectionName);
-        const q = query(staffRef);
-        const querySnapshot = await getDocs(q);
-        const staffList: StaffEntity[] = [];
-        querySnapshot.forEach((docSnap) => {
-            staffList.push({ id: docSnap.id, ...docSnap.data() } as StaffEntity);
-        });
-        return staffList;
-    } catch (error: any) {
-        throw error;
+export const getStaffDoc = async (userId: string) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data.staffs || [];
     }
+    return [];
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const getAllStaff = async (userId: string) => {
+  try {
+    return await getStaffDoc(userId);
+  } catch (error: any) {
+    throw error;
+  }
 };
 
 export const updateStaffDoc = async (
-    id: string,
-    staffData: Partial<StaffEntity>
+  userId: string,
+  staffId: string,
+  updatedStaffData: Partial<StaffEntity>
 ) => {
-    try {
-        const docRef = doc(db, collectionName, id);
-        await updateDoc(docRef, {
-            ...staffData
-        });
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message };
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const staffs: StaffEntity[] = data.staffs || [];
+      const updatedStaffs = staffs.map((staff) => {
+        if (staff.id === staffId) {
+          return {
+            ...staff,
+            ...updatedStaffData
+          };
+        }
+        return staff;
+      });
+      await updateDoc(userDocRef, { staffs: updatedStaffs });
+      return { error: null };
     }
+    return { error: "Documento de usuário não encontrado." };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };
 
-export const deleteStaffDoc = async (id: string) => {
-    try {
-        const docRef = doc(db, collectionName, id);
-        await deleteDoc(docRef);
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message};
+export const deleteStaffDoc = async (userId: string, staffId: string) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const staffs: StaffEntity[] = data.staffs || [];
+      const updatedStaffs = staffs.filter((staff) => staff.id !== staffId);
+      await updateDoc(userDocRef, { staffs: updatedStaffs });
+      return { error: null };
     }
-}
+    return { error: "Documento de usuário não encontrado." };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+};

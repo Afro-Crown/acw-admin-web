@@ -14,11 +14,9 @@ export function getAllStaffQueryKey() {
 
 export const getAllStaffQueryFn = () => {
     return () => getAllStaff();
-}
+};
 
-const useAllStaff = <T = StaffEntity[]>(
-    select?: (data: DocumentData) => T
-) => {
+const useAllStaff = <T = StaffEntity[]>(select?: (data: DocumentData) => T) => {
     return useQuery({
         queryKey: getAllStaffQueryKey(),
         queryFn: getAllStaffQueryFn(),
