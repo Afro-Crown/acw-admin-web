@@ -12,15 +12,15 @@ export interface ShopEntity {
   cnpj: string;
   phone: string;
   owner_name: string;
-  image: string;
-  banner: string;
-  isOpen: boolean;
+  image?: string;
+  banner?: string;
+  isOpen?: boolean;
   createdAt: Date;
-  updatedAt: Date;
-  isActive: boolean;
-  comments: string[];
-  staff: string[];
-  services: string[];
+  updatedAt?: Date;
+  isActive?: boolean;
+  comments?: string[];
+  staff?: string[];
+  services?: string[];
   inAnalising: boolean;
-  schedules: string[];
+  schedules?: string[];
 }

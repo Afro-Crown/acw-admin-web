@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import InputField from "@/components/molecules/InputField/inputField";
+import UserContext from "@/store/providers/User/context";
 import SignUpFormSchema from "@/validations/signUp";
 import Button from "@atoms/Button/button";
 
@@ -27,28 +29,29 @@ const fetchAddressByCep = async (cep: string) => {
   return response.json();
 };
 
-const useCepAutoFill = (setValue: any, register: any) => {
-  useEffect(() => {
-    register("cep", {
-      onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const cep = e.target.value.replace(/\D/g, "");
-        if (cep.length === 8) {
-          try {
-            const address = await fetchAddressByCep(cep);
-            setValue("rua", address.logradouro);
-            setValue("bairro", address.bairro);
-            setValue("cidade", address.localidade);
-            setValue("estado", address.uf);
-          } catch (error) {
-            console.error("Error fetching address:", error);
+export default function SignUpForm({ onSuccess }: SignUpFormProps) {
+  const { saveSignUpDraft } = useContext(UserContext);
+  const useCepAutoFill = (setValue: any, register: any) => {
+    useEffect(() => {
+      register("zipCode", {
+        onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
+          const cep = e.target.value.replace(/\D/g, "");
+          if (cep.length === 8) {
+            try {
+              const address = await fetchAddressByCep(cep);
+              setValue("address", address.logradouro);
+              setValue("neighboard", address.bairro);
+              setValue("city", address.localidade);
+              saveSignUpDraft({ state: address.uf });
+            } catch (error) {
+              console.error("Error fetching address:", error);
+            }
           }
         }
-      }
-    });
-  }, [register, setValue]);
-};
+      });
+    }, [register, setValue]);
+  };
 
-export default function SignUpForm({ onSuccess }: SignUpFormProps) {
   const {
     handleSubmit,
     register,
@@ -59,13 +62,12 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
     criteriaMode: "all",
     resolver: zodResolver(SignUpFormSchema)
   });
-
   const handleSubmitForm = (data: SignUpForm) => {
+    saveSignUpDraft(data);
     onSuccess(data.email);
     console.log(data);
   };
   useCepAutoFill(setValue, register);
-
   return (
     <div className="m-16 my-12 flex w-screen flex-col justify-center bg-[#FFFFFF] shadow-2xl sm:w-[450px]">
       <div className="m-7 flex flex-col items-center gap-2">
@@ -74,7 +76,9 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
       </div>
       <form
         className="flex w-screen flex-col gap-2 sm:w-[450px]"
-        onSubmit={handleSubmit(handleSubmitForm)}
+        onSubmit={handleSubmit(handleSubmitForm, (errors) => {
+          console.log(errors);
+        })}
       >
         <div className="m-4 my-16 flex flex-col gap-6 sm:mx-16">
           <InputField
@@ -91,7 +95,7 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
             label="CNPJ"
           />
           <InputField
-            name="name"
+            name="ownerName"
             register={register}
             formErrors={errors}
             label="Nome do(a) proprietário(a)"
@@ -99,14 +103,14 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
           <div className="flex justify-between">
             <InputField
               mask="99999-999"
-              name="cep"
+              name="zipCode"
               register={register}
               formErrors={errors}
               label="CEP"
               className="w-[120px]"
             />
             <InputField
-              name="cidade"
+              name="city"
               register={register}
               formErrors={errors}
               label="Cidade"
@@ -114,13 +118,13 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
             />
           </div>
           <InputField
-            name="rua"
+            name="address"
             register={register}
             formErrors={errors}
             label="Rua"
           />
           <InputField
-            name="bairro"
+            name="neighboard"
             register={register}
             formErrors={errors}
             label="Bairro"
@@ -128,14 +132,14 @@ export default function SignUpForm({ onSuccess }: SignUpFormProps) {
           <div className="flex justify-between">
             <InputField
               mask="99999"
-              name="numero"
+              name="number"
               register={register}
               formErrors={errors}
               label="Número"
               className="w-[120px]"
             />
             <InputField
-              name="complemento"
+              name="complement"
               register={register}
               formErrors={errors}
               label="Complemento"

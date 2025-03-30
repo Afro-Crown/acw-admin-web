@@ -24,22 +24,60 @@ const UserProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(initialLoadingObject);
   const [allUsers, setAllUsers] = useState<UsersEntity[] | null>();
 
+  const [signUpDraft, setSignUpDraft] = useState<Partial<UsersEntity>>({});
+
+  const saveSignUpDraft = (data: Partial<UsersEntity>) => {
+    setSignUpDraft((prev) => ({ ...prev, ...data }));
+  };
+
   const updateUser = async ({
     id,
+    salonName,
     email,
-    name,
-    geo,
-    image
+    address,
+    neighboard,
+    complement,
+    number,
+    city,
+    zipCode,
+    state,
+    cnpj,
+    phone,
+    ownerName,
+    image,
+    banner,
+    isOpen,
+    comments,
+    staff,
+    services,
+    inAnalising,
+    schedules
   }: Partial<UsersEntity>) => {
     setLoading((prev) => ({ ...prev, updateUserDoc: true }));
     const finalUid = id ?? (user?.id || "");
-    const { error } = await updateUserDoc(
-      finalUid,
+    const { error } = await updateUserDoc({
+      id: finalUid,
+      salonName,
       email,
-      name,
-      geo ? new Date(geo) : undefined,
-      image
-    );
+      address,
+      neighboard,
+      complement,
+      number,
+      city,
+      zipCode,
+      state,
+      cnpj,
+      phone,
+      ownerName,
+      image,
+      banner,
+      isOpen,
+      comments,
+      staff,
+      services,
+      inAnalising,
+      schedules
+    });
     if (!error) {
       successToast("Profile updated");
     }
@@ -63,7 +101,9 @@ const UserProvider = ({ children }: Props) => {
         loading,
         updateUser,
         fetchAllUsers,
-        allUsers
+        allUsers,
+        saveSignUpDraft,
+        signUpDraft
       }}
     >
       {children}

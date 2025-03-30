@@ -1,13 +1,16 @@
 "use client";
 
+import { useContext } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import InputField from "@/components/molecules/InputField/inputField";
+import useAuth from "@/hooks/useAuth";
+import UserContext from "@/store/providers/User/context";
 import { CreatePasswordSchema } from "@/validations/createPassword";
 import Button from "@atoms/Button/button";
 
@@ -32,12 +35,52 @@ export default function CreatePasswordForm({
     resolver: zodResolver(CreatePasswordSchema)
   });
 
-  const router = useRouter();
+  const { signUpDraft } = useContext(UserContext);
+  const { createUserWithInternalService } = useAuth();
 
-  const handleSubmitForm = (data: CreatePasswordForm) => {
+  const handleSubmitForm = async (data: CreatePasswordForm) => {
+    const {
+      email = signUpDraft?.email,
+      salonName = signUpDraft?.salonName,
+      cnpj = signUpDraft?.cnpj,
+      name = signUpDraft?.ownerName,
+      cep = signUpDraft?.zipCode,
+      cidade = signUpDraft?.city,
+      rua = signUpDraft?.address,
+      bairro = signUpDraft?.neighboard,
+      numero = signUpDraft?.number,
+      complemento = signUpDraft?.complement,
+      phone = signUpDraft?.phone
+    } = signUpDraft as {
+      email: string;
+      salonName: string;
+      cnpj: string;
+      name: string;
+      cep: string;
+      cidade: string;
+      rua: string;
+      bairro: string;
+      numero: string;
+      complemento: string;
+      phone: string;
+    };
+    await createUserWithInternalService({
+      email: email ?? "",
+      password: data.password,
+      salonName: salonName ?? "",
+      address: rua ?? "",
+      neighboard: bairro ?? "",
+      complement: complemento ?? "",
+      number: numero ?? "",
+      city: cidade ?? "",
+      zipCode: cep ?? "",
+      cnpj: cnpj ?? "",
+      phone: phone ?? "",
+      ownerName: name ?? ""
+    });
+    console.log(signUpDraft);
     console.log(data);
     onSuccess();
-    router.push("/in-analising");
   };
 
   return (

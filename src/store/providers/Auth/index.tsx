@@ -7,14 +7,12 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { UserEntity as UserDoc } from "@/common/entities/users";
+import { UsersEntity as UserDoc } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { errorToast, successToast } from "@/hooks/useAppToast";
 import {
   createUserWithEmailAndPasswordLocal,
   deleteOwnAccount,
-  loginWithFacebook,
-  loginWithGoogle,
   logout,
   recoverPassword,
   signInWithEmailAndPasswordLocal
@@ -22,7 +20,6 @@ import {
 import {
   createNewUserDoc,
   deleteUserDoc,
-  getUserDoc,
   waitForUser
 } from "@/store/services/user";
 import SignUpForm from "@/validations/signUp";
@@ -65,49 +62,7 @@ const AuthProvider = ({ children }: Props) => {
     return () => unsubscribe();
   }, []);
 
-  const loginWithGoogleUser = async () => {
-    setLoading((prev) => ({ ...prev, loginWithGoogle: true }));
-    const { user, error } = await loginWithGoogle();
-    const userDoc = await getUserDoc(user?.uid || "");
-    if (user && !userDoc) {
-      await createNewUserDoc({
-        uid: user?.uid,
-        email: user.email ?? "",
-        name: user.displayName ?? "",
-        dob: new Date(),
-        phone: ""
-      });
-      setUserUid(user.uid);
-      successToast("Bem vindo");
-    } else {
-      setUserUid(user?.uid || "");
-      successToast("Bem vindo de volta!");
-    }
-    errorToast(error);
-    setLoading((prev) => ({ ...prev, loginWithGoogle: false }));
-  };
-
-  const loginWithFacebookUser = async () => {
-    setLoading((prev) => ({ ...prev, loginWithFacebook: true }));
-    const { user, error } = await loginWithFacebook();
-    const userDoc = await getUserDoc(user?.uid || "");
-    if (user && !userDoc) {
-      await createNewUserDoc({
-        uid: user?.uid,
-        email: user.email ?? "",
-        name: user.displayName ?? "",
-        dob: new Date(),
-        phone: ""
-      });
-      setUserUid(user.uid);
-      toast("Bem vindo", { type: "success" });
-    } else {
-      setUserUid(user?.uid || "");
-      toast("Bem vindo de volta!", { type: "success" });
-    }
-    errorToast(error);
-    setLoading((prev) => ({ ...prev, loginWithFacebook: false }));
-  };
+  // Comentado: login com Google e Facebook
 
   const loginWithInternalService = async (email: string, password: string) => {
     setLoading((prev) => ({ ...prev, loginWithInternalService: true }));
@@ -115,7 +70,8 @@ const AuthProvider = ({ children }: Props) => {
       email,
       password
     );
-    if (user && !user?.emailVerified) {
+    console.log(email, password, error, user);
+    if (user && !user.emailVerified) {
       errorToast("Por favor verifique seu email");
       setLoading((prev) => ({ ...prev, loginWithInternalService: false }));
       logout();
@@ -134,10 +90,17 @@ const AuthProvider = ({ children }: Props) => {
   const createUserWithInternalService = async ({
     email,
     password,
-    name,
-    dob,
+    salonName,
+    cnpj,
+    ownerName,
+    zipCode,
+    city,
+    address,
+    neighboard,
+    number,
+    complement,
     phone
-  }: Omit<SignUpFormValidationData, "confirmPassword">) => {
+  }: SignUpFormValidationData & { password: string }) => {
     if (email && password) {
       setLoading((prev) => ({ ...prev, createUserWithInternalService: true }));
       const { error, user } = await createUserWithEmailAndPasswordLocal(
@@ -153,11 +116,30 @@ const AuthProvider = ({ children }: Props) => {
         return;
       }
       await createNewUserDoc({
-        uid: user?.uid || "",
+        id: user?.uid || "",
+        salonName, // Nome do salão
         email,
-        name,
-        dob: new Date(dob),
-        phone
+        address, // Rua
+        neighboard, // Bairro
+        complement: complement || "", // Complemento
+        number, // Número
+        city,
+        zipCode, // CEP (do formulário)
+        state: "", // Estado (não está no formulário)
+        cnpj,
+        phone,
+        ownerName, // Nome do proprietário
+        image: undefined,
+        banner: undefined,
+        isOpen: false,
+        createdAt: new Date(),
+        updatedAt: undefined,
+        isActive: true,
+        comments: [],
+        staff: [],
+        services: [],
+        inAnalising: false,
+        schedules: []
       });
       setUserUid(user?.uid || "");
       toast("Conta criada! Enviamos um email de confirmação ao seu email", {
@@ -173,13 +155,14 @@ const AuthProvider = ({ children }: Props) => {
   const waitForUserSync = async () => {
     setLoading((prev) => ({ ...prev, onAuthUserChanged: true }));
     await waitForUser(async (userCred) => {
-      if (userCred && !userCred?.emailVerified) {
+      if (userCred && !userCred.emailVerified) {
         logout();
         setLoading((prev) => ({ ...prev, onAuthUserChanged: false }));
       }
     });
     setLoading((prev) => ({ ...prev, onAuthUserChanged: false }));
   };
+
   const forgotPassword = async (email: string) => {
     setLoading((prev) => ({ ...prev, forgotPassword: true }));
     const { error } = await recoverPassword(email);
@@ -192,15 +175,9 @@ const AuthProvider = ({ children }: Props) => {
 
   const deleteUser = async () => {
     setLoading((prev) => ({ ...prev, deleteUser: true }));
-    // const { error } =
     await deleteOwnAccount();
     await deleteUserDoc(userUid);
     setUserUid("");
-    // if (!error) {
-    //   setUser(null);
-    //   toast("Account deleted", { type: "success" });
-    // }
-    // errorToast(error);
     setLoading((prev) => ({ ...prev, deleteUser: false }));
   };
 
@@ -216,15 +193,22 @@ const AuthProvider = ({ children }: Props) => {
     <AuthContext.Provider
       value={{
         userUid,
+        setUserUid, // Added setUserUid to the context value
         loading,
         forgotPassword,
-        loginWithGoogleUser,
+        loginWithGoogleUser: async () => {
+          // Placeholder function for loginWithGoogleUser
+          console.warn("loginWithGoogleUser is not implemented yet.");
+        },
         loginWithInternalService,
         logoutUser,
-        setUserUid,
+        waitForUserSync,
+        updatePassword: async () => {
+          // Placeholder function for updatePassword
+          console.warn("updatePassword is not implemented yet.");
+        },
         deleteUser,
-        createUserWithInternalService,
-        waitForUserSync
+        createUserWithInternalService
       }}
     >
       {children}
