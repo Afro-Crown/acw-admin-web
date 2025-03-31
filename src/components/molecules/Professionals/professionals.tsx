@@ -8,9 +8,14 @@ import Button from "../../atoms/Button/button";
 interface ProfessionalProps {
   text: string;
   onDelete: () => void;
+  onEdit?: () => void;
 }
 
-export default function Professional({ text, onDelete }: ProfessionalProps) {
+export default function Professional({
+  text,
+  onDelete,
+  onEdit
+}: ProfessionalProps) {
   return (
     <div className="flex flex-col items-center overflow-hidden p-5 shadow-md">
       <div className="relative flex h-20 w-20 flex-col content-center items-center">
@@ -24,6 +29,7 @@ export default function Professional({ text, onDelete }: ProfessionalProps) {
       </div>
       <div className="flex gap-2">
         <Button
+          onClick={onEdit}
           size="sm"
           variant="success"
           className="flex rounded-sm border-none bg-[#C7C7C7] bg-opacity-20 p-2 text-[#616161]"
