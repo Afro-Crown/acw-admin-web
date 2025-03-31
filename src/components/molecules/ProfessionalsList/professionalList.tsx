@@ -10,18 +10,19 @@ import Button from "@/components/atoms/Button/button";
 
 import Divider from "../../../../public/divider.svg";
 import Professional from "../Professionals/professionals";
+import useAuth from "@/hooks/useAuth";
+import useProfile from "@/hooks/queries/useProfile";
+import useAllStaff from "@/hooks/queries/useAllStaff";
+import { StaffEntity } from "@/common/entities/staff";
+import { deleteStaffDoc } from "@/store/services/staff";
 
 export default function ProfessionalList() {
-  const [professionals, setProfessionals] = useState<string[]>([
-    "User 1",
-    "User 2",
-    "User 3"
-  ]);
+  const { userUid } = useAuth();
+  const { data: staffsFromUser, isLoading: staffLoading } = useAllStaff<StaffEntity[]>();
 
-  const handleDelete = (indexToRemove: number) => {
-    setProfessionals(
-      professionals.filter((_, index) => index !== indexToRemove)
-    );
+  
+  const handleDelete = (staffUid: string) => {
+    deleteStaffDoc(userUid, staffUid)
   };
 
   return (
@@ -41,15 +42,21 @@ export default function ProfessionalList() {
       <div>
         <Image src={Divider} alt="Divider" className="bg-gray-300" />
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-5">
-        {professionals.map((professional, index) => (
-          <Professional
-            key={index}
-            text={professional}
-            onDelete={() => handleDelete(index)}
-          />
-        ))}
-      </div>
+        <div className="mt-5 grid grid-cols-2 gap-5">
+          {staffsFromUser && staffsFromUser.length > 0 ? (
+            staffsFromUser.map((staff, index) => (
+             <Professional
+               key={index}
+               text={staff.name}
+               onDelete={() => handleDelete(staff.id)}
+              />
+            ))
+          ) : (
+            <div className="flex w-[30rem] h-[28rem] items-center justify-center">
+              <h1 className="text-lg text-[#949494]">NENHUM COLABORADOR ENCONTRADO</h1>
+            </div>
+          )}
+        </div>
     </div>
   );
 }

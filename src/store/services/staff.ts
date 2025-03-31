@@ -10,6 +10,7 @@ import {
 
 import { StaffEntity } from "@/common/entities/staff";
 import firebaseApp from "@/config/firebase";
+import { queryClient } from "../providers/queryClient";
 
 const db = getFirestore(firebaseApp);
 const usersCollection = "users";
@@ -35,6 +36,7 @@ export const createMultipleStaffDocs = async (
     await updateDoc(userDocRef, {
       staffs: arrayUnion(...staffs)
     });
+    queryClient.invalidateQueries(["staff"]);
     return { error: null };
   } catch (error: any) {
     return { error: error.message };
@@ -101,6 +103,7 @@ export const deleteStaffDoc = async (userId: string, staffId: string) => {
       const staffs: StaffEntity[] = data.staffs || [];
       const updatedStaffs = staffs.filter((staff) => staff.id !== staffId);
       await updateDoc(userDocRef, { staffs: updatedStaffs });
+      queryClient.invalidateQueries(["staff"]);
       return { error: null };
     }
     return { error: "Documento de usuário não encontrado." };
