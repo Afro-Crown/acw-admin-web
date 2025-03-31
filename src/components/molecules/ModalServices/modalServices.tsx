@@ -17,6 +17,7 @@ import {
 import useAllStaff from "@/hooks/queries/useAllStaff";
 import { errorToast } from "@/hooks/useAppToast";
 import useAuth from "@/hooks/useAuth";
+import useProfile from "@/hooks/queries/useProfile";
 import { createNewServiceDoc } from "@/store/services/services";
 import { CreateServiceSchema } from "@/validations/createServices";
 import Button from "@atoms/Button/button";
@@ -33,6 +34,7 @@ export type CreateServiceData = z.infer<typeof CreateServiceSchema>;
 
 export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
   const { userUid } = useAuth();
+  const { data:user } = useProfile(userUid);
   const [selectedServiceIndex, setSelectedServiceIndex] = useState<
     number | null
   >(null);
@@ -109,9 +111,6 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
 
   if (staffLoading) {
     return <div>Carregando staffs...</div>;
-  }
-  if (!staffsFromUser || staffsFromUser.length === 0) {
-    return <div>Não há staffs disponíveis para selecionar.</div>;
   }
 
   return (
@@ -208,7 +207,12 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                 Selecione quem realiza este serviço:
               </p>
               <div className="flex flex-col gap-2">
-                {staffsFromUser.map((staff, index) => (
+                {staffsFromUser?.length === 0 && (
+                  <span className="text-sm text-gray-500">
+                    Nenhum cabeleireiro disponível
+                  </span>
+                )}
+                {staffsFromUser?.map((staff, index) => (
                   <div key={staff.id} onClick={() => handleStaffClick(index)}>
                     <CheckboxField
                       name={staff.name as Path<CreateServiceData>}
@@ -223,6 +227,7 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
               <Button
                 type="submit"
                 className="flex h-[45px] self-center truncate rounded-full px-[33px] font-light"
+                disabled={staffsFromUser?.length === 0}
               >
                 Adicionar serviço &gt;
               </Button>

@@ -3,86 +3,69 @@
 import { useState } from "react";
 import Navigation from "@molecules/Navigation/navigation";
 import Servicos from "@molecules/Servicos/servicos";
-import Button from "@atoms/Button/button"
+import Button from "@atoms/Button/button";
 import { ModalServices } from "@/components/molecules/ModalServices/modalServices";
-
-interface Servico {
-  id: number;
-  name: string;
-  text: string;
-  hora: string;
-  preco: string;
-}
+import useAllServices from "@/hooks/queries/useAllServices";
+import { ServicesEntity } from "@/common/entities/services";
 
 interface Categoria {
   id: number;
   title: string;
-  servicos: Servico[];
+  servicos: ServicesEntity[];
 }
 
 export default function Service() {
-  const [categorias, setCategorias] = useState<Categoria[]>([
-    {
-      id: 1,
-      title: "Cortes",
-      servicos: [
-        {
-          id: 1,
-          name: "Corte completo",
-          text: "Degradê simples com produtos de qualidade, tenha cachos definidos e hidratados.",
-          hora: "1h30 min",
-          preco: "R$ 120,00",
-        },
-        {
-          id: 2,
-          name: "Corte simples",
-          text: "Apenas o corte básico.",
-          hora: "50 min",
-          preco: "R$ 80,00",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Tinturas",
-      servicos: [
-        {
-          id: 1,
-          name: "Platinado",
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          hora: "2h55 min",
-          preco: "R$ 225,00",
-        },
-      ],
-    },
-  ]);
+  const { data: services } = useAllServices();
 
-  const handleDeleteServico = (categoriaId: number, servicoId: number) => {
-    setCategorias((prevCategorias) =>
-      prevCategorias
-        .map((categoria) =>
-          categoria.id === categoriaId
-            ? {
-              ...categoria,
-              servicos: categoria.servicos.filter((servico) => servico.id !== servicoId),
+  // Agrupando os serviços por categoria usando a propriedade "services"
+  const categorias: Categoria[] = services
+    ? Object.keys(
+        services.reduce((acc, service) => {
+          // Considera que service.services é a categoria; se não houver, utiliza "Outros"
+          const categoria = service.services || "Outros";
+          if (!acc[categoria]) {
+            acc[categoria] = [];
+          }
+          acc[categoria].push(service);
+          return acc;
+        }, {} as Record<string, typeof services>)
+      ).map((key, index) => ({
+          id: index,
+          title: key,
+          servicos: (services.reduce((acc, service) => {
+            const categoria = service.services || "Outros";
+            if (categoria === key) {
+              acc.push({
+                id: service.id || "",
+                name: service.name,
+                descricao: service.descricao || "",
+                horas: service.horas,
+                preco: service.preco,
+                minutos: service.minutos,
+                staffs: []
+              });
             }
-            : categoria
-        )
-        .filter((categoria) => categoria.servicos.length > 0 || categoria.title.trim() !== "")
-    );
-  };
-  
-  const [isOpen, setIsOpen] = useState(false)
+            return acc;
+          }, [] as ServicesEntity[]))
+      }))
+    : [];
+
+  const [isOpen, setIsOpen] = useState(false);
   const user = {
-    name: "John Doe",
+    name: "John Doe"
   };
 
-  
+
   return (
     <div>
       <div className="flex justify-self-center font-light text-sm w-[61rem]">
         <Navigation />
-        <Button className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate" onClick={() => setIsOpen(true)}>Adicionar serviço&gt;</Button>
+        <Button
+          className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate"
+          onClick={() => setIsOpen(true)}
+        >
+          Adicionar serviço &gt;
+        </Button>
       </div>
       <div className="flex flex-col justify-self-center justify-start gap-5 mx-20">
         {categorias.map((categoria) => (
@@ -91,7 +74,6 @@ export default function Service() {
             categoriaId={categoria.id}
             text={categoria.title}
             initialServicos={categoria.servicos}
-            onDeleteServico={(servicoId) => handleDeleteServico(categoria.id, servicoId)}
           />
         ))}
       </div>
