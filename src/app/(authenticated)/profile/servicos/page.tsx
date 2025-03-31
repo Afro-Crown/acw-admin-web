@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Navigation from "@molecules/Navigation/navigation";
-import Servicos from "@molecules/Servicos/servicos";
-import Button from "@atoms/Button/button";
+
+import { ServicesEntity } from "@/common/entities/services";
 import { ModalServices } from "@/components/molecules/ModalServices/modalServices";
 import useAllServices from "@/hooks/queries/useAllServices";
-import { ServicesEntity } from "@/common/entities/services";
+import Button from "@atoms/Button/button";
+import Navigation from "@molecules/Navigation/navigation";
+import Servicos from "@molecules/Servicos/servicos";
 
 interface Categoria {
   id: number;
@@ -16,58 +17,58 @@ interface Categoria {
 
 export default function Service() {
   const { data: services } = useAllServices();
+  console.log(services);
 
   // Agrupando os serviços por categoria usando a propriedade "services"
   const categorias: Categoria[] = services
     ? Object.keys(
-        services.reduce((acc, service) => {
-          // Considera que service.services é a categoria; se não houver, utiliza "Outros"
-          const categoria = service.services || "Outros";
-          if (!acc[categoria]) {
-            acc[categoria] = [];
-          }
-          acc[categoria].push(service);
-          return acc;
-        }, {} as Record<string, typeof services>)
-      ).map((key, index) => ({
-          id: index,
-          title: key,
-          servicos: (services.reduce((acc, service) => {
+        services.reduce(
+          (acc, service) => {
+            // Considera que service.services é a categoria; se não houver, utiliza "Outros"
             const categoria = service.services || "Outros";
-            if (categoria === key) {
-              acc.push({
-                id: service.id || "",
-                name: service.name,
-                descricao: service.descricao || "",
-                horas: service.horas,
-                preco: service.preco,
-                minutos: service.minutos,
-                staffs: []
-              });
+            if (!acc[categoria]) {
+              acc[categoria] = [];
             }
+            acc[categoria].push(service);
             return acc;
-          }, [] as ServicesEntity[]))
+          },
+          {} as Record<string, typeof services>
+        )
+      ).map((key, index) => ({
+        id: index,
+        title: key,
+        servicos: services.reduce((acc, service) => {
+          const categoria = service.services || "Outros";
+          if (categoria === key) {
+            acc.push({
+              id: service.id || "",
+              name: service.name,
+              descricao: service.descricao || "",
+              horas: service.horas,
+              preco: service.preco,
+              minutos: service.minutos,
+              staffs: []
+            });
+          }
+          return acc;
+        }, [] as ServicesEntity[])
       }))
     : [];
 
   const [isOpen, setIsOpen] = useState(false);
-  const user = {
-    name: "John Doe"
-  };
-
 
   return (
     <div>
-      <div className="flex justify-self-center font-light text-sm w-[61rem]">
+      <div className="flex w-[61rem] justify-self-center text-sm font-light">
         <Navigation />
         <Button
-          className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate"
+          className="flex h-[45px] self-center truncate rounded-full px-[33px] font-light"
           onClick={() => setIsOpen(true)}
         >
           Adicionar serviço &gt;
         </Button>
       </div>
-      <div className="flex flex-col justify-self-center justify-start gap-5 mx-20">
+      <div className="mx-20 flex flex-col justify-start gap-5 justify-self-center">
         {categorias.map((categoria) => (
           <Servicos
             key={categoria.id}
@@ -77,7 +78,7 @@ export default function Service() {
           />
         ))}
       </div>
-      <ModalServices isOpen={isOpen} setIsOpen={setIsOpen} name={user.name} />
+      <ModalServices isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }
