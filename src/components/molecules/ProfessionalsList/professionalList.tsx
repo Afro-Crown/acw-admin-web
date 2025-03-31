@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,14 +13,23 @@ import useAuth from "@/hooks/useAuth";
 import { deleteStaffDoc } from "@/store/services/staff";
 
 import Divider from "../../../../public/divider.svg";
+import { ModalEditStaff } from "../ModalEditStaff/modalEditStaff";
 import Professional from "../Professionals/professionals";
 
 export default function ProfessionalList() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStaff, setSelectedStaff] = useState<StaffEntity | null>(null);
+
   const { userUid } = useAuth();
-  const { data: staffsFromUser } = useAllStaff<StaffEntity[]>();
+  const { data: staffsFromUser, isLoading } = useAllStaff<StaffEntity[]>();
 
   const handleDelete = (staffUid: string) => {
     deleteStaffDoc(userUid, staffUid);
+  };
+
+  const handleEdit = (staff: StaffEntity) => {
+    setSelectedStaff(staff);
+    setIsModalOpen(true);
   };
 
   return (
@@ -40,21 +51,34 @@ export default function ProfessionalList() {
       </div>
       <div className="mt-5 grid grid-cols-2 gap-5">
         {staffsFromUser && staffsFromUser.length > 0 ? (
-          staffsFromUser.map((staff, index) => (
+          staffsFromUser.map((staff) => (
             <Professional
-              key={index}
+              key={staff.id}
               text={staff.name}
               onDelete={() => handleDelete(staff.id)}
+              onEdit={() => handleEdit(staff)}
             />
           ))
         ) : (
           <div className="flex h-[28rem] w-[30rem] items-center justify-center">
-            <h1 className="text-lg text-[#949494]">
-              Nenhum colaborador encontrado!
-            </h1>
+            {isLoading ? (
+              <p className="text-lg font-light">Carregando...</p>
+            ) : (
+              <h1 className="text-lg text-[#949494]">
+                Nenhum colaborador encontrado!
+              </h1>
+            )}
           </div>
         )}
       </div>
+      {selectedStaff && (
+        <ModalEditStaff
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          userId={userUid}
+          editStaff={selectedStaff}
+        />
+      )}
     </div>
   );
 }

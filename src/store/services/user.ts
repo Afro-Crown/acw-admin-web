@@ -16,6 +16,7 @@ import {
 import { UsersEntity } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { userMapper } from "@/utils/userMapper";
+import { queryClient } from "../providers/queryClient";
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
@@ -55,7 +56,6 @@ export const createNewUserDoc = async (data: UsersEntity) => {
 };
 
 export const getUserDoc = async (id: string) => {
-  console.log("getUserDoc", id);
   if (id === "") return null;
   const docRef = doc(db, tableName, id);
   console.log(docRef);
@@ -83,27 +83,22 @@ export const updateUserDoc = async (data: Partial<UsersEntity>) => {
     if (!data.id) {
       throw new Error("ID do usuário não informado");
     }
+    // Cria um objeto sem as chaves com undefined
+    const payload = Object.entries(data).reduce((acc, [key, value]) => {
+      if (value !== undefined) {
+        // Se for o campo do CEP do formulário, mapeia para o campo "cep" que o documento utiliza
+        if (key === "zipCode") {
+          (acc as any)["cep"] = value;
+        } else {
+          (acc as Record<string, any>)[key] = value;
+        }
+      }
+      return acc;
+    }, {} as Partial<UsersEntity>);
+    queryClient.invalidateQueries(["profile"]);
     await updateDoc(doc(db, tableName, data.id), {
-      name: data.salonName,
-      email: data.email,
-      address: data.address,
-      neighboard: data.neighboard,
-      complement: data.complement,
-      number: data.number,
-      city: data.city,
-      cep: data.zipCode,
-      state: data.state,
-      cnpj: data.cnpj,
-      phone: data.phone,
-      ownerName: data.ownerName,
-      image: data.image,
-      banner: data.banner,
-      isOpen: data.isOpen,
-      comments: data.comments,
-      staff: data.staff,
-      services: data.services,
-      inAnalising: data.inAnalising,
-      schedules: data.schedules,
+      // Utilize o payload filtrado
+      ...payload,
       updatedAt: new Date()
     });
     return { error: null };
@@ -111,7 +106,6 @@ export const updateUserDoc = async (data: Partial<UsersEntity>) => {
     return { error: error.message };
   }
 };
-
 export const deleteUserDoc = async (id: string) => {
   try {
     await deleteDoc(doc(db, tableName, id));

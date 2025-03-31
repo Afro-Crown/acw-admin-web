@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { Path, useForm } from "react-hook-form";
@@ -18,7 +17,7 @@ import useAllStaff from "@/hooks/queries/useAllStaff";
 import { errorToast } from "@/hooks/useAppToast";
 import useAuth from "@/hooks/useAuth";
 import { queryClient } from "@/store/providers/queryClient";
-import { createNewServiceDoc } from "@/store/services/services";
+import { createNewServiceDoc, updateServiceDoc } from "@/store/services/services";
 import { CreateServiceSchema } from "@/validations/createServices";
 import Button from "@atoms/Button/button";
 import ImputField from "@molecules/InputField/inputField";
@@ -32,15 +31,11 @@ const services = ["Cortes", "Tinturas", "Tranças", "Pacotes", "Infantil"];
 
 export type CreateServiceData = z.infer<typeof CreateServiceSchema>;
 
-export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
+export function ModalServices({ isOpen, setIsOpen, initialServiceData }: ModalProps) {
   const { userUid } = useAuth();
-  // const { data: user } = useProfile(userUid);
-  const [selectedServiceIndex, setSelectedServiceIndex] = useState<
-    number | null
-  >(null);
+  const [selectedServiceIndex, setSelectedServiceIndex] = useState<number | null>(null);
 
-  const { data: staffsFromUser, isLoading: staffLoading } =
-    useAllStaff<StaffEntity[]>();
+  const { data: staffsFromUser, isLoading: staffLoading } = useAllStaff<StaffEntity[]>();
 
   const [selectedStaffs, setSelectedStaffs] = useState<boolean[]>([]);
   useEffect(() => {
@@ -57,10 +52,32 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
     formState: { errors }
   } = useForm<CreateServiceData>({
     resolver: zodResolver(CreateServiceSchema),
-    defaultValues: {
+    defaultValues: initialServiceData || {
+      name: "",
+      preco: "",
+      horas: "",
+      minutos: "",
+      descricao: "",
       staffs: []
     }
   });
+
+  useEffect(() => {
+    reset(initialServiceData || {
+      name: "",
+      preco: "",
+      horas: "",
+      minutos: "",
+      descricao: "",
+      staffs: []
+    });
+    if (initialServiceData) {
+      const idx = services.findIndex((s) => s === initialServiceData.services);
+      setSelectedServiceIndex(idx >= 0 ? idx : null);
+    } else {
+      setSelectedServiceIndex(null);
+    }
+  }, [initialServiceData, reset]);
 
   const handleServiceClick = (index: number) => {
     setSelectedServiceIndex((prev) => (prev === index ? null : index));
@@ -72,7 +89,7 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
     setSelectedStaffs(newSelected);
   };
 
-  const onSubmit = (data: CreateServiceData) => {
+  const onSubmit = async (data: CreateServiceData) => {
     if (selectedServiceIndex === null) {
       errorToast("Selecione ao menos um serviço.");
       return;
@@ -95,8 +112,17 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
       services: serviceSelected,
       staffs: staffsSelected.map((name) => ({ name }))
     };
+
+    if (initialServiceData && initialServiceData.id) {
+      const res = await updateServiceDoc(userUid, initialServiceData.id, finalData);
+      if (res.error) {
+        errorToast(`Erro ao atualizar: ${res.error}`);
+        return;
+      }
+    } else {
+      await createNewServiceDoc(userUid, finalData);
+    }
     queryClient.invalidateQueries(["services"]);
-    createNewServiceDoc(userUid, finalData);
     setIsOpen(false);
     handleReset();
   };
@@ -118,29 +144,18 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
       <DialogContent className="sm:max-w-[60rem]">
         <DialogHeader>
           <DialogTitle className="flex justify-center text-2xl font-bold">
-            Cadastrar Serviços
+            {initialServiceData ? "Editar Serviço" : "Cadastrar Serviços"}
           </DialogTitle>
         </DialogHeader>
-        <form
-          onSubmit={handleSubmit(onSubmit, (error) => {
-            console.log(error);
-          })}
-          className="flex justify-between"
-        >
-          {/* Left side: seleção de serviço e inputs */}
+        <form onSubmit={handleSubmit(onSubmit, (error) => console.log(error))} className="flex justify-between">
           <div className="flex w-[25rem] flex-col gap-6">
-            {/* Seleção única de serviço */}
             <div className="flex flex-col gap-2 pl-8">
               {services.map((service, index) => (
                 <button
                   type="button"
                   key={service}
                   onClick={() => handleServiceClick(index)}
-                  className={`rounded border px-4 py-2 ${
-                    selectedServiceIndex === index
-                      ? "bg-primary text-black"
-                      : "bg-white text-gray-700"
-                  }`}
+                  className={`rounded border px-4 py-2 ${selectedServiceIndex === index ? "bg-primary text-black" : "bg-white text-gray-700"}`}
                 >
                   {service}
                 </button>
@@ -203,14 +218,10 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                 <Image src={addImagem} alt="Adicionar imagem" />
                 <Image src={addImagem} alt="Adicionar imagem" />
               </div>
-              <p className="font-semibold">
-                Selecione quem realiza este serviço:
-              </p>
+              <p className="font-semibold">Selecione quem realiza este serviço:</p>
               <div className="flex flex-col gap-2">
                 {staffsFromUser?.length === 0 && (
-                  <span className="text-sm text-gray-500">
-                    Nenhum cabeleireiro disponível
-                  </span>
+                  <span className="text-sm text-gray-500">Nenhum cabeleireiro disponível</span>
                 )}
                 {staffsFromUser?.map((staff, index) => (
                   <div key={staff.id} onClick={() => handleStaffClick(index)}>
@@ -229,7 +240,7 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                 className="flex h-[45px] self-center truncate rounded-full px-[33px] font-light"
                 disabled={staffsFromUser?.length === 0}
               >
-                Adicionar serviço &gt;
+                {initialServiceData ? "Salvar Alterações" : "Adicionar serviço >"}
               </Button>
             </div>
           </div>

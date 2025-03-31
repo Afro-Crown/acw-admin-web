@@ -17,14 +17,11 @@ interface Categoria {
 
 export default function Service() {
   const { data: services } = useAllServices();
-  console.log(services);
 
-  // Agrupando os serviços por categoria usando a propriedade "services"
   const categorias: Categoria[] = services
     ? Object.keys(
         services.reduce(
           (acc, service) => {
-            // Considera que service.services é a categoria; se não houver, utiliza "Outros"
             const categoria = service.services || "Outros";
             if (!acc[categoria]) {
               acc[categoria] = [];
@@ -56,6 +53,13 @@ export default function Service() {
     : [];
 
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<ServicesEntity | null>(null);
+  
+  const handleEditService = (service: ServicesEntity) => {
+    console.log("teste")
+    setSelectedService(service);
+    setIsOpen(true);
+  };
 
   return (
     <div>
@@ -75,10 +79,19 @@ export default function Service() {
             categoriaId={categoria.id}
             text={categoria.title}
             initialServicos={categoria.servicos}
+            onEditService={handleEditService}
           />
         ))}
       </div>
-      <ModalServices isOpen={isOpen} setIsOpen={setIsOpen} />
+      <ModalServices
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        initialServiceData={
+          selectedService && selectedService.id
+            ? { ...selectedService, id: selectedService.id }
+            : undefined
+        }
+      />
     </div>
   );
 }
