@@ -12,6 +12,7 @@ import userImg from "../../../../public/user-icon.svg";
 import { ModalProfile } from "../ModalProfile/modalProfile";
 import useProfile from "@/hooks/queries/useProfile";
 import useAuth from "@/hooks/useAuth";
+import { ModalConfig } from "../ModalConfig/modalConfig";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,14 @@ export default function Header() {
   const { data: user } = useProfile(userUid);
   
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isConfigOpen, setIsConfigOpen] = useState(false);
+
 
   const openHelpModal = () => {
     setIsHelpOpen(true);
+  };
+  const openModalConfig = () => {
+    setIsConfigOpen(true);
   };
 
   return (
@@ -58,8 +64,10 @@ export default function Header() {
         setIsOpen={setIsOpen}
         ownerName={user?.ownerName || ""}
         openHelpModal={openHelpModal}
+        openModalConfig={openModalConfig}
       />
       <ModalHelp isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} />
+      <ModalConfig isOpen={isConfigOpen} setIsOpen={setIsConfigOpen}/>
     </header>
   );
 }
