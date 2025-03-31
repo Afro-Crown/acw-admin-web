@@ -1,70 +1,159 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { Path, useForm } from "react-hook-form";
+import { z } from "zod";
+
+import type { StaffEntity } from "@/common/entities/staff";
 import {
   Dialog,
   DialogContent,
-  // DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import useAllStaff from "@/hooks/queries/useAllStaff";
+import { errorToast } from "@/hooks/useAppToast";
+import useAuth from "@/hooks/useAuth";
+import { createNewServiceDoc } from "@/store/services/services";
+import { CreateServiceSchema } from "@/validations/createServices";
+import Button from "@atoms/Button/button";
+import ImputField from "@molecules/InputField/inputField";
 
 import { ModalProps } from "./types";
-import Button from "@atoms/Button/button"
-import { useState } from "react";
-import ImputField from "@molecules/InputField/inputField";
-import { useForm } from "react-hook-form";
-import Image from "next/image";
+
 import addImagem from "../../../../public/service-schedule-add-img.svg";
-import ButtonArray from "../ButtonArray/buttonArray";
 import CheckboxField from "../CheckboxField/checkboxField";
 
 const services = ["Cortes", "Tinturas", "Tranças", "Pacotes", "Infantil"];
 
+export type CreateServiceData = z.infer<typeof CreateServiceSchema>;
+
 export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
-  const [selectedServices, setSelectedServices] = useState<boolean[]>(Array(5).fill(false));
-  
-  const { register, handleSubmit, control, reset } = useForm();
-  
-  const handleServicesClick = (index: number) => {
-    const newSelectedServices = [...selectedServices];
-    newSelectedServices[index] = !newSelectedServices[index];
-    setSelectedServices(newSelectedServices);
+  const { userUid } = useAuth();
+  const [selectedServiceIndex, setSelectedServiceIndex] = useState<
+    number | null
+  >(null);
+
+  const { data: staffsFromUser, isLoading: staffLoading } =
+    useAllStaff<StaffEntity[]>();
+
+  const [selectedStaffs, setSelectedStaffs] = useState<boolean[]>([]);
+  useEffect(() => {
+    if (staffsFromUser && staffsFromUser.length > 0) {
+      setSelectedStaffs(Array(staffsFromUser.length).fill(false));
+    }
+  }, [staffsFromUser]);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors }
+  } = useForm<CreateServiceData>({
+    resolver: zodResolver(CreateServiceSchema),
+    defaultValues: {
+      staffs: []
+    }
+  });
+
+  const handleServiceClick = (index: number) => {
+    setSelectedServiceIndex((prev) => (prev === index ? null : index));
   };
 
-  const onSubmit = (data: any) => {
-    const selectedServicesArray: string[] = [];
-    selectedServices.forEach((isSelected, index) => {
+  const handleStaffClick = (index: number) => {
+    const newSelected = [...selectedStaffs];
+    newSelected[index] = !newSelected[index];
+    setSelectedStaffs(newSelected);
+  };
+
+  const onSubmit = (data: CreateServiceData) => {
+    if (selectedServiceIndex === null) {
+      errorToast("Selecione ao menos um serviço.");
+      return;
+    }
+    const serviceSelected = services[selectedServiceIndex];
+
+    const staffsSelected: string[] = [];
+    selectedStaffs.forEach((isSelected, index) => {
       if (isSelected) {
-        selectedServicesArray.push(services[index]);
+        staffsSelected.push(staffsFromUser![index].name);
       }
     });
-    console.log({ ...data, services: selectedServicesArray });
+    if (staffsSelected.length === 0) {
+      errorToast("Selecione ao menos um Cabeleleiro.");
+      return;
+    }
+
+    const finalData: CreateServiceData = {
+      ...data,
+      services: serviceSelected,
+      staffs: staffsSelected.map((name) => ({ name }))
+    };
+
+    createNewServiceDoc(userUid, finalData);
     setIsOpen(false);
     handleReset();
   };
 
   const handleReset = () => {
     reset();
-    setSelectedServices(Array(5).fill(false));
+    setSelectedServiceIndex(null);
+    if (staffsFromUser && staffsFromUser.length > 0) {
+      setSelectedStaffs(Array(staffsFromUser.length).fill(false));
+    }
   };
+
+  if (staffLoading) {
+    return <div>Carregando staffs...</div>;
+  }
+  if (!staffsFromUser || staffsFromUser.length === 0) {
+    return <div>Não há staffs disponíveis para selecionar.</div>;
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[60rem]">
         <DialogHeader>
-          <DialogTitle className="flex justify-center font-bold text-2xl">Cadastrar Serviços</DialogTitle>
-          {/* <DialogDescription>Descrição</DialogDescription> */}
+          <DialogTitle className="flex justify-center text-2xl font-bold">
+            Cadastrar Serviços
+          </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex justify-between">
-          <div className="flex flex-col w-[25rem] gap-6">
-            <div className="flex flex-col pl-8 gap-2">
-              <ButtonArray {...{ name: services, handleNameClick: handleServicesClick, selectedName: selectedServices, cols: 3, w: 5, h: 2 }} />
+        <form
+          onSubmit={handleSubmit(onSubmit, (error) => {
+            console.log(error);
+          })}
+          className="flex justify-between"
+        >
+          {/* Left side: seleção de serviço e inputs */}
+          <div className="flex w-[25rem] flex-col gap-6">
+            {/* Seleção única de serviço */}
+            <div className="flex flex-col gap-2 pl-8">
+              {services.map((service, index) => (
+                <button
+                  type="button"
+                  key={service}
+                  onClick={() => handleServiceClick(index)}
+                  className={`rounded border px-4 py-2 ${
+                    selectedServiceIndex === index
+                      ? "bg-primary text-black"
+                      : "bg-white text-gray-700"
+                  }`}
+                >
+                  {service}
+                </button>
+              ))}
             </div>
-            <div className="flex flex-col pl-8 gap-5">
+            <div className="flex flex-col gap-5 pl-8">
               <ImputField
                 register={register}
                 name="name"
                 label="Nome"
                 placeholder="Ex: Hidratação + Pontas"
+                formErrors={errors}
               />
               <ImputField
                 register={register}
@@ -72,15 +161,16 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                 label="Preço"
                 placeholder="R$"
                 mask="R$ 999,99"
+                formErrors={errors}
               />
               <div className="flex flex-col text-gray-700">
                 <span className="text-sm font-semibold">Duração</span>
-                <div className="flex items-center gap-2 text-gray-400 text-lg mt-1">
+                <div className="mt-1 flex items-center gap-2 text-lg text-gray-400">
                   <div className="relative flex flex-col items-center">
                     <input
                       type="text"
                       placeholder="00"
-                      className="w-6 border-b border-gray-400 text-center text-xs bg-transparent outline-none placeholder-gray-400"
+                      className="w-6 border-b border-gray-400 bg-transparent text-center text-xs placeholder-gray-400 outline-none"
                       {...register("horas")}
                     />
                   </div>
@@ -89,24 +179,24 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                     <input
                       type="text"
                       placeholder="00"
-                      className="w-6 border-b border-gray-400 text-center text-xs bg-transparent outline-none placeholder-gray-400"
+                      className="w-6 border-b border-gray-400 bg-transparent text-center text-xs placeholder-gray-400 outline-none"
                       {...register("minutos")}
                     />
                   </div>
                   <span className="text-sm">min</span>
                 </div>
               </div>
-              <div className="flex flex-col text-gray-700 mt-4 gap-2">
+              <div className="mt-4 flex flex-col gap-2 text-gray-700">
                 <label className="text-sm font-semibold">Descrição</label>
                 <textarea
                   {...register("descricao")}
-                  placeholder="(Opicional)"
-                  className="w-full h-32 p-2 border rounded text-gray-700 outline-none placeholder-gray-400 resize-none"
+                  placeholder="(Opcional)"
+                  className="h-32 w-full resize-none rounded border p-2 text-gray-700 placeholder-gray-400 outline-none"
                 />
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-between ml-20 w-[25rem]">
+          <div className="ml-20 flex w-[25rem] flex-col justify-between">
             <div className="flex flex-col gap-4">
               <p className="font-semibold">Adicione fotos</p>
               <div className="flex gap-2">
@@ -114,20 +204,31 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
                 <Image src={addImagem} alt="Adicionar imagem" />
                 <Image src={addImagem} alt="Adicionar imagem" />
               </div>
-              <p className="font-semibold">Selecione quem realiza este serviço:</p>
+              <p className="font-semibold">
+                Selecione quem realiza este serviço:
+              </p>
               <div className="flex flex-col gap-2">
-                <CheckboxField  {...{ name: "Ana", label: "Ana", control}} />
-                <CheckboxField  {...{ name: "Margaret", label: "Margaret", control}} />
+                {staffsFromUser.map((staff, index) => (
+                  <div key={staff.id} onClick={() => handleStaffClick(index)}>
+                    <CheckboxField
+                      name={staff.name as Path<CreateServiceData>}
+                      label={staff.name}
+                      control={control}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="flex justify-end">
-              <Button type="submit" className="flex self-center h-[45px] px-[33px] rounded-full font-light truncate">
-                Adicionar serviço&gt;
+              <Button
+                type="submit"
+                className="flex h-[45px] self-center truncate rounded-full px-[33px] font-light"
+              >
+                Adicionar serviço &gt;
               </Button>
             </div>
           </div>
-          <DialogFooter>
-          </DialogFooter>
+          <DialogFooter />
         </form>
       </DialogContent>
     </Dialog>

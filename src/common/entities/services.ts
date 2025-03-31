@@ -1,12 +1,12 @@
 export interface ServicesEntity {
-  id: string;
-  type: string;
-  price: string;
+  id?: string;
   name: string;
-  duration: string;
-  description: string;
-  image: string;
-  staff: string;
-  created_at: Date;
-  updated_at: Date;
+  preco: string;
+  horas: string;
+  minutos: string;
+  staffs: {
+    name: string;
+  }[];
+  descricao?: string | undefined;
+  services?: string | undefined;
 }

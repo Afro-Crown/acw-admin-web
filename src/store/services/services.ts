@@ -1,79 +1,91 @@
+/* eslint-disable no-useless-catch */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    getDocs,
-    getFirestore,
-    query,
-    setDoc,
-    updateDoc
+  doc,
+  getDoc,
+  getFirestore,
+  updateDoc,
+  arrayUnion
 } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 import { ServicesEntity } from "@/common/entities/services";
 import firebaseApp from "@/config/firebase";
 
 const db = getFirestore(firebaseApp);
-const collectionName = "services";
+const usersCollection = "users";
 
-export const creatNewServiceDoc = async (service: ServicesEntity) => {
-    try {
-        await setDoc(doc(db, collectionName, service.id), {
-            ...service
-        });
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message };
-    }
+export const createNewServiceDoc = async (
+  userId: string,
+  service: ServicesEntity
+) => {
+  service.id = uuidv4();
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    await updateDoc(userDocRef, {
+      services: arrayUnion(service)
+    });
+    return { error: null };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };
 
-export const getServiceDoc = async (id: string) => {
-    if (!id) return null;
-    try {
-        const docRef = doc(db, collectionName, id);
-        const docSnap = await getDoc(docRef);
-        return docSnap.exists() ? docSnap.data() : null;
-    } catch (error: any) {
-        throw error;
+export const getServiceDocs = async (userId: string) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data.services || [];
     }
-};
-
-export const getAllServices = async () => {
-    try {
-        const servicesRef = collection(db, collectionName);
-        const q = query(servicesRef);
-        const querySnapshot = await getDocs(q);
-        const services: ServicesEntity[] = [];
-        querySnapshot.forEach((docSnap) => {
-            services.push({ id: docSnap.id, ...docSnap.data() } as ServicesEntity);
-        });
-        return services;
-    } catch (error: any) {
-        throw error;
-    }
+    return [];
+  } catch (error: any) {
+    throw error;
+  }
 };
 
 export const updateServiceDoc = async (
-    id: string,
-    serviceData: Partial<ServicesEntity>
+  userId: string,
+  serviceId: string,
+  updatedServiceData: Partial<ServicesEntity>
 ) => {
-    try {
-        const docRef = doc(db, collectionName, id);
-        await updateDoc(docRef, {
-            ...serviceData
-        });
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message };
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const services: ServicesEntity[] = data.services || [];
+      const updatedServices = services.map((service) => {
+        if (service.id === serviceId) {
+          return { ...service, ...updatedServiceData };
+        }
+        return service;
+      });
+      await updateDoc(userDocRef, { services: updatedServices });
+      return { error: null };
     }
+    return { error: "Documento de usuário não encontrado." };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };
 
-export const deleteServiceDoc = async (id: string) => {
-    try {
-        const docRef = doc(db, collectionName, id);
-        await deleteDoc(docRef);
-        return { error: null };
-    } catch (error: any) {
-        return { error: error.message };
+export const deleteServiceDoc = async (userId: string, serviceId: string) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const services: ServicesEntity[] = data.services || [];
+      const updatedServices = services.filter(
+        (service) => service.id !== serviceId
+      );
+      await updateDoc(userDocRef, { services: updatedServices });
+      return { error: null };
     }
+    return { error: "Documento de usuário não encontrado." };
+  } catch (error: any) {
+    return { error: error.message };
+  }
 };

@@ -122,10 +122,7 @@ const errorToast = async (message: string) => {
       break;
 
     default:
-      toast.error(
-        "Algum erro aconteceu. Tente novamente mais tarde.",
-        toastConfig
-      );
+      toast.error(message, toastConfig);
       console.log(message);
   }
 
