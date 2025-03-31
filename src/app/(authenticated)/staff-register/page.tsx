@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { ScheduleEntity } from "@/common/entities/schedules";
 import DateAndTime from "@/components/molecules/StaffRegisterComponents/dateAndTime";
 import NameAndEmail from "@/components/molecules/StaffRegisterComponents/nameAndEmail";
 import useAuth from "@/hooks/useAuth";
@@ -13,10 +12,50 @@ import { createMultipleStaffDocs } from "@/store/services/staff";
 
 export default function StaffRegisterPage() {
   const { userUid } = useAuth();
+
+  const [staffData, setStaffData] = useState<
+    {
+      name: string;
+      email: string;
+      id?: string;
+      image?: string;
+      hours: string;
+      days: string;
+      created_at: Date;
+      updated_at?: Date;
+    }[]
+  >([]);
+  const [scheduleData, setScheduleData] = useState<
+    {
+      id?: string;
+      staff_name: string;
+      email: string;
+      date: Date;
+      service_name: string;
+      days: string[];
+      times: string[];
+      price: string;
+      duration: string;
+      isConfirmed: boolean;
+    }[]
+  >([]);
+
   const [step, setStep] = useState(1);
-  const [staffData, setStaffData] = useState([{ name: "", email: "" }]);
-  const [scheduleData, setScheduleData] = useState<ScheduleEntity[]>([]);
   const [currentStaffIndex, setCurrentStaffIndex] = useState(0);
+
+  const [submitted, setSubmitted] = useState(false);
+  const [finalData, setFinalData] = useState<
+    {
+      name: string;
+      email: string;
+      id: string;
+      image: string;
+      hours: string;
+      days: string;
+      created_at: Date;
+      updated_at: Date;
+    }[]
+  >([]);
 
   const handleNameAndEmailSuccess = (
     data: { name: string; email: string }[]
@@ -31,23 +70,26 @@ export default function StaffRegisterPage() {
       created_at: new Date(),
       updated_at: new Date()
     }));
-    setStaffData(data);
-    setScheduleData(
-      data.map((staff) => ({
-        id: "",
-        staff_name: staff.name,
-        email: staff.email,
-        date: new Date(),
-        service_name: "",
-        days: [],
-        times: [],
-        price: "0",
-        duration: "",
-        isConfirmed: false
-      }))
-    );
+    setStaffData(staffs);
+
+    const initSchedules = data.map((staff) => ({
+      id: "",
+      staff_name: staff.name,
+      email: staff.email,
+      date: new Date(),
+      service_name: "",
+      days: [],
+      times: [],
+      price: "0",
+      duration: "",
+      isConfirmed: false
+    }));
+    setScheduleData(initSchedules);
+
     setStep(2);
     setCurrentStaffIndex(0);
+    setSubmitted(false);
+    setFinalData([]);
   };
 
   const handleDateAndTimeSuccess = (
@@ -55,35 +97,50 @@ export default function StaffRegisterPage() {
     selectedTimes: string[]
   ) => {
     setScheduleData((prev) => {
-      const newData = [...prev];
-      newData[currentStaffIndex] = {
-        ...newData[currentStaffIndex],
+      const updated = [...prev];
+      updated[currentStaffIndex] = {
+        ...updated[currentStaffIndex],
         days: selectedDays,
         times: selectedTimes
       };
-
-      if (currentStaffIndex === staffData.length - 1) {
-        const consolidatedData = staffData.map((staff, index) => ({
-          ...staff,
-          id: uuidv4(),
-          days: newData[index].days.join(", "),
-          hours: newData[index].times.join(", "),
-          created_at: new Date()
-        }));
-        console.log("Dados consolidados:", consolidatedData);
-        createMultipleStaffDocs(userUid, consolidatedData);
-      }
-      return newData;
+      return updated;
     });
-
     if (currentStaffIndex < staffData.length - 1) {
-      setCurrentStaffIndex(currentStaffIndex + 1);
+      setCurrentStaffIndex((prev) => prev + 1);
     }
   };
 
+  useEffect(() => {
+    if (
+      step === 2 &&
+      currentStaffIndex === staffData.length - 1 &&
+      scheduleData[currentStaffIndex]?.days.length > 0 &&
+      !submitted
+    ) {
+      const consolidated = staffData.map((staff, index) => ({
+        ...staff,
+        id: uuidv4(),
+        days: scheduleData[index].days.join(", "),
+        hours: scheduleData[index].times.join(", "),
+        image: staff.image || "",
+        created_at: new Date(),
+        updated_at: new Date()
+      }));
+      setFinalData(consolidated);
+      createMultipleStaffDocs(userUid, consolidated)
+        .then(() => {
+          console.log("Dados enviados com sucesso:", consolidated);
+        })
+        .catch((err) => {
+          console.error("Erro ao enviar os dados:", err);
+        });
+      setSubmitted(true);
+    }
+  }, [currentStaffIndex, staffData, scheduleData, step, submitted, userUid]);
+
   const handleBack = () => {
     if (step === 2 && currentStaffIndex > 0) {
-      setCurrentStaffIndex(currentStaffIndex - 1);
+      setCurrentStaffIndex((prev) => prev - 1);
     } else {
       setStep(1);
     }
