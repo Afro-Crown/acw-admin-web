@@ -87,6 +87,7 @@ export const updateStaffDoc = async (
         return staff;
       });
       await updateDoc(userDocRef, { staffs: updatedStaffs });
+      queryClient.invalidateQueries(["staff"]);
       return { error: null };
     }
     return { error: "Documento de usuário não encontrado." };

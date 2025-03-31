@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Pencil, MapPin } from "lucide-react";
 import Image from "next/image";
 
@@ -10,12 +12,14 @@ import ChangeBgUser from "../../../../public/change-bg-user.svg";
 import ChangeUser from "../../../../public/change-user.svg";
 import ProfileBg from "../../../../public/profile-bg.svg";
 import UserProfile from "../../../../public/user-profile.svg";
+import { ModalEditAddress } from "../ModalEditAddress/modalEditAddress";
 
 interface ProfileBGProps {
   isEditable: boolean;
 }
 
 export default function ProfileBG({ isEditable }: ProfileBGProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const { userUid } = useAuth();
   const { data: user } = useProfile(userUid);
   return (
@@ -31,9 +35,13 @@ export default function ProfileBG({ isEditable }: ProfileBGProps) {
           <h1 className="text-3xl font-extrabold">{user?.salonName}</h1>
           <div className="flex items-center gap-2">
             <MapPin className="stroke-red-500" />
-            <p className="text-xl">{user?.neighboard}, {user?.number}, {user?.city}</p>
+            <p className="text-xl">
+              {user?.address}, {user?.number}, {user?.city}
+            </p>
             {isEditable && (
-              <Pencil className="cursor-pointer fill-black stroke-white stroke-1" />
+              <span onClick={() => setIsOpen(true)}>
+                <Pencil className="cursor-pointer fill-black stroke-white stroke-1" />
+              </span>
             )}
           </div>
         </div>
@@ -52,6 +60,11 @@ export default function ProfileBG({ isEditable }: ProfileBGProps) {
           </>
         )}
       </div>
+      <ModalEditAddress
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        user={user ?? null}
+      />
     </div>
   );
 }

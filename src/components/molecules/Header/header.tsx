@@ -30,17 +30,17 @@ export default function Header() {
         <Image src={logo} alt="Logo" width={250} />
         <span className="mx-3 h-[1px] w-[200px] rounded-sm bg-secondary"></span>
         <div className="flex items-center gap-5">
-          <Link href="/volunteer" className="text-secondary">
+          <p className="text-secondary cursor-pointer">
             Seja um voluntário
-          </Link>
+          </p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
-          <Link href="/about" className=" text-secondary">
+          <p  className=" text-secondary cursor-pointer">
             Sobre
-          </Link>
+          </p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
-          <Link href="/contact" className=" text-secondary">
+          <p className=" text-secondary cursor-pointer">
             Contato
-          </Link>
+          </p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
           {user ? (
             <div className="cursor-pointer" onClick={() => setIsOpen(true)}>

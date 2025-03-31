@@ -20,7 +20,7 @@ export function ModalHelp({ isOpen, setIsOpen }: ModalProps) {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="absolute left-[100rem] top-[43rem] sm:max-w-[35rem] sm:max-h-[40rem]">
+        <DialogContent className="left-auto right-[-18rem] top-[42rem] sm:max-w-[35rem] sm:max-h-[40rem] min-h-[100%]">
           <DialogHeader className="gap-4">
             <p className="text-sm font-light opacity-60">Dúvidas frequentes</p>
             <DialogTitle className="text-2xl">Como cadastrar um salão?</DialogTitle>
