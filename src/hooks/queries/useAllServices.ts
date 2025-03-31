@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { DocumentData } from "firebase/firestore";
 
 import type { ServicesEntity } from "@/common/entities/services";
-import { getAllServices } from "@/store/services/services";
+import { getAllServices } from "../../store/services/services";
 import {
     FORTY_FIVE_MINUTES_IN_MS,
     ONE_DAY_IN_MS

@@ -1,34 +1,18 @@
-import React, { useState, useEffect } from "react";
 import ServicoForm from "../serviçosForm/servicosForm";
+import { ServicesEntity } from "@/common/entities/services";
 
-interface Servico {
-  id: number;
-  name: string;
-  text: string;
-  hora: string;
-  preco: string;
-}
+
 
 interface ServicosProps {
   categoriaId: number;
   text: string;
-  initialServicos: Servico[];
-  onDeleteServico: (id: number) => void;
+  initialServicos: ServicesEntity[];
 }
 
-export default function Servicos({ text, initialServicos, onDeleteServico }: ServicosProps) {
-  const [servicos, setServicos] = useState<Servico[]>(initialServicos);
+export default function Servicos({ text, initialServicos }: ServicosProps) {
 
-  useEffect(() => {
-    setServicos(initialServicos);
-  }, [initialServicos]);
 
-  const handleDelete = (id: number) => {
-    setServicos((prevServicos) => prevServicos.filter((servico) => servico.id !== id));
-    onDeleteServico(id);
-  };
-
-  if (servicos.length === 0) return null;
+  if (initialServicos.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -37,14 +21,14 @@ export default function Servicos({ text, initialServicos, onDeleteServico }: Ser
       </div>
 
       <div className="grid grid-cols-2 gap-7">
-        {servicos.map((servico) => (
+        {initialServicos.map((servico: ServicesEntity) => (
           <ServicoForm
             key={servico.id}
             name={servico.name}
-            text={servico.text}
-            hora={servico.hora}
+            text={servico?.descricao || ""}
+            hora={servico.horas + ":" + servico.minutos}
             preco={servico.preco}
-            onDelete={() => handleDelete(servico.id)}
+            onDelete={() => console.log("deletar")}
           />
         ))}
       </div>

@@ -45,6 +45,20 @@ export const getServiceDocs = async (userId: string) => {
   }
 };
 
+export const getAllServices = async (userId: string) => {
+  try {
+    const userDocRef = doc(db, usersCollection, userId);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data.services || [];
+    }
+    return [];
+  } catch (error: any) {
+    throw error;
+  }
+};
+
 export const updateServiceDoc = async (
   userId: string,
   serviceId: string,

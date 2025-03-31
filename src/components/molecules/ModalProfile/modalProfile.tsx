@@ -20,8 +20,7 @@ export function ModalProfile({
   setIsOpen,
   openHelpModal
 }: ModalProps & { openHelpModal: () => void }) {
-  const { logoutUser } = useAuth();
-  const { userUid } = useAuth();
+  const { userUid, logoutUser } = useAuth();
   const { data: user } = useProfile(userUid);
   const tabs = [
     {
