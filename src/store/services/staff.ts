@@ -10,6 +10,7 @@ import {
 
 import { StaffEntity } from "@/common/entities/staff";
 import firebaseApp from "@/config/firebase";
+
 import { queryClient } from "../providers/queryClient";
 
 const db = getFirestore(firebaseApp);

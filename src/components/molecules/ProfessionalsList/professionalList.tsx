@@ -1,28 +1,24 @@
 "use client";
 
-import { useState } from "react";
-
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { StaffEntity } from "@/common/entities/staff";
 import Button from "@/components/atoms/Button/button";
+import useAllStaff from "@/hooks/queries/useAllStaff";
+import useAuth from "@/hooks/useAuth";
+import { deleteStaffDoc } from "@/store/services/staff";
 
 import Divider from "../../../../public/divider.svg";
 import Professional from "../Professionals/professionals";
-import useAuth from "@/hooks/useAuth";
-import useProfile from "@/hooks/queries/useProfile";
-import useAllStaff from "@/hooks/queries/useAllStaff";
-import { StaffEntity } from "@/common/entities/staff";
-import { deleteStaffDoc } from "@/store/services/staff";
 
 export default function ProfessionalList() {
   const { userUid } = useAuth();
-  const { data: staffsFromUser, isLoading: staffLoading } = useAllStaff<StaffEntity[]>();
+  const { data: staffsFromUser } = useAllStaff<StaffEntity[]>();
 
-  
   const handleDelete = (staffUid: string) => {
-    deleteStaffDoc(userUid, staffUid)
+    deleteStaffDoc(userUid, staffUid);
   };
 
   return (
@@ -42,21 +38,23 @@ export default function ProfessionalList() {
       <div>
         <Image src={Divider} alt="Divider" className="bg-gray-300" />
       </div>
-        <div className="mt-5 grid grid-cols-2 gap-5">
-          {staffsFromUser && staffsFromUser.length > 0 ? (
-            staffsFromUser.map((staff, index) => (
-             <Professional
-               key={index}
-               text={staff.name}
-               onDelete={() => handleDelete(staff.id)}
-              />
-            ))
-          ) : (
-            <div className="flex w-[30rem] h-[28rem] items-center justify-center">
-              <h1 className="text-lg text-[#949494]">NENHUM COLABORADOR ENCONTRADO</h1>
-            </div>
-          )}
-        </div>
+      <div className="mt-5 grid grid-cols-2 gap-5">
+        {staffsFromUser && staffsFromUser.length > 0 ? (
+          staffsFromUser.map((staff, index) => (
+            <Professional
+              key={index}
+              text={staff.name}
+              onDelete={() => handleDelete(staff.id)}
+            />
+          ))
+        ) : (
+          <div className="flex h-[28rem] w-[30rem] items-center justify-center">
+            <h1 className="text-lg text-[#949494]">
+              Nenhum colaborador encontrado!
+            </h1>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

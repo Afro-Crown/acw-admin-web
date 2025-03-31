@@ -17,7 +17,7 @@ import {
 import useAllStaff from "@/hooks/queries/useAllStaff";
 import { errorToast } from "@/hooks/useAppToast";
 import useAuth from "@/hooks/useAuth";
-import useProfile from "@/hooks/queries/useProfile";
+import { queryClient } from "@/store/providers/queryClient";
 import { createNewServiceDoc } from "@/store/services/services";
 import { CreateServiceSchema } from "@/validations/createServices";
 import Button from "@atoms/Button/button";
@@ -34,7 +34,7 @@ export type CreateServiceData = z.infer<typeof CreateServiceSchema>;
 
 export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
   const { userUid } = useAuth();
-  const { data:user } = useProfile(userUid);
+  // const { data: user } = useProfile(userUid);
   const [selectedServiceIndex, setSelectedServiceIndex] = useState<
     number | null
   >(null);
@@ -95,7 +95,7 @@ export function ModalServices({ isOpen, setIsOpen }: ModalProps) {
       services: serviceSelected,
       staffs: staffsSelected.map((name) => ({ name }))
     };
-
+    queryClient.invalidateQueries(["services"]);
     createNewServiceDoc(userUid, finalData);
     setIsOpen(false);
     handleReset();

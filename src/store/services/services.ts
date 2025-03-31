@@ -49,8 +49,10 @@ export const getAllServices = async (userId: string) => {
   try {
     const userDocRef = doc(db, usersCollection, userId);
     const docSnap = await getDoc(userDocRef);
+    console.log("Usuário", docSnap.data());
     if (docSnap.exists()) {
       const data = docSnap.data();
+      console.log("Serviços", data.services);
       return data.services || [];
     }
     return [];
