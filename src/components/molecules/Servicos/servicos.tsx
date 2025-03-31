@@ -1,7 +1,10 @@
+import React from "react";
 import ServicoForm from "../serviçosForm/servicosForm";
 import { ServicesEntity } from "@/common/entities/services";
-
-
+import useAuth from "@/hooks/useAuth";
+import { deleteServiceDoc } from "@/store/services/services";
+import { errorToast, successToast } from "@/hooks/useAppToast";
+import { queryClient } from "@/store/providers/queryClient";
 
 interface ServicosProps {
   categoriaId: number;
@@ -10,7 +13,18 @@ interface ServicosProps {
 }
 
 export default function Servicos({ text, initialServicos }: ServicosProps) {
+  const { userUid } = useAuth();
 
+  const handleDeleteService = async (serviceId: string) => {
+    const { error } = await deleteServiceDoc(userUid, serviceId);
+    if (error) {
+      errorToast("Erro ao excluir serviço");
+    } else {
+      successToast("Serviço excluído com sucesso");
+      // Invalidando a query "services" para forçar a atualização dos dados
+      queryClient.invalidateQueries(["services"]);
+    }
+  };
 
   if (initialServicos.length === 0) return null;
 
@@ -19,16 +33,15 @@ export default function Servicos({ text, initialServicos }: ServicosProps) {
       <div className="flex items-center gap-2">
         <p className="text-4xl border-b-2 border-black w-fit py-2">{text}</p>
       </div>
-
       <div className="grid grid-cols-2 gap-7">
         {initialServicos.map((servico: ServicesEntity) => (
           <ServicoForm
             key={servico.id}
             name={servico.name}
-            text={servico?.descricao || ""}
-            hora={servico.horas + ":" + servico.minutos}
+            text={servico.descricao || "Sem descrição."}
+            hora={servico.horas + "h" + servico.minutos + " min"}
             preco={servico.preco}
-            onDelete={() => console.log("deletar")}
+            onDelete={() => handleDeleteService(servico.id!)}
           />
         ))}
       </div>

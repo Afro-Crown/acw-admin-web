@@ -31,7 +31,7 @@ export default function ProfileBG({ isEditable }: ProfileBGProps) {
           <h1 className="text-3xl font-extrabold">{user?.salonName}</h1>
           <div className="flex items-center gap-2">
             <MapPin className="stroke-red-500" />
-            <p className="text-xl">{user?.neighboard}, {user?.number}, {user?.city}/PE</p>
+            <p className="text-xl">{user?.neighboard}, {user?.number}, {user?.city}</p>
             {isEditable && (
               <Pencil className="cursor-pointer fill-black stroke-white stroke-1" />
             )}

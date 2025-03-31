@@ -19,7 +19,7 @@ export default function ServicoForm({ name, text, hora, preco, onDelete }: Servi
         <div>
           <div className="flex xl:gap-2 sm:gap-1">
             <h2 className="text-[#2E2E2E] font-semibold xl:text-xl sm:text-lg">{name} </h2>
-            <p className="xl:text-xl sm:text-lg font-light">&gt;</p>
+            <p className="xl:text-xl sm:text-lg font-light"></p>
           </div>
           <p className="xl:text-sm sm:text-xs">{hora}</p>
           <p className="xl:text-sm sm:text-xs break-words">{text}</p>
