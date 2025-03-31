@@ -9,6 +9,7 @@ import DateAndTime from "@/components/molecules/StaffRegisterComponents/dateAndT
 import NameAndEmail from "@/components/molecules/StaffRegisterComponents/nameAndEmail";
 import useAuth from "@/hooks/useAuth";
 import { createMultipleStaffDocs } from "@/store/services/staff";
+import { queryClient } from "@/store/providers/queryClient";
 
 export default function StaffRegisterPage() {
   const { userUid } = useAuth();
@@ -135,6 +136,7 @@ export default function StaffRegisterPage() {
           console.error("Erro ao enviar os dados:", err);
         });
       setSubmitted(true);
+      
     }
   }, [currentStaffIndex, staffData, scheduleData, step, submitted, userUid]);
 
