@@ -18,8 +18,9 @@ import useProfile from "@/hooks/queries/useProfile";
 export function ModalProfile({
   isOpen,
   setIsOpen,
-  openHelpModal
-}: ModalProps & { openHelpModal: () => void }) {
+  openHelpModal,
+  openModalConfig
+}: ModalProps & { openHelpModal: () => void } & { openModalConfig: () => void }) {
   const { userUid, logoutUser } = useAuth();
   const { data: user } = useProfile(userUid);
   const tabs = [
@@ -44,8 +45,12 @@ export function ModalProfile({
     },
     {
       icon: <Settings color="#616161" strokeWidth={1.25} />,
-      link: "/profile",
-      name: "Configurações"
+      link: "#",
+      name: "Configurações",
+      onClick: () => {
+        setIsOpen(false);
+        openModalConfig();
+      }
     }
   ];
 
