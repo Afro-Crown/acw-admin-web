@@ -11,13 +11,13 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import useAuth from "@/hooks/useAuth";
 import { queryClient } from "@/store/providers/queryClient";
 import { updateUserDoc } from "@/store/services/user";
 import Button from "@atoms/Button/button";
 import InputField from "@molecules/InputField/inputField";
 
 import { ModalEditAddressProps } from "./types";
-import useAuth from "@/hooks/useAuth";
 
 const EditAddressSchema = z.object({
   zipCode: z.string().min(1, "CEP obrigatório"),
@@ -40,7 +40,6 @@ export function ModalEditAddress({
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors }
   } = useForm<EditAddressData>({
     resolver: zodResolver(EditAddressSchema),

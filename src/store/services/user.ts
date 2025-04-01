@@ -16,6 +16,7 @@ import {
 import { UsersEntity } from "@/common/entities/users";
 import firebaseApp from "@/config/firebase";
 import { userMapper } from "@/utils/userMapper";
+
 import { queryClient } from "../providers/queryClient";
 
 const auth = getAuth(firebaseApp);
@@ -88,7 +89,7 @@ export const updateUserDoc = async (data: Partial<UsersEntity>) => {
       if (value !== undefined) {
         // Se for o campo do CEP do formulário, mapeia para o campo "cep" que o documento utiliza
         if (key === "zipCode") {
-          (acc as any)["cep"] = value;
+          (acc as any).cep = value;
         } else {
           (acc as Record<string, any>)[key] = value;
         }

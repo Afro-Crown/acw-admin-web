@@ -53,10 +53,12 @@ export default function Service() {
     : [];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<ServicesEntity | null>(null);
-  
+  const [selectedService, setSelectedService] = useState<ServicesEntity | null>(
+    null
+  );
+
   const handleEditService = (service: ServicesEntity) => {
-    console.log("teste")
+    console.log("teste");
     setSelectedService(service);
     setIsOpen(true);
   };

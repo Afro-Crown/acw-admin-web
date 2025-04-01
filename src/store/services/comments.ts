@@ -67,7 +67,7 @@ export const updateCommentDoc = async (
   try {
     const docRef = doc(db, collectionName, id);
     await updateDoc(docRef, {
-      ...commentData,
+      ...commentData
       // Caso queira registrar a data da atualização, descomente a linha abaixo:
       // updatedAt: new Date()
     });

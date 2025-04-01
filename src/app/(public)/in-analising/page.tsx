@@ -1,16 +1,22 @@
-import Image from 'next/image';
-import emAnalise from '../../../../public/em-analise.svg';
-import Button from '../../../components/atoms/Button/button';
+import Image from "next/image";
+
+import emAnalise from "../../../../public/em-analise.svg";
+import Button from "../../../components/atoms/Button/button";
 
 export default function AnalisingPage() {
   return (
-    <main className="bg-[#A21A1A] flex h-screen w-full flex-col items-center justify-center gap-3">
-      <p className="font-[300] text-center text-[28px] w-[257px] h-[99px] text-primary mt-[100px]">
-        O cadastro de <span className="font-[800]">Dellas & Delles Cabeleireiros</span> está
+    <main className="flex h-screen w-full flex-col items-center justify-center gap-3 bg-[#A21A1A]">
+      <p className="mt-[100px] h-[99px] w-[257px] text-center text-[28px] font-[300] text-primary">
+        O cadastro de{" "}
+        <span className="font-[800]">Dellas & Delles Cabeleireiros</span> está
       </p>
       <Image src={emAnalise} alt="Em análise" />
-      <p className="mt-40 text-center font-[200] text-[19px] w-[258px] text-primary">Fique de olho em seu e-mail. Daremos um retorno em breve.</p>
-      <Button className="mt-10 w-[290px] h-11 text-primary border-primary bg-transparent">Continuar</Button>
+      <p className="mt-40 w-[258px] text-center text-[19px] font-[200] text-primary">
+        Fique de olho em seu e-mail. Daremos um retorno em breve.
+      </p>
+      <Button className="mt-10 h-11 w-[290px] border-primary bg-transparent text-primary">
+        Continuar
+      </Button>
     </main>
   );
 }
