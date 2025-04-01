@@ -60,7 +60,7 @@ const AuthProvider = ({ children }: Props) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [auth]);
 
   // Comentado: login com Google e Facebook
 

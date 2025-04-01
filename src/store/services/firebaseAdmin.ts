@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import admin from "firebase-admin";
 
 export const createUserAuthAdmin = async (

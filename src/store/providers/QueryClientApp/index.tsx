@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 
-import { QueryClient } from "@tanstack/react-query";
+// import { QueryClient } from "@tanstack/react-query";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 
 import { persister, queryClient } from "../queryClient";

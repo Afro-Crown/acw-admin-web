@@ -1,8 +1,8 @@
-import { createUserAuthAdmin } from "@store/services/firebaseAdmin";
 import admin from "firebase-admin";
 import { NextResponse } from "next/server";
 
 import { initAdmin } from "@/config/firebaseAdmin";
+import { createUserAuthAdmin } from "@store/services/firebaseAdmin";
 
 export async function POST(request: Request) {
   const { email, password } = await request.json();

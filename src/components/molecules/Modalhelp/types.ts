@@ -1,5 +1,4 @@
 export interface ModalProps {
-    isOpen: boolean;
-    setIsOpen: (value: boolean) => void;
-  }
-  
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+}

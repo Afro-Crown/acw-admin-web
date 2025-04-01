@@ -9,18 +9,19 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import useProfile from "@/hooks/queries/useProfile";
 import useAuth from "@/hooks/useAuth";
 
 import { ModalProps } from "./types";
-import useProfile from "@/hooks/queries/useProfile";
-
 
 export function ModalProfile({
   isOpen,
   setIsOpen,
   openHelpModal,
   openModalConfig
-}: ModalProps & { openHelpModal: () => void } & { openModalConfig: () => void }) {
+}: ModalProps & { openHelpModal: () => void } & {
+  openModalConfig: () => void;
+}) {
   const { userUid, logoutUser } = useAuth();
   const { data: user } = useProfile(userUid);
   const tabs = [
@@ -58,7 +59,9 @@ export function ModalProfile({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="absolute left-[80rem] top-[15rem] w-[18rem]">
         <DialogHeader>
-          <DialogTitle className="font-normal">Olá, {user?.ownerName}</DialogTitle>
+          <DialogTitle className="font-normal">
+            Olá, {user?.ownerName}
+          </DialogTitle>
           {/* <DialogDescription>Descrição</DialogDescription> */}
         </DialogHeader>
         <div className="grid gap-6 py-4">

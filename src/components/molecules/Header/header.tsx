@@ -6,22 +6,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ModalHelp } from "@/components/molecules/Modalhelp/modalHelp";
+import useProfile from "@/hooks/queries/useProfile";
+import useAuth from "@/hooks/useAuth";
 
 import logo from "../../../../public/logo-one.svg";
 import userImg from "../../../../public/user-icon.svg";
-import { ModalProfile } from "../ModalProfile/modalProfile";
-import useProfile from "@/hooks/queries/useProfile";
-import useAuth from "@/hooks/useAuth";
 import { ModalConfig } from "../ModalConfig/modalConfig";
+import { ModalProfile } from "../ModalProfile/modalProfile";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { userUid } = useAuth();
   const { data: user } = useProfile(userUid);
-  
+
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
-
 
   const openHelpModal = () => {
     setIsHelpOpen(true);
@@ -36,17 +35,11 @@ export default function Header() {
         <Image src={logo} alt="Logo" width={250} />
         <span className="mx-3 h-[1px] w-[200px] rounded-sm bg-secondary"></span>
         <div className="flex items-center gap-5">
-          <p className="text-secondary cursor-pointer">
-            Seja um voluntário
-          </p>
+          <p className="cursor-pointer text-secondary">Seja um voluntário</p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
-          <p  className=" text-secondary cursor-pointer">
-            Sobre
-          </p>
+          <p className=" cursor-pointer text-secondary">Sobre</p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
-          <p className=" text-secondary cursor-pointer">
-            Contato
-          </p>
+          <p className=" cursor-pointer text-secondary">Contato</p>
           <span className="mx-3 h-[30px] w-[2px] rounded-sm bg-secondary"></span>
           {user ? (
             <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
@@ -67,7 +60,7 @@ export default function Header() {
         openModalConfig={openModalConfig}
       />
       <ModalHelp isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} />
-      <ModalConfig isOpen={isConfigOpen} setIsOpen={setIsConfigOpen}/>
+      <ModalConfig isOpen={isConfigOpen} setIsOpen={setIsConfigOpen} />
     </header>
   );
 }

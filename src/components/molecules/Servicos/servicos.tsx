@@ -1,11 +1,10 @@
 import React from "react";
-import ServicoForm from "../serviçosForm/servicosForm";
+
 import { ServicesEntity } from "@/common/entities/services";
-import useAuth from "@/hooks/useAuth";
-import { deleteServiceDoc } from "@/store/services/services";
 import { errorToast, successToast } from "@/hooks/useAppToast";
+import useAuth from "@/hooks/useAuth";
 import { queryClient } from "@/store/providers/queryClient";
-import { ServicesEntity } from "@/common/entities/services";
+import { deleteServiceDoc } from "@/store/services/services";
 
 import ServicoForm from "../serviçosForm/servicosForm";
 
@@ -16,7 +15,11 @@ interface ServicosProps {
   onEditService: (service: ServicesEntity) => void;
 }
 
-export default function Servicos({ text, initialServicos, onEditService }: ServicosProps) {
+export default function Servicos({
+  text,
+  initialServicos,
+  onEditService
+}: ServicosProps) {
   const { userUid } = useAuth();
 
   const handleDeleteService = async (serviceId: string) => {

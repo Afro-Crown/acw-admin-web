@@ -1,6 +1,8 @@
 import * as React from "react";
+
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 const Dialog = DialogPrimitive.Root;
@@ -53,7 +55,10 @@ const DialogContent = React.forwardRef<
           buttonLeft ? "left-4" : "right-4"
         )}
       >
-        <X color="#616161" className={`h-4 w-4 ${buttonLeft ? "h-[25px] w-[25px]" : "" }` }/>
+        <X
+          color="#616161"
+          className={`h-4 w-4 ${buttonLeft ? "h-[25px] w-[25px]" : ""}`}
+        />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
@@ -95,7 +100,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    className={cn(
+      "text-lg font-semibold leading-none tracking-tight",
+      className
+    )}
     {...props}
   />
 ));
