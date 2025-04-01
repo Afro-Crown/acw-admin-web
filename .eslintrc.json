@@ -1,3 +1,57 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["import"],
+  "extends": ["@rocketseat/eslint-config/next", "next/core-web-vitals"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "none",
+        "endOfLine": "auto"
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/common/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@/config/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@/hooks/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@/store/services/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@/validations/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "./**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
