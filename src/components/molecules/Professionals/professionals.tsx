@@ -18,7 +18,7 @@ export default function Professional({
 }: ProfessionalProps) {
   return (
     <div className="flex flex-col items-center overflow-hidden p-5 shadow-md">
-      <div className="relative flex h-20 w-20 flex-col content-center items-center">
+      <div className="relative flex h-20 flex-col content-center items-center">
         <Image src={UserIcon} alt="UserIcon" />
         <p>{text}</p>
         <Image

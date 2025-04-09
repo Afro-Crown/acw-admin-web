@@ -35,7 +35,7 @@ export default function ProfessionalList() {
   return (
     <div className="flex flex-col gap-4 p-2">
       <div className="flex items-end gap-2">
-        <h1 className="text-3xl">Cabeleleiras(os)</h1>
+        <h1 className="text-3xl">Cabeleireiras(os)</h1>
         <Link href="/staff-register">
           <Button
             size="md"
