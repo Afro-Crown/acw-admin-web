@@ -22,18 +22,18 @@ export default function AvaliationSection() {
   ];
 
   return (
-    <div className="start mr-10 flex flex-col gap-4 p-2">
+    <div className="start flex flex-col gap-4 p-2 w-full lg:w-1/2 lg:mr-0 md:mr-6">
       <div className="flex justify-between gap-2">
         <div className="flex items-center gap-2">
-          <Star className="h-10 w-10 fill-[#FF8A54] stroke-[#FF8A54]" />
-          <p className="text-3xl">3,3</p>
+          <Star className="h-8 w-8 md:h-10 md:w-10 fill-[#FF8A54] stroke-[#FF8A54]" />
+          <p className="text-2xl md:text-3xl">3,3</p>
         </div>
-        <h1 className="flex items-center font-bold text-[#2E2E2E] opacity-80">
+        <h1 className="flex items-center font-bold text-[#2E2E2E] opacity-80 text-base md:text-lg">
           {avaliations.length} avaliações
         </h1>
       </div>
       <div>
-        <Image src={Divider} alt="Divider" className="bg-gray-300" />
+        <Image src={Divider} alt="Divider" className="bg-gray-300 w-full" />
       </div>
       <div className="flex flex-col">
         {avaliations.map((avaliation, index) => (

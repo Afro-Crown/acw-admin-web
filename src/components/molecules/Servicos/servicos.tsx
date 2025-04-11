@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ServicesEntity } from "@/common/entities/services";
 import { errorToast, successToast } from "@/hooks/useAppToast";
 import useAuth from "@/hooks/useAuth";
 import { queryClient } from "@/store/providers/queryClient";
 import { deleteServiceDoc } from "@/store/services/services";
+import Confirmation from "@/components/atoms/Confirmation/confirmation";
 
 import ServicoForm from "../serviçosForm/servicosForm";
 
@@ -21,17 +22,28 @@ export default function Servicos({
   onEditService
 }: ServicosProps) {
   const { userUid } = useAuth();
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
 
   const handleDeleteService = async (serviceId: string) => {
-    const { error } = await deleteServiceDoc(userUid, serviceId);
+    setServiceToDelete(serviceId);
+    setIsConfirmationOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!serviceToDelete) return;
+
+    const { error } = await deleteServiceDoc(userUid, serviceToDelete);
     if (error) {
       errorToast("Erro ao excluir serviço");
     } else {
       successToast("Serviço excluído com sucesso");
-      // Invalidando a query "services" para forçar a atualização dos dados
       queryClient.invalidateQueries(["services"]);
     }
+    setIsConfirmationOpen(false);
+    setServiceToDelete(null);
   };
+
   if (initialServicos.length === 0) return null;
 
   return (
@@ -52,6 +64,17 @@ export default function Servicos({
           />
         ))}
       </div>
+
+      <Confirmation
+        isOpen={isConfirmationOpen}
+        onClose={() => {
+          setIsConfirmationOpen(false);
+          setServiceToDelete(null);
+        }}
+        onConfirm={confirmDelete}
+        title="Tem certeza que deseja excluir este serviço?"
+        description=""
+      />
     </div>
   );
 }
