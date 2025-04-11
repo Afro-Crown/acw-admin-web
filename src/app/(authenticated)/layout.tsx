@@ -18,11 +18,9 @@ import AuthenticatedOnlyFeature from "@templates/Authenticated/authenticated";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AuthenticatedOnlyFeature>
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </div>
     </AuthenticatedOnlyFeature>

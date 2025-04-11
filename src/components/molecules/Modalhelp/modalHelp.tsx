@@ -25,7 +25,7 @@ export function ModalHelp({ isOpen, setIsOpen }: ModalProps) {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
           buttonLeft
-          className="left-auto right-[-18rem] top-[35rem] min-h-[104%] sm:max-h-[40rem] sm:max-w-[35rem] sm:rounded-none"
+          className="left-auto right-[-18rem] top-[52vh] min-h-[104%] sm:max-h-[40rem] sm:max-w-[35rem] sm:rounded-none"
         >
           <DialogHeader className="mt-6 flex max-h-[1px] flex-col gap-4">
             <p className="text-sm font-light opacity-60">Dúvidas frequentes</p>

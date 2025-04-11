@@ -33,44 +33,48 @@ export default function ProfessionalList() {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-2">
+    <div className="flex w-full flex-col gap-4 p-2 lg:w-1/2">
       <div className="flex items-end gap-2">
-        <h1 className="text-3xl">Cabeleleiras(os)</h1>
+        <h1 className="text-2xl md:text-3xl">Cabeleireiras(os)</h1>
         <Link href="/staff-register">
           <Button
             size="md"
             variant="success"
-            className="flex h-10 w-10 items-center justify-center rounded-full border-none p-0"
+            className="flex h-8 w-8 items-center justify-center rounded-full border-none p-0 md:h-10 md:w-10"
           >
             <Plus />
           </Button>
         </Link>
       </div>
       <div>
-        <Image src={Divider} alt="Divider" className="bg-gray-300" />
+        <Image src={Divider} alt="Divider" className="w-full bg-gray-300" />
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-5">
-        {staffsFromUser && staffsFromUser.length > 0 ? (
-          staffsFromUser.map((staff) => (
+      {staffsFromUser && staffsFromUser.length > 0 ? (
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-5">
+          {staffsFromUser.map((staff) => (
             <Professional
               key={staff.id}
               text={staff.name}
               onDelete={() => handleDelete(staff.id)}
               onEdit={() => handleEdit(staff)}
             />
-          ))
-        ) : (
-          <div className="flex h-[28rem] w-[30rem] items-center justify-center">
+          ))}
+        </div>
+      ) : (
+        <div className="mt-5 flex h-[20rem] w-full items-center justify-center md:h-[24rem] lg:h-[28rem]">
+          <div className="flex w-full flex-col items-center justify-center">
             {isLoading ? (
-              <p className="text-lg font-light">Carregando...</p>
+              <p className="text-center text-base font-light md:text-lg">
+                Carregando...
+              </p>
             ) : (
-              <h1 className="text-lg text-[#949494]">
+              <h1 className="text-center text-base text-[#949494] md:text-lg lg:text-xl">
                 Nenhum colaborador encontrado!
               </h1>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {selectedStaff && (
         <ModalEditStaff
           isOpen={isModalOpen}
