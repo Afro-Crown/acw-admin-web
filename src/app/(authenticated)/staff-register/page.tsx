@@ -147,28 +147,30 @@ export default function StaffRegisterPage() {
   };
 
   return (
-    <main className="flex min-h-[38rem] flex-col items-center pt-20">
-      {step === 1 && (
-        <NameAndEmail
-          onSuccess={handleNameAndEmailSuccess}
-          setName={(name) =>
-            setStaffData((prev) =>
-              prev.map((staff, index) =>
-                index === 0 ? { ...staff, name } : staff
+    <main className="flex min-h-[38rem] w-full flex-col items-center px-4 pt-20 md:px-6 lg:px-8">
+      <div className="w-full max-w-3xl">
+        {step === 1 && (
+          <NameAndEmail
+            onSuccess={handleNameAndEmailSuccess}
+            setName={(name) =>
+              setStaffData((prev) =>
+                prev.map((staff, index) =>
+                  index === 0 ? { ...staff, name } : staff
+                )
               )
-            )
-          }
-          defaultStaffData={staffData}
-        />
-      )}
-      {step === 2 && (
-        <DateAndTime
-          onSuccess={handleDateAndTimeSuccess}
-          onBack={handleBack}
-          name={staffData[currentStaffIndex]?.name || ""}
-          isLastStaff={currentStaffIndex === staffData.length - 1}
-        />
-      )}
+            }
+            defaultStaffData={staffData}
+          />
+        )}
+        {step === 2 && (
+          <DateAndTime
+            onSuccess={handleDateAndTimeSuccess}
+            onBack={handleBack}
+            name={staffData[currentStaffIndex]?.name || ""}
+            isLastStaff={currentStaffIndex === staffData.length - 1}
+          />
+        )}
+      </div>
     </main>
   );
 }

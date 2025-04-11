@@ -3,11 +3,11 @@ import Link from "next/link";
 
 import {
   Dialog,
-  DialogContent,
   // DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  RelativeDialogContent
 } from "@/components/ui/dialog";
 import useProfile from "@/hooks/queries/useProfile";
 import useAuth from "@/hooks/useAuth";
@@ -63,7 +63,7 @@ export function ModalProfile({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="absolute left-[80rem] top-[15rem] w-[18rem]">
+      <RelativeDialogContent className="w-[18rem]">
         <DialogHeader>
           <DialogTitle className="font-normal">
             Olá, {user?.ownerName}
@@ -95,7 +95,7 @@ export function ModalProfile({
             Sair da conta
           </button>
         </DialogFooter>
-      </DialogContent>
+      </RelativeDialogContent>
     </Dialog>
   );
 }

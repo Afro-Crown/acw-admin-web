@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getAuth, User } from "firebase/auth";
+import { getAuth, updateEmail, updatePassword, User } from "firebase/auth";
 import {
   collection,
   deleteDoc,
@@ -107,9 +107,31 @@ export const updateUserDoc = async (data: Partial<UsersEntity>) => {
     return { error: error.message };
   }
 };
+
 export const deleteUserDoc = async (id: string) => {
   try {
     await deleteDoc(doc(db, tableName, id));
+  } catch (error: any) {
+    return { error: error.message };
+  }
+};
+
+export const updateUserAuth = async (
+  newEmail: string,
+  newPassword?: string
+) => {
+  const authUser = auth.currentUser;
+  if (!authUser) {
+    throw new Error("Usuário não autenticado.");
+  }
+  try {
+    if (newEmail && newEmail !== authUser.email) {
+      await updateEmail(authUser, newEmail);
+    }
+    if (newPassword) {
+      await updatePassword(authUser, newPassword);
+    }
+    return { error: null };
   } catch (error: any) {
     return { error: error.message };
   }
