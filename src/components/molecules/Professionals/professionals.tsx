@@ -17,32 +17,32 @@ export default function Professional({
   onEdit
 }: ProfessionalProps) {
   return (
-    <div className="flex flex-col items-center overflow-hidden p-5 shadow-md">
-      <div className="relative flex h-20 w-20 flex-col content-center items-center">
-        <Image src={UserIcon} alt="UserIcon" />
-        <p>{text}</p>
+    <div className="flex flex-col items-center overflow-hidden p-3 md:p-5 shadow-md rounded-md">
+      <div className="relative flex h-16 w-16 md:h-20 md:w-20 flex-col content-center items-center">
+        <Image src={UserIcon} alt="UserIcon" className="w-full h-full" />
+        <p className="text-sm md:text-base mt-1 text-center">{text}</p>
         <Image
           src={ChangeUser}
           alt="ChangeUser"
-          className="relative bottom-20 left-7 h-6 w-6 cursor-pointer"
+          className="absolute bottom-16 md:bottom-20 left-5 md:left-7 h-5 w-5 md:h-6 md:w-6 cursor-pointer"
         />
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-1 md:gap-2 mt-2">
         <Button
           onClick={onEdit}
           size="sm"
           variant="success"
-          className="flex rounded-sm border-none bg-[#C7C7C7] bg-opacity-20 p-2 text-[#616161]"
+          className="flex rounded-sm border-none bg-[#C7C7C7] bg-opacity-20 p-1 md:p-2 text-[#616161] text-xs md:text-sm"
         >
-          <Pencil size={16} /> Editar
+          <Pencil size={14} className="md:w-4 md:h-4" /> Editar
         </Button>
         <Button
           onClick={onDelete}
           size="sm"
           variant="success"
-          className="flex rounded-sm border-none bg-[#A21A1A1A] bg-opacity-10 p-2 text-[#A21A1A]"
+          className="flex rounded-sm border-none bg-[#A21A1A1A] bg-opacity-10 p-1 md:p-2 text-[#A21A1A] text-xs md:text-sm"
         >
-          <Trash2 size={16} /> Excluir
+          <Trash2 size={14} className="md:w-4 md:h-4" /> Excluir
         </Button>
       </div>
     </div>
