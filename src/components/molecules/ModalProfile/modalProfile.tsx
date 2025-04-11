@@ -28,12 +28,18 @@ export function ModalProfile({
     {
       icon: <User color="#616161" strokeWidth={1.25} />,
       link: "/profile",
-      name: "Seu perfil"
+      name: "Seu perfil",
+      onClick: () => {
+        setIsOpen(false);
+      }
     },
     {
       icon: <Calendar color="#616161" strokeWidth={1.25} />,
       link: "/profile/agendamento",
-      name: "Agendamentos"
+      name: "Agendamentos",
+      onClick: () => {
+        setIsOpen(false);
+      }
     },
     {
       icon: <CircleHelp color="#616161" strokeWidth={1.25} />,
