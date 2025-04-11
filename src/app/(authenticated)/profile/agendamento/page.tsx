@@ -7,7 +7,6 @@ import Image from "next/image";
 
 import Button from "@atoms/Button/button";
 import AgendamentoForm from "@molecules/AgendamentoForm/agendamentoForm";
-import Navigation from "@molecules/Navigation/navigation";
 import ProfileBG from "@molecules/ProfileBG/profileBG";
 
 import Schedule from "../../../../../public/schedule-icon.svg";
@@ -25,7 +24,7 @@ interface Agendamento {
   status: string;
 }
 
-export default function Agendamento() {
+export default function AgendamentoPage() {
   const [activeSection, setActiveSection] = useState("proximos");
   const [activeButton, setActiveButton] = useState("todos");
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([
@@ -110,7 +109,7 @@ export default function Agendamento() {
         }
 
         return (
-          <div className="mt-2 flex w-[63rem] flex-col justify-self-center">
+          <div className="mt-2 flex flex-col">
             {filteredAgendamentos.map((agendamento, index) => (
               <div key={agendamento.id}>
                 <AgendamentoForm
@@ -132,80 +131,81 @@ export default function Agendamento() {
   };
 
   return (
-    <main>
-      <div className="flex-start flex w-[61rem] gap-2 justify-self-center text-sm font-light">
-        <Navigation />
-      </div>
+    <main className="w-full px-4 md:px-6 lg:px-8">
       <ProfileBG isEditable={false} />
-      <div className="mt-5 flex rounded-md justify-self-center gap-80 max-w-6xl text-2xl font-light shadow-md p-2">
-        <div
-          className={`flex cursor-pointer gap-2 ${
-            activeSection === "proximos" ? "border-b-2 border-black" : ""
-          }`}
-          onClick={() => setActiveSection("proximos")}
-        >
-          <Image
-            src={Schedule}
-            alt="agenda"
-            width={24}
-            height={24}
-            className={`${activeSection === "historico" || activeSection === "cancelados" ? "opacity-30 grayscale filter" : ""}`}
-          />
-          <p>Próximos</p>
-        </div>
-        <div
-          className={`flex cursor-pointer ${
-            activeSection === "historico" ? "border-b-2 border-black" : ""
-          }`}
-          onClick={() => setActiveSection("historico")}
-        >
-          <p>Histórico</p>
-        </div>
-        <div
-          className={`cursor-pointer ${
-            activeSection === "cancelados" ? "border-b-2 border-black" : ""
-          }`}
-          onClick={() => setActiveSection("cancelados")}
-        >
-          <p>Cancelados</p>
+      <div>
+        <div className="mx-auto max-w-6xl">
+          <div className="mt-5 flex flex-col justify-center rounded-md p-2 text-2xl font-light shadow-md md:flex-row md:gap-20">
+            <div
+              className={`flex cursor-pointer gap-2 ${
+                activeSection === "proximos" ? "border-b-2 border-black" : ""
+              }`}
+              onClick={() => setActiveSection("proximos")}
+            >
+              <Image
+                src={Schedule}
+                alt="agenda"
+                width={24}
+                height={24}
+                className={`${activeSection === "historico" || activeSection === "cancelados" ? "opacity-30 grayscale filter" : ""}`}
+              />
+              <p>Próximos</p>
+            </div>
+            <div
+              className={`flex cursor-pointer ${
+                activeSection === "historico" ? "border-b-2 border-black" : ""
+              }`}
+              onClick={() => setActiveSection("historico")}
+            >
+              <p>Histórico</p>
+            </div>
+            <div
+              className={`cursor-pointer ${
+                activeSection === "cancelados" ? "border-b-2 border-black" : ""
+              }`}
+              onClick={() => setActiveSection("cancelados")}
+            >
+              <p>Cancelados</p>
+            </div>
+          </div>
+          {activeSection === "historico" && (
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+              <Button
+                size="sm"
+                className={`rounded-full border-[#2E2E2E] ${activeButton === "todos" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
+                onClick={() => setActiveButton("todos")}
+              >
+                todos
+              </Button>
+              <span className="text-xl">•</span>
+              <Button
+                size="sm"
+                className={`rounded-full border-[#2E2E2E] ${activeButton === "esse mês" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
+                onClick={() => setActiveButton("esse mês")}
+              >
+                esse mês
+              </Button>
+              <span className="text-xl">•</span>
+              <Button
+                size="sm"
+                className={`rounded-full border-[#2E2E2E] ${activeButton === "mês passado" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
+                onClick={() => setActiveButton("mês passado")}
+              >
+                mês passado
+              </Button>
+              <span className="text-xl">•</span>
+              <Button
+                size="sm"
+                className={`rounded-full border-[#2E2E2E] ${activeButton === "esse ano" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
+                onClick={() => setActiveButton("esse ano")}
+              >
+                esse ano
+              </Button>
+            </div>
+          )}
+          {renderContent()}
         </div>
       </div>
-      {activeSection === "historico" && (
-        <div className="mt-2 flex items-center justify-center gap-2">
-          <Button
-            size="sm"
-            className={`rounded-full border-[#2E2E2E] ${activeButton === "todos" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
-            onClick={() => setActiveButton("todos")}
-          >
-            todos
-          </Button>
-          <span className="text-xl">•</span>
-          <Button
-            size="sm"
-            className={`rounded-full border-[#2E2E2E] ${activeButton === "esse mês" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
-            onClick={() => setActiveButton("esse mês")}
-          >
-            esse mês
-          </Button>
-          <span className="text-xl">•</span>
-          <Button
-            size="sm"
-            className={`rounded-full border-[#2E2E2E] ${activeButton === "mês passado" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
-            onClick={() => setActiveButton("mês passado")}
-          >
-            mês passado
-          </Button>
-          <span className="text-xl">•</span>
-          <Button
-            size="sm"
-            className={`rounded-full border-[#2E2E2E] ${activeButton === "esse ano" ? "bg-[#2E2E2E]  text-white" : "bg-white text-[#2E2E2E] "}`}
-            onClick={() => setActiveButton("esse ano")}
-          >
-            esse ano
-          </Button>
-        </div>
-      )}
-      {renderContent()}
     </main>
   );
 }

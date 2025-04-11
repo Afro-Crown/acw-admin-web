@@ -128,7 +128,7 @@ export const RelativeDialogContent = React.forwardRef<
   <DialogPrimitive.Content
     ref={ref}
     className={cn(
-      "absolute top-[65%] z-50 mt-2 w-64 rounded bg-background p-4 shadow-lg md:right-0 lg:right-[5rem] xl:right-[10rem] 2xl:right-[15rem]",
+      "3xl:right-[45rem] absolute top-[65%] z-50 mt-2 w-64 rounded bg-background p-4 shadow-lg md:right-0 lg:right-[5rem] xl:right-[10rem] 2xl:right-[15rem]",
       className
     )}
     {...props}
