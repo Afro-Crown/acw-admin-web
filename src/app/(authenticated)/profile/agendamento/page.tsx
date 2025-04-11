@@ -137,7 +137,7 @@ export default function Agendamento() {
         <Navigation />
       </div>
       <ProfileBG isEditable={false} />
-      <div className="mt-5 flex justify-center gap-80 text-2xl font-light">
+      <div className="mt-5 flex rounded-md justify-self-center gap-80 max-w-6xl text-2xl font-light shadow-md p-2">
         <div
           className={`flex cursor-pointer gap-2 ${
             activeSection === "proximos" ? "border-b-2 border-black" : ""
